@@ -1,0 +1,12 @@
+logs/access.log
+logs
+logs/*
+app/package-lock.json
+node_modules
+node_modules/*
+config/database.js
+
+!uploads/updates/update.xml
+/api/+source.index.js
+/models/+source.id.js
+/library/+source.index.js
