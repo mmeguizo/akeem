@@ -7,7 +7,6 @@ const hash = crypto.createHmac(process.env.ENCRYPTION_ALGO, process.env.ENCRYPTI
 
 module.exports = {
 
-
     uri: 'mongodb://localhost:27017/akeem',
     secret: hash,
     options: {
