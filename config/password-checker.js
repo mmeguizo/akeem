@@ -1,37 +1,10 @@
 
 let bcrypt = require('bcryptjs');
+const { response } = require('express');
 
-module.exports.checkPassword = function (password) {
-
-
-
-
-
-    return new Promise((resolve, reject) => {
-
-        bcrypt.compare(password, hash, function(err, result) {
-            // result == true
-        });
-
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(password, salt, function (err, hash) {
-                if (err) reject(err);
-                else {
-                    resolve(hash);
-                }
-            });
-        });
-    })
+module.exports.checkPassword =  function (password, hash) {
+  return bcrypt.compare(password, hash, (err, res) => {
+    console.log('passwordChecker Result: ' + res);
+  });
 }
 
-bcrypt.compare(req.body.password, user.password, function(err, res) {
-    if (err){
-      // handle error
-    }
-    if (res) {
-      // Send JWT
-    } else {
-      // response is OutgoingMessage object that server response http request
-      return response.json({success: false, message: 'passwords do not match'});
-    }
-  });

@@ -1,8 +1,7 @@
-let mongoose = require('mongoose');
 const User = require('../models/user'); // Import User Model Schema
 const { v4: uuidv4 } = require('uuid');
-const hash = require('../config/password-hasher')
-
+const hash = require('../config/password-hasher');
+let bcrypt = require('bcryptjs');
 
 
 module.exports = (router) => {
@@ -29,8 +28,6 @@ module.exports = (router) => {
 
 
     router.post('/addUser', (req, res) => {
-
-
 
         if (!req.body.email) {
             res.json({ success: false, message: 'You must provide an email' })
@@ -98,22 +95,15 @@ module.exports = (router) => {
 
     router.put('/deleteUser', (req, res) => {
 
+        let data = req.body;
 
-
-        let data = req.body
-
-
-        User.updateOne({
-            _id: data._id
-        },
-            {
-                $set: { deleted: true }
-
-            }, (err, user) => {
+        User.deleteOne({
+            id: data.id
+        }, (err, user) => {
                 if (err) {
                     res.json({ success: false, message: 'Could not Delete User' + err })
                 } else {
-                    res.json({ success: true, message: data.username + ' Successfully Deleted the User', data: user });
+                    res.json({ success: true, message:' Successfully Deleted the User', data: user });
                     // globalconnetion.emitter('user')
                 }
             })
@@ -124,87 +114,80 @@ module.exports = (router) => {
 
 
 
-    router.put('/updateUser', (req, res) => {
+    router.put('/updateUser', (req, res) =>   {
 
-
-
-
-        let data = {
-            "_id": mongoose.Types.ObjectId("63482c0882453f90d8c1d97b"),
-            "id": "9487847e-1e85-4764-bcc8-b9bae030292e",
-            "email": "tester@tester.com",
-            "username": "tester",
-            "role": "admin",
-            "status": "active",
-            "deleted": false,
-            "password": "Password123!",
-            "__v": 0
-        }
-
-
+        let data = req.body;
         let userData = {};
-        let changedPassword = false;
 
-      let results = User.findOne({id: "9487847e-1e85-4764-bcc8-b9bae030292e" },  (err,docs) => {
+     User.findOne({id: data.id }, async (err,docs) => {
+         //check old password against the database
+       
             if (err){
-                console.log(err)
+                res.json({ success: false, message: 'Error unable to Process Profile update: ' + err })
             }
             else{
-                console.log('================');
-                console.log("Result : ", docs);
+                //if they change thier password
+                if(data.changePassword){
+                    
+                    //compare passwords
+                    let checkPassword = await bcrypt.compare(data.old_password, docs.password); 
+
+                    if( !checkPassword){
+                        res.json({ success: false, message: 'Old Password Incorrect: ' + !checkPassword })
+                    }else{
+                        
+                        hash.encryptPassword(data.new_password).then(hash => {
+                            userData.role = data.role;
+                            userData.username = data.username;
+                            userData.email = data.email;
+                            userData.password = hash;
+                            changedPassword = true;
+                            User.findOneAndUpdate({ id: data.id }, userData, { upsert: true }, (err, response) => {
+                                if (err) return res.json({ success: false, message: err.message });
+                                if (response) {
+                                    res.json({ success: true, message: "User Information has been updated!", data: response });
+                                } else {
+                                    res.json({ success: true, message: "No User has been modified!", data: response });
+                                }
+                            });
+                        }).catch(err => { console.log(err); })
+
+                    }
+                }else{
+
+                    userData.role = data.role;
+                    userData.username = data.username;
+                    userData.email = data.email;
+                    userData.status = data.status;
+                    User.findOneAndUpdate({ id: data.id }, userData, { upsert: true }, (err, response) => {
+                        if (err) return res.json({ success: false, message: err.message });
+                        if (response) {
+                             res.json({ success: true, message: "User Information has been updated!", data: response  });
+                        } else {
+                            res.json({ success: true, message: "No User has been modified!", data: response });
+                        }
+                    });
+                    
+                }
             }
-        }).lean();
+        })
 
-        console.log('================');
-        console.log(results);
-
-
-
-        // if (data.password || data.confirm !== '') {
-        //     hash.encryptPassword(data.password).then(hash => {
-        //         console.log({ hash_resolve: hash });
-        //         userData.role = data.role;
-        //         userData.username = data.username;
-        //         userData.email = data.email;
-        //         userData.password = hash;
-        //         changedPassword = true;
-        //         User.findOneAndUpdate({ _id: data._id }, userData, { upsert: true }, (err, response) => {
-        //             if (err) return res.json({ success: false, message: err.message });
-        //             if (response) {
-        //                 res.json({ success: true, message: "User Information has been updated!", data: response, changedPassword: changedPassword });
-        //             } else {
-        //                 res.json({ success: true, message: "No User has been modified!", data: response });
-        //             }
-        //         });
-        //     }).catch(err => { console.log(err); })
-        // } else {
-        //     userData.role = data.role;
-        //     userData.username = data.username;
-        //     userData.email = data.email;
-        //     changedPassword = false
-        //     User.findOneAndUpdate({ _id: data._id }, userData, { upsert: true }, (err, response) => {
-        //         if (err) return res.json({ success: false, message: err.message });
-        //         if (response) {
-        //             res.json({ success: true, message: "User Information has been updated!", data: response, changedPassword: changedPassword });
-        //         } else {
-        //             res.json({ success: true, message: "No User has been modified!", data: response });
-        //         }
-        //     });
-        // }
-
-        console.log(userData);
     });
 
 
-
-
-
-
-
-
-
-
-
+    router.get('/profile', (req, res) => {
+        User.findOne({ id: req.decoded.userID }).select('username email').exec((err, user) => {
+          if (err) {
+            res.json({ success: false, message: err.message })
+          } else {
+            if (!user) {
+              res.json({ success: false, message: 'User not found' })
+            } else {
+              res.json({ success: true, data: user })
+            }
+          }
+        });
+      });
 
     return router;
 };
