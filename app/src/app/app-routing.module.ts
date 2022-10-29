@@ -1,13 +1,5 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import {
-  NbAuthComponent,
-  NbLoginComponent,
-  NbLogoutComponent,
-  NbRegisterComponent,
-  NbRequestPasswordComponent,
-  NbResetPasswordComponent,
-} from '@nebular/auth';
 
 export const routes: Routes = [
   {
@@ -17,41 +9,19 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('../app/login/login.module')
-      .then(m => m.LoginModule),
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
-  {
-    path: 'auth',
-    component: NbAuthComponent,
-    children: [
-      {
-        path: '',
-        component: NbLoginComponent,
-      },
-      {
-        path: 'login',
-        component: NbLoginComponent,
-      },
-      {
-        path: 'register',
-        component: NbRegisterComponent,
-      },
-      {
-        path: 'logout',
-        component: NbLogoutComponent,
-      },
-      {
-        path: 'request-password',
-        component: NbRequestPasswordComponent,
-      },
-      {
-        path: 'reset-password',
-        component: NbResetPasswordComponent,
-      },
-    ],
-  },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' },
+  // {
+  //   path: 'customers',
+  //   loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule)
+  // },
+  // {
+  //   path: 'orders',
+  //   loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
+  // },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'customers' },
 ];
 
 const config: ExtraOptions = {

@@ -148,8 +148,6 @@ module.exports = (router) => {
 
   // any route that needs authorization or token should be under it if not above this middleware 
   router.use((req, res, next) => {
-
-
     //'@auth0/angular-jwt' automatically adds token in the headers but it also add the world 'Bearer ' so i manually format it 
     //i slice the word 'Bearer '  = 7
     //let token = (req.headers['authorization']).slice(7);

@@ -11,8 +11,6 @@ import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
-
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -22,11 +20,11 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
-import { LoginComponent } from './login/login.component';
-import { SharedModule } from './shared/shared.module';
+
+
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -43,11 +41,9 @@ import { SharedModule } from './shared/shared.module';
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
-    SharedModule
+
   ],
   bootstrap: [AppComponent],
-  providers:[
-  ]
 })
 export class AppModule {
 }

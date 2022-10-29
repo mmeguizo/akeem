@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
-
+@Injectable({
+  providedIn: 'root'
+})
 export class ConnectionService {
-   public connection: String = "http://localhost:3000";
-   // public connection: String = "http://192.168.1.88:80";
+
+  //localhost development
+  // public domain: String = "http://localhost:3000";
+
+  // if deployed online
+  public domain: String = "";
 }
 

@@ -11,7 +11,9 @@ const http = require('http').Server(app);
 
 
 //path routes
+const customer = require('./routes/customers')(router);
 const authentication = require('./routes/authentication')(router);
+// const customer = require('./routes/customers')(router);
 const users = require('./routes/users')(router);
 
 mongoose.Promise = global.Promise;
@@ -38,7 +40,9 @@ app.use('/upload', express.static(path.join(__dirname, './upload')));
 
 
 //api routes
+app.use('/customer', customer);
 app.use('/authentication', authentication);
+// app.use('/customer', customer);
 app.use('/users', users);
 
 
