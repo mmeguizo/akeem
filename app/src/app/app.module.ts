@@ -11,6 +11,11 @@ import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { JwtModule } from "@auth0/angular-jwt";
+
+
+
+
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -20,8 +25,12 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { AdminComponent } from './admin/admin.component';
+import { AdminModule } from './admin/admin.module';
 
-
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,9 +50,24 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        // allowedDomains: ['localhost:3000'],
+        // disallowedRoutes: ["http://localhost:3000/authentication/login"],
+      },
+    }),
+    AdminModule
 
   ],
   bootstrap: [AppComponent],
+  providers: [
+    // { provide: APP_BASE_HREF, useValue: '/' },
+    // AuthGuard,
+    // NotAuthGuard,
+    // AuthService,
+    // ConnectionService
+  ],
 })
 export class AppModule {
 }

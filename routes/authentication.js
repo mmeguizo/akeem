@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
-
+const { v4: uuidv4 } = require('uuid');
 module.exports = (router) => {
 
 
@@ -20,9 +20,11 @@ module.exports = (router) => {
 
         } else {
           let user = new User({
+            id: uuidv4(),
             email: req.body.email.toLowerCase(),
             username: req.body.username.toLowerCase(),
-            password: req.body.password
+            password: req.body.password,
+            role:  req.body.role,
           })
 
           user.save((err, data) => {

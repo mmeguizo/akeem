@@ -69,7 +69,7 @@ export class AuthService {
     public connection: ConnectionService,
     public location: Location,
     private http: HttpClient,
-    // public jwtHelper: JwtHelperService,
+    public jwtHelper: JwtHelperService,
     public toasted: NbToastrService,
     private toastrService: NbToastrService
 
@@ -161,8 +161,8 @@ export class AuthService {
 
   CurrentlyloggedIn() {
     const token = localStorage.getItem('token');
-    // this.router.navigate(['/main/dashboard']);
-    // return !this.jwtHelper.isTokenExpired(token)
+    this.router.navigate(['/main/dashboard']);
+    return !this.jwtHelper.isTokenExpired(token)
 
   }
 
