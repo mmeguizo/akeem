@@ -39,6 +39,27 @@ import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
 
+
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatGridListModule } from '@angular/material/grid-list';
+
+
 const NB_MODULES = [
   NbLayoutModule,
   NbMenuModule,
@@ -70,9 +91,31 @@ const PIPES = [
   NumberWithCommasPipe,
 ];
 
+
+const materialModules = [
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatNativeDateModule,
+  MatDatepickerModule,
+  MatCheckboxModule,
+  MatSlideToggleModule,
+  MatRadioModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatIconModule,
+  MatBadgeModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatCardModule,
+  MatTooltipModule,
+  MatMenuModule,
+  MatGridListModule
+];
+
 @NgModule({
-  imports: [CommonModule, ...NB_MODULES],
-  exports: [CommonModule, ...PIPES, ...COMPONENTS],
+  imports: [CommonModule, ...NB_MODULES, ...materialModules],
+  exports: [CommonModule, ...PIPES, ...COMPONENTS, ...materialModules],
   declarations: [...COMPONENTS, ...PIPES],
 })
 export class ThemeModule {
@@ -82,7 +125,7 @@ export class ThemeModule {
       providers: [
         ...NbThemeModule.forRoot(
           {
-            name: 'dark',
+            name: 'default',
           },
           [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME, DARK_THEME ],
         ).providers,

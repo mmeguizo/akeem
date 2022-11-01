@@ -1,1 +1,29 @@
-<p>dashboard works!</p>
+<div class="row">
+  <div class="col-sm-12 card">
+    <mat-card class="example-card">
+      <mat-card-title> ADMIN DASHBOARD</mat-card-title>
+      <mat-card-content>
+        <div class="clock">
+          <span class="date">{{ date | date: 'EEE. MMM. d, yyyy' }} |</span> &nbsp;🕐&nbsp;
+          <span class="hour">{{ hours }}:</span>
+          <span class="min">{{ minutes }}:</span>
+          <span class="second">{{ seconds }}</span>
+          &nbsp;
+          <span> {{ PmAm >= 12 && PmAm <= 24 ? 'PM' : 'AM' }} </span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+  <div class="col-sm-2 card">
+    <mat-card class="example-card">
+      <mat-card-title><i class="fas fa-user"></i> USERS</mat-card-title>
+      <mat-card-content>
+        <p>{{userData}}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

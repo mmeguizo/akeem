@@ -27,6 +27,12 @@ import {
 } from '@nebular/theme';
 import { AdminComponent } from './admin/admin.component';
 import { AdminModule } from './admin/admin.module';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthGuard } from './@core/guard/auth.guard';
+import { NotAuthGuard } from './@core/guard/notAuth.guard';
+
+
+
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -57,14 +63,15 @@ export function tokenGetter() {
         // disallowedRoutes: ["http://localhost:3000/authentication/login"],
       },
     }),
-    AdminModule
+    AdminModule,
+    NbDialogModule.forRoot(),
 
   ],
   bootstrap: [AppComponent],
   providers: [
     // { provide: APP_BASE_HREF, useValue: '/' },
-    // AuthGuard,
-    // NotAuthGuard,
+    AuthGuard,
+    NotAuthGuard,
     // AuthService,
     // ConnectionService
   ],

@@ -27,7 +27,7 @@ export class AuthService {
   public domain
   authToken;
   user;
-  options;
+  public options;
   fulluserloggedData: any[];
   public socketserver: any = { status: true, message: "online" };
 
@@ -98,13 +98,11 @@ export class AuthService {
   }
 
   createAuthenticationHeaders() {
-
     this.loadToken();
     this.options = new HttpHeaders({
       'Content-Type': 'application/json',
       'authorization': this.authToken
     })
-
   }
 
 
@@ -161,11 +159,15 @@ export class AuthService {
 
   CurrentlyloggedIn() {
     const token = localStorage.getItem('token');
-    this.router.navigate(['/main/dashboard']);
     return !this.jwtHelper.isTokenExpired(token)
 
   }
-
+  public loggingIn(role){
+    setTimeout(() => {
+      this.router.navigate([role]); // Navigate to dashboard view
+    }, 500);
+   // this.router.navigate([this.getTokenData('role')]);
+  }
 
 
   // Function to store user's data in client local storage

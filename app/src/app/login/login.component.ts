@@ -77,11 +77,6 @@ export class LoginComponent implements OnInit {
     // Function to send login data to API
     this.authService.login(user).subscribe((data: any) => {
 
-      console.log('login');
-      console.log(data);
-      console.log(user);
-
-
       // Check if response was a success or error
       if (!data.success) {
         this.authService.makeToast('danger', 'Failed Logging in', data.message);
@@ -92,10 +87,7 @@ export class LoginComponent implements OnInit {
         // Function to store user's token in client local storage
         this.authService.storeUserData(data.token, data.user, data.userToken);
         if (this.authService.CurrentlyloggedIn()) {
-          console.log(this.authService.CurrentlyloggedIn());
-          setTimeout(() => {
-            this.router.navigate([data.role]); // Navigate to dashboard view
-          }, 1000);
+            this.authService.loggingIn(data.role)
         } else {
           this.authService.logout()
           this.router.navigate(['login']); // Navigate to dashboard view

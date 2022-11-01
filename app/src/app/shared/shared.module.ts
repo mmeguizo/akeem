@@ -9,27 +9,27 @@ import { NbStepperModule, NbSpinnerModule, NbListModule, } from '@nebular/theme'
 import { NbMenuModule, NbActionsModule, NbTreeGridModule } from '@nebular/theme';
 
 // import { MomentModule } from 'angular2-moment';
-//
+//import {NgModule} from "@angular/core";
 // from valor components
 // import { TooltipModule, BsDatepickerModule, TimepickerModule, BsDropdownModule } from 'ngx-bootstrap';
 
 // import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 // import { TimeagoModule } from 'ngx-timeago';
-// import { MatNativeDateModule } from '@angular/material/core';
-// import { MatFormFieldModule } from '@angular/material/form-field';
-// import { MatInputModule } from '@angular/material/input';
-// import { MatSelectModule } from '@angular/material/select';
-// import { MatDatepickerModule } from '@angular/material/datepicker';
-// import { MatCheckboxModule } from '@angular/material/checkbox';
-// import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-// import { MatRadioModule } from '@angular/material/radio';
-// import { MatButtonModule } from '@angular/material/button';
-// import { MatButtonToggleModule } from '@angular/material/button-toggle';
-// import { MatSnackBarModule } from '@angular/material/snack-bar';
-// import { MatIconModule } from '@angular/material/icon';
-// import { MatBadgeModule } from '@angular/material/badge';
-// import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
-// import {MatStepperModule} from '@angular/material/stepper';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import {MatStepperModule} from '@angular/material/stepper';
 
 // import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 
@@ -38,6 +38,10 @@ import { NbMenuModule, NbActionsModule, NbTreeGridModule } from '@nebular/theme'
 
 //https://angularscript.com/fullscreen-swipeable-viewer/
 // import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
+
+// import { DataTablesModule } from 'angular-datatables';
+
+
 
 import {
   NbButtonModule,
@@ -55,21 +59,21 @@ import {
 } from '@nebular/theme';
 
 const materialModules = [
-  // MatFormFieldModule,
-  // MatInputModule,
-  // MatSelectModule,
-  // MatNativeDateModule,
-  // MatDatepickerModule,
-  // MatCheckboxModule,
-  // MatSlideToggleModule,
-  // MatRadioModule,
-  // MatButtonModule,
-  // MatButtonToggleModule,
-  // MatSnackBarModule,
-  // MatIconModule,
-  // MatBadgeModule,
-  // MatBottomSheetModule,
-  // MatStepperModule
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatNativeDateModule,
+  MatDatepickerModule,
+  MatCheckboxModule,
+  MatSlideToggleModule,
+  MatRadioModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatSnackBarModule,
+  MatIconModule,
+  MatBadgeModule,
+  MatBottomSheetModule,
+  MatStepperModule
 ];
 
 const MODULES = [
@@ -103,8 +107,9 @@ const MODULES = [
     // NgImageFullscreenViewModule,
     NbAccordionModule,
     RouterModule,
+    // DataTablesModule,
     ...MODULES,
-    // ...materialModules,
+    ...materialModules,
 
   ],
   declarations: [
@@ -153,7 +158,7 @@ const MODULES = [
     RouterModule,
     // NgxProgressiveImageLoaderModule,
     // NgImageFullscreenViewModule,
-    // ...materialModules
+    ...materialModules
   ],
   providers: [
     ReverseDate

@@ -28,6 +28,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { UsersComponent } from './users/users.component';
+import { DataTablesModule } from 'angular-datatables';
+import { CommonDialogComponent } from '../shared/common-dialog/common-dialog.component';
 
 // import { ThemeModule } from '../@theme/theme.module';
 // import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -75,7 +78,7 @@ const NB_MODULES = [
   NbTooltipModule,
   NbWindowModule,
   NbCheckboxModule,
-  NbDialogModule,
+  NbDialogModule.forChild(),
   NbInputModule,
   NbPopoverModule,
   NbCalendarModule
@@ -90,6 +93,7 @@ const NB_MODULES = [
     // BsDropdownModule.forRoot(),
     NbActionsModule,
     SharedModule,
+    DataTablesModule,
     // ImageCropperModule,
     ...NB_MODULES,
     // NgApexchartsModule
@@ -97,6 +101,8 @@ const NB_MODULES = [
   declarations: [
     AdminComponent,
     DashboardComponent,
+    UsersComponent,
+    CommonDialogComponent,
     // CreateWarehouseComponent,
     // ViewStorageComponent,
     // CreateStorageComponent,

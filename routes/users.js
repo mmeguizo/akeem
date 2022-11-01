@@ -9,7 +9,7 @@ module.exports = (router) => {
     router.get('/getAllUser', (req, res) => {
 
         // Search database for all blog posts
-        User.find({ deleted: false }, { _id: 1, email: 1, username: 1, role: 1, status: 1 }, (err, user) => {
+        User.find({ deleted: false }, { id: 1, email: 1, username: 1, role: 1, status: 1 }, (err, user) => {
             // Check if error was found or not
             if (err) {
                 res.json({ success: false, message: err }); // Return error message
