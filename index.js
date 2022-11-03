@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //for deployment on hosting and build
-app.use(express.static(__dirname + 'dist'));
+app.use(express.static(__dirname + '/app/dist/'));
 app.use('/images', express.static(path.join(__dirname, './images')));
 app.use('/upload', express.static(path.join(__dirname, './upload')));
 
@@ -47,8 +47,15 @@ app.use('/users', users);
 
 
 app.get('*', (req, res) => {
+
+    console.log('__dirname');
+    console.log(__dirname);
+    console.log('__dirname + /app/dist/');
+    console.log(__dirname + '/app/dist/');
+    console.log('path.join__dirname /app/dist/index.html');
+    console.log(path.join(__dirname + '/app/dist/index.html'));
     //  res.send('<h1>Hello from the Server Side</h1>')
-    res.sendFile(path.join(__dirname + '/dist/index.html'),)
+    res.sendFile(path.join(__dirname + '/app/dist/index.html'),)
 });
 
 
