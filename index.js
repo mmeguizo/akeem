@@ -49,8 +49,8 @@ app.use('/users', users);
 app.get('*', (req, res) => {
     //  res.send('<h1>Hello from the Server Side</h1>')
     console.log(__dirname)
-    console.log(__dirname + '/app/dist/index.html')
-    res.sendFile(path.join(__dirname + '/app/dist/index.html'),)
+    console.log(__dirname + '/dist/index.html')
+    res.sendFile(path.join(__dirname + '/dist/index.html'),)
 });
 
 
