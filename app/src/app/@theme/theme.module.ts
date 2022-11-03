@@ -58,6 +58,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 const NB_MODULES = [
@@ -110,13 +111,19 @@ const materialModules = [
   MatCardModule,
   MatTooltipModule,
   MatMenuModule,
+  MatProgressSpinnerModule,
   MatGridListModule
 ];
+
+
 
 @NgModule({
   imports: [CommonModule, ...NB_MODULES, ...materialModules],
   exports: [CommonModule, ...PIPES, ...COMPONENTS, ...materialModules],
   declarations: [...COMPONENTS, ...PIPES],
+  entryComponents: [
+
+  ]
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders<ThemeModule> {

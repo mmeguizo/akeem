@@ -165,7 +165,7 @@ export class AuthService {
   public loggingIn(role){
     setTimeout(() => {
       this.router.navigate([role]); // Navigate to dashboard view
-    }, 500);
+    },500);
    // this.router.navigate([this.getTokenData('role')]);
   }
 
@@ -229,12 +229,12 @@ export class AuthService {
       position: this.position,
       preventDuplicates: this.preventDuplicates,
     };
-    const titleContent = title ? `. ${title}` : '';
+    const titleContent = title ? `${title}` : '';
 
     this.index += 1;
     this.toastrService.show(
       body,
-      `Toast ${this.index}${titleContent}`,
+      `${titleContent}`,
       config);
   }
 

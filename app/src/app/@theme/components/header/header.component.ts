@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
@@ -8,7 +8,9 @@ import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../../@core/services/auth.service';
 import { ReverseDate } from '../../../@core/pipes/dataFilter';
-import { CommonDialogComponent } from '../../../shared/common-dialog/common-dialog.component';
+import { CommonComponent } from '../../../shared/common/common.component';
+
+
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
@@ -22,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public contentInit = false;
 
   userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  name: string;
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -29,7 +32,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private layoutService: LayoutService,
               public auth: AuthService,
               public rd: ReverseDate,
-              public ngbModal: NgbModal
+              public ngbModal: NgbModal,
+              private dialog: MatDialog,
+              private breakpointService: NbMediaBreakpointsService,
 
               ) {
   }
@@ -41,6 +46,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.onItemSelection(event.item.title);
       }
     });
+    this.name = this.auth.getTokenUsername();
+    const { xl } = this.breakpointService.getBreakpointsMap();
+    this.themeService.onMediaQueryChange()
+      .pipe(
+        map(([, currentBreakpoint]) => currentBreakpoint.width < xl),
+        takeUntil(this.destroy$),
+      ).subscribe((isLessThanXl: boolean) => this.userPictureOnly = isLessThanXl);
 
   }
 
@@ -66,20 +78,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onItemSelection(title) {
     if (title === 'Log out') {
-      const activeModal = this.ngbModal.open(CommonDialogComponent
-        , { size: 'sm', container: 'nb-layout', windowClass: 'min_height' });
-      activeModal.componentInstance.headerTitle = 'Log Out';
-      activeModal.componentInstance.contentMessage = 'Are you sure you want to logout?';
-     activeModal.result.then((result) => {
-      activeModal.close();
-    }, (reason) => {
-      activeModal.close();
-    });
-
+      const activeModal = this.ngbModal.open(CommonComponent, { size: 'sm', container: 'nb-layout', windowClass: 'min_height', backdrop: 'static' });
+      activeModal.componentInstance.headerTitle = 'Logout',
+      activeModal.componentInstance.bodyContent ='Are you sure you want to logout?',
+      activeModal.componentInstance.username = this.name
     } else if (title === 'Profile') {
      // this.updateUser();
     }
   }
 
 
+
 }
+

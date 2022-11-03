@@ -132,6 +132,28 @@ module.exports = (router) => {
             
     });
 
+    router.put('/changeUserStatus', (req, res) => {
+
+        let data = req.body;
+        
+        User.findOne({
+            id: data.id
+        }, (err, user) => {
+            let statusData = user.status === 'inactive' ? 'active': 'inactive';
+            if(err) throw err
+            User.findOneAndUpdate({ id: data.id }, { status: statusData }, { upsert: true }, (err, response) => {
+                    if (err) return res.json({ success: false, message: err.message });
+                    if (response) {
+                        res.json({ success: false, message: 'Could not set User  Status' + err })
+                    } else {
+                        res.json({ success: true, message:' Successfully User set Status', data: user });
+                    }
+                });
+
+            })
+            
+    });
+
 
 
 

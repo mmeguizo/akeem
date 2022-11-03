@@ -25,9 +25,8 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
-import { AdminComponent } from './admin/admin.component';
 import { AdminModule } from './admin/admin.module';
-import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from './@core/guard/auth.guard';
 import { NotAuthGuard } from './@core/guard/notAuth.guard';
 
@@ -37,6 +36,8 @@ import { NotAuthGuard } from './@core/guard/notAuth.guard';
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
+
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -65,6 +66,7 @@ export function tokenGetter() {
     }),
     AdminModule,
     NbDialogModule.forRoot(),
+    NgbModule,
 
   ],
   bootstrap: [AppComponent],
@@ -75,6 +77,11 @@ export function tokenGetter() {
     // AuthService,
     // ConnectionService
   ],
+  entryComponents:[
+  ]
 })
+
+
+
 export class AppModule {
 }

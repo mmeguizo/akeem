@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
+import { CustomersComponent } from './customers/customers.component';
 
 const routes: Routes = [{
   path: '',
@@ -13,6 +14,7 @@ const routes: Routes = [{
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'users', component: UsersComponent },
+    { path: 'customers', component: CustomersComponent },
 ]
 },
 { path: '**', redirectTo: 'dashboard' }

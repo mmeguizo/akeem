@@ -4,17 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { dataFilterPipe, NumberWithCommas, IsRead, SumPipe, AssetsPipe, ReverseDate, StripTags, RoundOff, ChatMessagePipe, FileNameOnly } from '../@core/pipes/dataFilter';
 import { TruncatePipe, TruncateTextPipe } from '../@core/pipes/truncate';
-// import { DataTableModule } from 'angular2-datatable';
 import { NbStepperModule, NbSpinnerModule, NbListModule, } from '@nebular/theme';
 import { NbMenuModule, NbActionsModule, NbTreeGridModule } from '@nebular/theme';
 
-// import { MomentModule } from 'angular2-moment';
-//import {NgModule} from "@angular/core";
-// from valor components
-// import { TooltipModule, BsDatepickerModule, TimepickerModule, BsDropdownModule } from 'ngx-bootstrap';
-
-// import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-// import { TimeagoModule } from 'ngx-timeago';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -31,17 +23,6 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import {MatStepperModule} from '@angular/material/stepper';
 
-// import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
-
-//https://www.npmjs.com/package/ngx-progressive-image-loader
-// import { NgxProgressiveImageLoaderModule, IImageLoaderOptions } from 'ngx-progressive-image-loader';
-
-//https://angularscript.com/fullscreen-swipeable-viewer/
-// import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
-
-// import { DataTablesModule } from 'angular-datatables';
-
-
 
 import {
   NbButtonModule,
@@ -57,6 +38,8 @@ import {
   NbAccordionModule,
 
 } from '@nebular/theme';
+
+import { CommonComponent } from './common/common.component';
 
 const materialModules = [
   MatFormFieldModule,
@@ -125,9 +108,10 @@ const MODULES = [
     RoundOff,
     ChatMessagePipe,
     FileNameOnly,
+    CommonComponent
   ],
   entryComponents: [
-
+    CommonComponent
   ],
   exports: [
     dataFilterPipe,

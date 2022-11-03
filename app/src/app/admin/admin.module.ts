@@ -30,7 +30,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { UsersComponent } from './users/users.component';
 import { DataTablesModule } from 'angular-datatables';
-import { CommonDialogComponent } from '../shared/common-dialog/common-dialog.component';
+import { CustomersComponent } from './customers/customers.component';
 
 // import { ThemeModule } from '../@theme/theme.module';
 // import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -102,7 +102,7 @@ const NB_MODULES = [
     AdminComponent,
     DashboardComponent,
     UsersComponent,
-    CommonDialogComponent,
+    CustomersComponent,
     // CreateWarehouseComponent,
     // ViewStorageComponent,
     // CreateStorageComponent,
