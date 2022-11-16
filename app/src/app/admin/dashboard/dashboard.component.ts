@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../@core/services/user.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { CustomerService } from '../../@core/services/customer.service';
+import { log } from 'console';
 
 @Component({
   selector: 'ngx-dashboard',
@@ -29,10 +31,12 @@ export class DashboardComponent implements OnInit {
     loans = 0;
     PmAm = 0;
     userData
-    private getUserSubscription = new Subject<void>();
+    customerData
+    private getSubscription = new Subject<void>();
 
   constructor(
-    public user : UserService
+    public user : UserService,
+    public customer : CustomerService
   ) {
 
     this.date = new Date();
@@ -42,7 +46,8 @@ export class DashboardComponent implements OnInit {
    }
 
   ngOnInit(): void {
-      this.getAllUsers()
+      this.getAllUsers();
+      this.getAllCustomer();
   }
   private updateTime() {
     setInterval(() => {
@@ -65,15 +70,24 @@ export class DashboardComponent implements OnInit {
 
 
   getAllUsers() {
-    this.user.getAllUsers().pipe(takeUntil(this.getUserSubscription)).subscribe((data: any) => {
+    this.user.getAllUsers().pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
      this.userData = data.user.length;
+  });
+
+}
+  getAllCustomer() {
+    this.customer.getAllCustomers().pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
+      console.log('getAllCustomer');
+      console.log(data);
+
+     this.customerData = data.customer.length;
   });
 
 }
 
 
 ngOnDestroy(){
-  this.getUserSubscription.unsubscribe()
+  this.getSubscription.unsubscribe()
 }
 
 }

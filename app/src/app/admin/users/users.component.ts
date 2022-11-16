@@ -102,7 +102,6 @@ changeStatus(person){
 
   console.log(person);
 
-
   const activeModal = this.ngbModal.open(CommonComponent, { size: 'sm', container: 'nb-layout', windowClass: 'min_height', backdrop: 'static' });
   activeModal.componentInstance.username = person.username;
   activeModal.componentInstance.id = person.id;

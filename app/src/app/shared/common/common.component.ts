@@ -6,6 +6,7 @@ import { AuthService } from '../../@core/services/auth.service';
 import { UserService } from '../../@core/services/user.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CustomerService } from '../../@core/services/customer.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { takeUntil } from 'rxjs/operators';
 export class CommonComponent implements OnInit,OnDestroy {
 
   @Output() passEntry: EventEmitter<string> = new EventEmitter<string>();
-  private getUserSubscription = new Subject<void>();
+  private getSubscription = new Subject<void>();
 
 
   public headerTitle;
@@ -37,6 +38,7 @@ export class CommonComponent implements OnInit,OnDestroy {
 
     public auth: AuthService,
     public user: UserService,
+    public customer: CustomerService,
     public activeModal: NgbActiveModal,
 
   ) {
@@ -50,7 +52,7 @@ export class CommonComponent implements OnInit,OnDestroy {
   runQuery(){
 
     if(this.model && this.model === 'user'){
-        this.user.getRoute(this.endpointType,this.apiName,this.frontEnddata).pipe(takeUntil(this.getUserSubscription)).subscribe((data: any) => {
+        this.user.getRoute(this.endpointType,this.apiName,this.frontEnddata).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
           this.passEntry.emit(data);
           this.activeModal.close();
        });
@@ -61,6 +63,18 @@ export class CommonComponent implements OnInit,OnDestroy {
         }else{
 
         }
+    }else if(this.model && this.model === 'customers'){
+      this.customer.getRoute(this.endpointType,this.apiName,this.frontEnddata).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
+        this.passEntry.emit(data);
+        this.activeModal.close();
+     });
+      if(this.endpointType === 'post'){
+
+      }else if(this.endpointType === 'put'){
+
+      }else{
+
+      }
     }else{
       this.logout();
     }
@@ -78,7 +92,7 @@ export class CommonComponent implements OnInit,OnDestroy {
 
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
-    this.getUserSubscription.unsubscribe();
+    this.getSubscription.unsubscribe();
   }
 
 

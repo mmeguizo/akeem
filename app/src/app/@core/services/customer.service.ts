@@ -41,7 +41,19 @@ export class CustomerService {
 
  getAllCustomers() {
   this.createAuthenticationHeaders()
-  return this.http.get(this.cs.domain + '/users/getAllCostumer',{ headers: this.options });
+  return this.http.get(this.cs.domain + '/customers/getAllCostumer',{ headers: this.options });
+  }
+
+
+  getRoute(endpoint,apiName,data){
+    this.createAuthenticationHeaders()
+    if(endpoint == 'put'){
+      return this.http.put(this.cs.domain + `/customers/${apiName}`, data,{ headers: this.options });
+    }else if(endpoint == 'post'){
+      return this.http.post(this.cs.domain + `/customers/${apiName}`,  data ,{ headers: this.options });
+    }else{
+      return this.http.get(this.cs.domain + `/customers/${apiName}`,{ headers: this.options });
+    }
   }
 
 

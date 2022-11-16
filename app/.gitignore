@@ -4,6 +4,7 @@
 
 # dependencies
 /node_modules
+/src/app/pages
 
 # IDEs and editors
 /.idea
