@@ -41,7 +41,7 @@ export class CustomerService {
 
  getAllCustomers() {
   this.createAuthenticationHeaders()
-  return this.http.get(this.cs.domain + '/customers/getAllCostumer',{ headers: this.options });
+  return this.http.get(this.cs.domain + '/customers/getAllCustomer',{ headers: this.options });
   }
 
 

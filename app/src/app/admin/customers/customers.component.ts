@@ -13,6 +13,7 @@ import { CommonComponent } from '../../shared/common/common.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../@core/services/auth.service';
 import { DataTableDirective } from 'angular-datatables';
+import { log } from 'console';
 
 
 
@@ -71,6 +72,9 @@ export class CustomersComponent implements OnInit {
       pageLength: 10
     };
     this.customer.getAllCustomers().pipe(takeUntil(this.getCustomerSubscription)).subscribe((data: any) => {
+      console.log('getAllCustomers');
+      console.log(data);
+
         this.data = data.customer;
        this.loading = false;
       //  this.data = (data as any).data;
