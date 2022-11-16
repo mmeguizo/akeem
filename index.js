@@ -42,7 +42,7 @@ app.use('/images', express.static(path.join(__dirname, './images')));
 //api routes
 //app.use('/customer', customer);
 app.use('/authentication', authentication);
-app.use('/customer', customer);
+app.use('/customers', customer);
 app.use('/users', users);
 
 
