@@ -24,11 +24,13 @@ import {
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,
+
 } from '@nebular/theme';
 import { AdminModule } from './admin/admin.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from './@core/guard/auth.guard';
 import { NotAuthGuard } from './@core/guard/notAuth.guard';
+import { SharedModule } from './shared/shared.module';
 
 
 
@@ -67,6 +69,7 @@ export function tokenGetter() {
     AdminModule,
     NbDialogModule.forRoot(),
     NgbModule,
+    SharedModule,
 
   ],
   bootstrap: [AppComponent],
@@ -74,6 +77,7 @@ export function tokenGetter() {
     // { provide: APP_BASE_HREF, useValue: '/' },
     AuthGuard,
     NotAuthGuard,
+    NgbActiveModal,
     // AuthService,
     // ConnectionService
   ],

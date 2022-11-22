@@ -11,6 +11,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonComponent } from '../../shared/common/common.component';
 import { AuthService } from '../../@core/services/auth.service';
 import { DataTableDirective } from 'angular-datatables';
+import { UsersModalComponent } from '../../shared/users-modal/users-modal.component';
+
 
 @Component({
   selector: 'ngx-users',
@@ -46,6 +48,7 @@ export class UsersComponent implements OnInit,OnDestroy {
     public user : UserService,
     public auth : AuthService,
     public ngbModal: NgbModal,
+    public user_modal: UsersModalComponent,
 
 
   ) {
@@ -87,7 +90,10 @@ selectFilter(name, value){
 
 
 addUser(){
-
+  const activeModal = this.ngbModal.open(UsersModalComponent, { size: 'sm', container: 'nb-layout', windowClass: 'min_height', backdrop: 'static' });
+  activeModal.componentInstance.buttonStatus = "success"
+  activeModal.componentInstance.buttonTxt = "Add"
+  activeModal.componentInstance.action = "Add"
 }
 
 updateUser(){
@@ -140,6 +146,8 @@ rerender(): void {
     this.dtTrigger.next();
   });
 }
+
+
 
 
 }

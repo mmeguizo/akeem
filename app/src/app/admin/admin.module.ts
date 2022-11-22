@@ -31,6 +31,7 @@ import { SharedModule } from '../shared/shared.module';
 import { UsersComponent } from './users/users.component';
 import { DataTablesModule } from 'angular-datatables';
 import { CustomersComponent } from './customers/customers.component';
+import { UsersModalComponent } from '../shared/users-modal/users-modal.component';
 
 // import { ThemeModule } from '../@theme/theme.module';
 // import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -103,6 +104,7 @@ const NB_MODULES = [
     DashboardComponent,
     UsersComponent,
     CustomersComponent,
+    UsersModalComponent
     // CreateWarehouseComponent,
     // ViewStorageComponent,
     // CreateStorageComponent,
@@ -124,6 +126,7 @@ const NB_MODULES = [
     // AddUserModalComponent
   ],
   entryComponents: [
+    UsersModalComponent
     // CreateWarehouseComponent,
     // CreateStorageComponent,
     // UpdateWarehouseComponent,
@@ -136,6 +139,9 @@ const NB_MODULES = [
     // AddUserModalComponent
   ],
   exports: [
+  ],
+  providers : [
+    UsersModalComponent
 
   ]
 })

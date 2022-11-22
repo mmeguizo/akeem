@@ -1,0 +1,133 @@
+<div class="col-md-12">
+  <nb-card>
+<nb-card-header> {{ action | titlecase }} User </nb-card-header>
+<nb-card-body>
+  <form [formGroup]="form" (submit)="executeAction(form)">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label for="inputFirstName" class="label">Username</label>
+        <input type="text" nbInput fullWidth id="inputFirstName" [status]="form?.get('username').touched && form.controls['username'].errors?.required ? 'danger' : '' "  placeholder="Username" formControlName="username">
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label for="inputLastName" class="label">Email</label>
+        <input type="email" nbInput fullWidth id="inputLastName" [status]="form?.get('email').touched && form.controls['email'].errors?.required ? 'danger' : '' "  placeholder="Email" formControlName="email">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label for="inputEmail" class="label">Password</label>
+        <input type="password" nbInput fullWidth id="inputEmail" [status]="form?.get('password').touched && form.controls['password'].errors?.required ? 'danger' : '' " placeholder="Password" formControlName="password">
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label for="inputWebsite" class="label">Confirm Password</label>
+        <input type="password" nbInput fullWidth id="inputWebsite" [status]="form?.get('confirm').touched && form.controls['confirm'].errors?.required ? 'danger' : '' " placeholder="Confirm Password" formControlName="confirm">
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label for="inputWebsite" class="label">Role</label>
+        <nb-select formControlName="role" selected="admin">
+          <nb-option value="admin">Admin</nb-option>
+          <nb-option value="user">User</nb-option>
+          <nb-option value="customer">Customer</nb-option>
+        </nb-select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <button type="submit" nbButton [status]="buttonStatus" outline  > {{ buttonTxt | titlecase }}  </button> &nbsp;
+      <button type="button" nbButton status="danger" (click)="closeModal()" outline>Cancel</button>
+    </div>
+  </div>
+</form>
+</nb-card-body>
+</nb-card>
+</div>
+<!-- <div class="modal-header">
+  {{ action | titlecase }} User
+  <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="form">
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput  type="text"  autocomplete="off" formControlName="username"   >
+      <mat-error  *ngIf="form?.get('username').touched && form.controls['username'].errors?.required">Username is <strong>required </strong> </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="input-example" >
+        <mat-label>Email:  </mat-label>
+         <input matInput  type="text"  autocomplete="off" formControlName="email"   >
+         <mat-error  *ngIf="form?.get('email').touched && form.controls['email'].errors?.required">Email  is <strong>required </strong> </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="row">
+    <div class="col-md-6">
+          <div class="dropdown input-group-prepend input-group-btn wide" ngbDropdown>
+            <mat-form-field class="input-example" >
+              <mat-label>Password:  </mat-label>
+               <input matInput   type="{{showpassword ? 'text' : 'password'}}"  autocomplete="off" formControlName="password"   >
+               <mat-error  *ngIf="form?.get('password').touched && form.controls['password'].errors?.required">Password  is <strong>required </strong> </mat-error>
+            </mat-form-field>
+            <button type="button" class="btn btn-primary" style="color: #000;height: 44px;" (click)="showPassword()">
+              <i [ngClass]="eyeIcon"></i>
+            </button>
+          </div>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field>
+        <mat-label>User Role:</mat-label>
+        <mat-select formControlName="role" #maritalStatus id="role">
+          <mat-option   value="admin" >admin</mat-option>
+          <mat-option value="user" >user</mat-option>
+          <mat-option value="customer" >customer</mat-option>
+        </mat-select>
+      <mat-error  *ngIf="form?.get('role').touched && form.controls['role'].errors?.required">Role is <strong>required </strong> </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger" (click)="closeModal()">Close</button>
+  <button type="submit" class="btn btn-primary"  (click)="executeAction(form)">
+    <i class="far fa-address-card"></i>  {{ buttonTxt | titlecase }}
+  </button>
+</div>
+</form> -->
+
+
+<!-- <nb-card>
+
+
+
+
+
+ <mat-select formControlName="role" #maritalStatus id="role">
+          <mat-option   value="admin" >admin</mat-option>
+          <mat-option   value="salesman" >salesman</mat-option>
+          <mat-option   value="clerk" >clerk</mat-option>
+          <mat-option   value="WH-man" >WH-man</mat-option>
+          <mat-option value="user" >user</mat-option>
+        </mat-select>
+
+
+
+
+
+</nb-card> -->

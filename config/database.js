@@ -28,8 +28,8 @@ const hash = crypto.createHmac('sha256', secret)
 
 module.exports = {
 
-    uri: process.env.DB_URL,
-    // uri: process.env.DB_LOCAL,
+    // uri: process.env.DB_URL,
+    uri: process.env.DB_LOCAL,
     secret: hash,
     options: {
         useUnifiedTopology: true,

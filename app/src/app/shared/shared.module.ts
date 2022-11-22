@@ -36,6 +36,7 @@ import {
   NbTooltipModule,
   NbWindowModule,
   NbAccordionModule,
+  NbRadioModule,
 
 } from '@nebular/theme';
 
@@ -89,6 +90,7 @@ const MODULES = [
     // PasswordStrengthMeterModule,
     // NgImageFullscreenViewModule,
     NbAccordionModule,
+    NbRadioModule,
     RouterModule,
     // DataTablesModule,
     ...MODULES,
@@ -108,10 +110,10 @@ const MODULES = [
     RoundOff,
     ChatMessagePipe,
     FileNameOnly,
-    CommonComponent
+    CommonComponent,
   ],
   entryComponents: [
-    CommonComponent
+    CommonComponent,
   ],
   exports: [
     dataFilterPipe,
