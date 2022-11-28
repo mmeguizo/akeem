@@ -26,7 +26,10 @@ export class UsersModalComponent implements OnInit {
   public action : String = "action to perform in";
   public form: any;
   public showpassword: Boolean = false;
-  public eyeIcon : String = 'eye-outline'
+  public id : String;
+  public updateUser : Boolean;
+  selected : String;
+  eyeIcon: string = "eye-off-outline";
 
 
   constructor(
@@ -43,6 +46,9 @@ export class UsersModalComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
+    this.buttonTxt === 'update' ?  this.getUser(this.userData.id ) : '';
+    this.showpassword = false;
   }
 
 
@@ -60,6 +66,31 @@ export class UsersModalComponent implements OnInit {
     this.activeModal.close();
   }
 
+
+  getUser(id){
+    this.user.getRoute(this.userData.endpoint, this.userData.apiName, { id : id }).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
+      this.selected = data.user.role;
+      this.form = this.formBuilder.group({
+        username:         [data.user.username, [Validators.required]],
+        email:     [data.user.email, [Validators.required]],
+        role:     [data.user.role, [Validators.required]],
+        password:     ['', [Validators.required]],
+        confirm:     ['', [Validators.required]],
+      })
+
+
+
+      // data.success ? [this.passEntry.emit(data) , this.activeModal.close()] : this.passEntry.emit(data)
+   });
+  }
+
+  executeAction(form){
+    this.form.value.id = this.userData.id;
+    this.user.getRoute(this.userData.endpoint2 ? this.userData.endpoint2 : this.userData.endpoint, this.userData.apiName2 ? this.userData.apiName2 : this.userData.apiName, this.form.value).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
+      data.success ? [this.passEntry.emit(data) , this.activeModal.close()] : this.passEntry.emit(data)
+   });
+  }
+
   showPassword(){
     if(this.showpassword == true){
       this.showpassword = false;
@@ -71,9 +102,10 @@ export class UsersModalComponent implements OnInit {
   }
 
 
-  executeAction(form){
-    console.log(form.value)
 
-  }
+
+
+
+
 
 }

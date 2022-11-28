@@ -1,8 +1,11 @@
 const User = require('../models/user'); // Import User Model Schema
 const { v4: uuidv4 } = require('uuid');
 const hash = require('../config/password-hasher');
+const mongoose = require('mongoose');
 let bcrypt = require('bcryptjs');
 
+
+const ObjectId = mongoose.Types.ObjectId;
 
 module.exports = (router) => {
 
@@ -22,6 +25,22 @@ module.exports = (router) => {
                 }
             }
         }).sort({ '_id': -1 }); // Sort blogs from newest to oldest
+    });
+
+    router.post('/findById', (req, res) => {
+        User.findOne({ id: req.body.id }, function (err, user) {
+             if (err) {
+                    res.json({ success: false, message: err }); // Return error message
+                } else {
+                    // Check if blogs were found in database
+                    if (!user) {
+                        res.json({ success: false, message: 'No User found.' }); // Return error of no blogs found
+                    } else {
+                        res.json({ success: true, user: user }); // Return success and blogs array
+                    }
+                }
+
+        });
     });
 
 
@@ -81,7 +100,7 @@ module.exports = (router) => {
                                 }
                             }
                         } else {
-                            res.json({ success: true, message: 'Account Registered successfully', data: { email: data.email, username: data.username } });
+                            res.json({ success: true, message: 'This user is successfully Registered ', data: { email: data.email, username: data.username } });
                             // globalconnetion.emitter('user')
                         }
                     })
@@ -119,12 +138,12 @@ module.exports = (router) => {
             id: data.id
         }, (err, user) => {
             if(err) throw err
-            User.findOneAndUpdate({ id: data.id }, { status: 'inactive' }, { upsert: true }, (err, response) => {
+            User.findOneAndUpdate({ id: data.id }, { deleted: true, status : 'inactive' }, { upsert: true }, (err, response) => {
                     if (err) return res.json({ success: false, message: err.message });
                     if (response) {
-                        res.json({ success: false, message: 'Could not set User to Inactive Status' + err })
+                        res.json({ success: true, message:' Successfully Delete User', data: user });
                     } else {
-                        res.json({ success: true, message:' Successfully User set to Inactive Status', data: user });
+                        res.json({ success: false, message: 'Could Delete User' + err })
                     }
                 });
 
@@ -158,64 +177,48 @@ module.exports = (router) => {
 
 
 
-    router.put('/updateUser', (req, res) =>   {
+    router.put('/updateUser', async (req, res) =>   {
 
         let data = req.body;
         let userData = {};
 
-     User.findOne({id: data.id }, async (err,docs) => {
-         //check old password against the database
-       
-            if (err){
-                res.json({ success: false, message: 'Error unable to Process Profile update: ' + err })
-            }
-            else{
-                //if they change thier password
-                if(data.changePassword){
-                    
-                    //compare passwords
-                    let checkPassword = await bcrypt.compare(data.old_password, docs.password); 
+        if(data.changePassword){
+            let checkPassword = await bcrypt.compare(data.old_password, docs.password); 
 
-                    if( !checkPassword){
-                        res.json({ success: false, message: 'Old Password Incorrect: ' + !checkPassword })
-                    }else{
-                        
-                        hash.encryptPassword(data.new_password).then(hash => {
-                            userData.role = data.role;
-                            userData.username = data.username;
-                            userData.email = data.email;
-                            userData.password = hash;
-                            changedPassword = true;
-                            User.findOneAndUpdate({ id: data.id }, userData, { upsert: true }, (err, response) => {
-                                if (err) return res.json({ success: false, message: err.message });
-                                if (response) {
-                                    res.json({ success: true, message: "User Information has been updated!", data: response });
-                                } else {
-                                    res.json({ success: true, message: "No User has been modified!", data: response });
-                                }
-                            });
-                        }).catch(err => { console.log(err); })
-
-                    }
-                }else{
-
+            if( !checkPassword){
+                res.json({ success: false, message: 'Old Password Incorrect: ' + !checkPassword })
+            }else{
+                
+                hash.encryptPassword(data.new_password).then(hash => {
                     userData.role = data.role;
                     userData.username = data.username;
                     userData.email = data.email;
-                    userData.status = data.status;
+                    userData.password = hash;
+                    changedPassword = true;
                     User.findOneAndUpdate({ id: data.id }, userData, { upsert: true }, (err, response) => {
                         if (err) return res.json({ success: false, message: err.message });
                         if (response) {
-                             res.json({ success: true, message: "User Information has been updated!", data: response  });
+                            res.json({ success: true, message: "User Information has been updated!", data: response });
                         } else {
                             res.json({ success: true, message: "No User has been modified!", data: response });
                         }
                     });
-                    
-                }
-            }
-        })
+                }).catch(err => { console.log(err); })
 
+            }
+        }else{
+            userData.role = data.role;
+            userData.username = data.username;
+            userData.email = data.email;
+            User.findOneAndUpdate({ id: data.id }, userData, { upsert: true }, (err, response) => {
+                if (err) return res.json({ success: false, message: err.message });
+                if (response) {
+                     res.json({ success: true, message: "User Information has been updated!", data: response  });
+                } else {
+                    res.json({ success: true, message: "No User has been modified!", data: response });
+                }
+            });
+        }
     });
 
 

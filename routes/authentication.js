@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const { v4: uuidv4 } = require('uuid');
 let bcrypt = require('bcryptjs');
-
+const comparePassword = require('../models/validators/password-compare');
 
 
 module.exports = (router) => {
@@ -110,7 +110,7 @@ module.exports = (router) => {
   })
 
   //login
-  router.post('/login',  (req, res) => {
+  router.post('/login', (req, res) => {
 
     if (!req.body.username) {
       res.json({ success: false, message: 'No Username was provided' })
@@ -120,7 +120,7 @@ module.exports = (router) => {
         res.json({ success: false, message: 'No password was provided' })
       } else {
 
-        User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
+        User.findOne({ username: req.body.username.toLowerCase() }, async (err, user) => {
 
           if (err) {
             res.json({ success: false, message: err.message })
@@ -129,20 +129,13 @@ module.exports = (router) => {
             if (!user) {
               res.json({ success: false, message: 'User not found' })
             } else {
-              //user found compare the password
-              bcrypt.compare(req.body.password, user.password).then(function(result) {
-                if (!result) {
-                  res.json({ success: false, message: 'Password is incorrect' })
-                } else {
-                  const token = jwt.sign({ userID: user._id }, config.secret, { expiresIn: '24h' });
-                  res.json({ success: true, message: 'Password is Correct', token: token, user: { username: user.username }, userToken: user.username, role: user.role },)
-                }
-              }, function(err) {
-                console.log(err); // Error: "It broke"
-              }); ;
-              // const validPassword = user.comparePassword(req.body.password) ;
 
-             
+               if(await comparePassword(req.body.password, user.password)){
+                const token = jwt.sign({ userID: user._id }, config.secret, { expiresIn: '24h' });
+                res.json({ success: true, message: 'Password is Correct', token: token, user: { username: user.username }, userToken: user.username, role: user.role })
+               }else{
+                res.json({ success: false, message: 'Password is incorrect' });
+               }
             }
 
           }

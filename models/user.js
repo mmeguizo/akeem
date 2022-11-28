@@ -32,7 +32,6 @@ const userSchema = new Schema({
     }
   })
   
-  // (password) => ****does not work with es6 syntax**** use functions old ways
   userSchema.methods.comparePassword = function (password) {
     return bcrypt.compare(password, this.password); // this return a promise
   }

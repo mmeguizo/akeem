@@ -56,13 +56,6 @@ export class CommonComponent implements OnInit,OnDestroy {
           this.passEntry.emit(data);
           this.activeModal.close();
        });
-        if(this.endpointType === 'post'){
-
-        }else if(this.endpointType === 'put'){
-
-        }else{
-
-        }
     }else if(this.model && this.model === 'customers'){
       this.customer.getRoute(this.endpointType,this.apiName,this.frontEnddata).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
         this.passEntry.emit(data);

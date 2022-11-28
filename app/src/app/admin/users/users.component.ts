@@ -49,19 +49,13 @@ export class UsersComponent implements OnInit,OnDestroy {
     public auth : AuthService,
     public ngbModal: NgbModal,
     public user_modal: UsersModalComponent,
-
-
   ) {
 
    }
 
   ngOnInit() {
     this.data = [];
-
     this.getAllUsersInitially();
-
-
-
   }
 
   getAllUsersInitially() {
@@ -92,22 +86,64 @@ selectFilter(name, value){
 addUser(){
   const activeModal = this.ngbModal.open(UsersModalComponent, { size: 'sm', container: 'nb-layout', windowClass: 'min_height', backdrop: 'static' });
   activeModal.componentInstance.buttonStatus = "success"
-  activeModal.componentInstance.buttonTxt = "Add"
-  activeModal.componentInstance.action = "Add"
+  activeModal.componentInstance.buttonTxt = "add"
+  activeModal.componentInstance.action = "add"
+  activeModal.componentInstance.updateUser = false;
+  activeModal.componentInstance.userData = {
+    endpoint : 'post',
+    apiName :  'addUser'
+  };
+  //
+  activeModal.componentInstance.passEntry.subscribe((receivedEntry) => {
+    receivedEntry.success ?
+    [this.auth.makeToast('success',`Adding ${receivedEntry.data?.username}`,receivedEntry.message),
+    this.rerender()] : [this.auth.makeToast('danger',`Adding ${receivedEntry.data?.username || 'failed'}`,receivedEntry.message),
+    this.rerender()]
+ });
+
 }
 
-updateUser(){
-
+updateUser(id){
+  const activeModal = this.ngbModal.open(UsersModalComponent, { size: 'sm', container: 'nb-layout', windowClass: 'min_height', backdrop: 'static' });
+  activeModal.componentInstance.buttonStatus = "success";
+  activeModal.componentInstance.buttonTxt = "update";
+  activeModal.componentInstance.action = "update";
+  activeModal.componentInstance.updateUser = true;
+  activeModal.componentInstance.userData = {
+    endpoint : 'post',
+    apiName :  'findById',
+    apiName2 : 'updateUser',
+    endpoint2 : 'put',
+    id : id,
+  };
+  activeModal.componentInstance.passEntry.subscribe((receivedEntry) => {
+    receivedEntry.success ?
+    [this.auth.makeToast('success',`Updating ${receivedEntry.data?.username}`,receivedEntry.message),
+    this.rerender()] : [this.auth.makeToast('danger',`Updating ${receivedEntry.data?.username || 'failed'}`,receivedEntry.message),
+    this.rerender()]
+ });
 
 }
-deleteUser(){
+deleteUser(person){
+  const activeModal = this.ngbModal.open(CommonComponent, { size: 'sm', container: 'nb-layout', windowClass: 'min_height', backdrop: 'static' });
+  activeModal.componentInstance.username = person.username;
+  activeModal.componentInstance.id = person.id;
+  activeModal.componentInstance.frontEnddata = person;
+  activeModal.componentInstance.model = 'user';
+  activeModal.componentInstance.endpointType = 'put';
+  activeModal.componentInstance.apiName = 'setInactiveUser';
+  activeModal.componentInstance.headerTitle = 'Deleting';
+  activeModal.componentInstance.bodyContent = 'Deleting';
+  activeModal.componentInstance.passEntry.subscribe((receivedEntry) => {
+    receivedEntry.success ?
+    [this.auth.makeToast('success',`Deleting ${receivedEntry.data?.username || person.username}`,receivedEntry.message),
+    this.rerender()] : [this.auth.makeToast('danger',`Deleting ${receivedEntry.data?.username || 'failed'}`,receivedEntry.message),
+    this.rerender()]
+  });
 
 
 }
 changeStatus(person){
-
-  console.log(person);
-
   const activeModal = this.ngbModal.open(CommonComponent, { size: 'sm', container: 'nb-layout', windowClass: 'min_height', backdrop: 'static' });
   activeModal.componentInstance.username = person.username;
   activeModal.componentInstance.id = person.id;
