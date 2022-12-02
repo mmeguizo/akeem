@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../../@core/services/auth.service';
 import { ReverseDate } from '../../../@core/pipes/dataFilter';
 import { CommonComponent } from '../../../shared/common/common.component';
+import { UpdateProfileComponent } from '../../../shared/update-profile/update-profile.component';
 
 
 @Component({
@@ -83,7 +84,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       activeModal.componentInstance.bodyContent ='Are you sure you want to logout?',
       activeModal.componentInstance.username = this.name
     } else if (title === 'Profile') {
-     // this.updateUser();
+      const activeModal = this.ngbModal.open(UpdateProfileComponent, { size: 'sm', container: 'nb-layout', windowClass: 'min_height', backdrop: 'static' });
     }
   }
 

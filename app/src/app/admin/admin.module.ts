@@ -23,6 +23,7 @@ import {
   NbPopoverModule,
   NbCalendarModule
 } from '@nebular/theme';
+
 import { ThemeModule } from '../@theme/theme.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin.component';
@@ -32,6 +33,8 @@ import { UsersComponent } from './users/users.component';
 import { DataTablesModule } from 'angular-datatables';
 import { CustomersComponent } from './customers/customers.component';
 import { UsersModalComponent } from '../shared/users-modal/users-modal.component';
+import { UpdateProfileComponent } from '../shared/update-profile/update-profile.component';
+import { CustomerModalComponent } from '../shared/customer-modal/customer-modal.component';
 
 // import { ThemeModule } from '../@theme/theme.module';
 // import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -104,7 +107,9 @@ const NB_MODULES = [
     DashboardComponent,
     UsersComponent,
     CustomersComponent,
-    UsersModalComponent
+    UpdateProfileComponent,
+    UsersModalComponent,
+    CustomerModalComponent,
     // CreateWarehouseComponent,
     // ViewStorageComponent,
     // CreateStorageComponent,
@@ -126,7 +131,9 @@ const NB_MODULES = [
     // AddUserModalComponent
   ],
   entryComponents: [
-    UsersModalComponent
+    UpdateProfileComponent,
+    UsersModalComponent,
+    CustomerModalComponent,
     // CreateWarehouseComponent,
     // CreateStorageComponent,
     // UpdateWarehouseComponent,
@@ -141,7 +148,9 @@ const NB_MODULES = [
   exports: [
   ],
   providers : [
-    UsersModalComponent
+    UsersModalComponent,
+    UpdateProfileComponent,
+    CustomerModalComponent,
 
   ]
 })

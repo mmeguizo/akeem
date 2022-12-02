@@ -37,10 +37,22 @@ import {
   NbWindowModule,
   NbAccordionModule,
   NbRadioModule,
+  NbIconModule,
+  NbLayoutModule,
+  NbSearchModule,
+  NbSidebarModule,
+  NbUserModule,
+  NbContextMenuModule,
+  NbThemeModule,
+  NbBadgeModule,
+  NbDatepickerModule,
+  NbCalendarModule
+
 
 } from '@nebular/theme';
 
 import { CommonComponent } from './common/common.component';
+// import { CustomerModalComponent } from './customer-modal/customer-modal.component';
 
 const materialModules = [
   MatFormFieldModule,
@@ -57,7 +69,7 @@ const materialModules = [
   MatIconModule,
   MatBadgeModule,
   MatBottomSheetModule,
-  MatStepperModule
+  MatStepperModule,
 ];
 
 const MODULES = [
@@ -71,6 +83,17 @@ const MODULES = [
   NbInputModule,
   NbSelectModule,
   NbTooltipModule,
+  NbIconModule,
+  NbLayoutModule,
+  NbMenuModule,
+  NbUserModule,
+  NbActionsModule,
+  NbSearchModule,
+  NbSidebarModule,
+  NbContextMenuModule,
+  NbThemeModule,
+  NbBadgeModule,
+  NbCalendarModule
 ];
 
 @NgModule({
@@ -111,9 +134,12 @@ const MODULES = [
     ChatMessagePipe,
     FileNameOnly,
     CommonComponent,
+    // CustomerModalComponent,
+    //UpdateProfileComponent,
   ],
   entryComponents: [
     CommonComponent,
+    //UpdateProfileComponent,
   ],
   exports: [
     dataFilterPipe,

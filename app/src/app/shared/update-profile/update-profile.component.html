@@ -1,8 +1,8 @@
 <div class="col-md-12">
   <nb-card>
-<nb-card-header> {{ action | titlecase }} User {{ updateUser ? updateUser : '' }} </nb-card-header>
+<nb-card-header> Update Profile</nb-card-header>
 <nb-card-body>
-  <form [formGroup]="form" (submit)="executeAction(form)">
+  <form [formGroup]="form" enctype="multipart/form-data" (submit)="executeAction(form)">
   <div class="row">
     <div class="col-sm-12">
       <div class="form-group">
@@ -18,14 +18,14 @@
     </div>
   </div>
   <div class="row">
-      <div class="col-sm-12" [ngClass]="{'critical': updateUser}" >
+      <div class="col-sm-12"  >
         <div class="form-group" >
           <label for="inputEmail" class="label">Password</label>
           <input type="{{showpassword ? 'text' : 'password'}}"  nbInput fullWidth id="inputEmail" [status]="form?.get('password').touched && form.controls['password'].errors?.required ? 'danger' : '' " placeholder="Password" formControlName="password">
           <nb-icon class="password-icon" [icon]="eyeIcon" (click)="showPassword()" pack="eva"></nb-icon>
         </div>
       </div>
-      <div class="col-sm-12" [ngClass]="{'critical': updateUser}">
+      <div class="col-sm-12" >
         <div class="form-group">
           <label for="inputWebsite" class="label">Confirm Password</label>
           <input type="{{showpassword ? 'text' : 'password'}}" nbInput fullWidth id="inputWebsite" [status]="form?.get('confirm').touched && form.controls['confirm'].errors?.required ? 'danger' : '' " placeholder="Confirm Password" formControlName="confirm">
@@ -34,18 +34,25 @@
       </div>
     <div class="col-sm-12">
       <div class="form-group">
-        <nb-card-header>Role</nb-card-header>
-        <nb-select formControlName="role" [selected]="selected">
-          <nb-option value="admin">Admin</nb-option>
-          <nb-option value="user">User</nb-option>
-          <nb-option value="customer">Customer</nb-option>
-        </nb-select>
+          <div class="avatar-container">
+          <div class="display-photo" *ngIf="avatar"
+            >
+          </div>
+          <div class="display-photo" *ngIf="avatar"
+            [style.background-image]="'url('+this.auth.domain+'/images/'+avatar+')'">
+          </div>
+          <div class="display-photo" *ngIf="!avatar"
+            [style.background-image]="'url('+this.auth.domain+'/images/no-photo.png'+')'">
+          </div>
+          <input type="file" name="file" class="d-none" id="file">
+          <button class="btn btn-primary browse-btn"  [nbSpinner]="loadingMediumGroup" nbSpinnerStatus="primary" nbSpinnerSize="tiny" nbSpinnerMessage="" (click)="openFile($event, 'file')">Change Profile Image</button>
+        </div>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-12 text-center">
-      <button type="submit" nbButton [status]="buttonStatus" outline  > {{ buttonTxt | titlecase }}  </button> &nbsp;
+      <button type="submit" nbButton [status]="buttonStatus" outline  > Update </button> &nbsp;
       <button type="button" nbButton status="danger" (click)="closeModal()" outline>Cancel</button>
     </div>
   </div>

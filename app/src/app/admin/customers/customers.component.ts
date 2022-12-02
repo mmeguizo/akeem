@@ -14,6 +14,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../@core/services/auth.service';
 import { DataTableDirective } from 'angular-datatables';
 import { log } from 'console';
+import { CustomerModalComponent } from '../../shared/customer-modal/customer-modal.component';
 
 
 
@@ -108,7 +109,7 @@ changeStatus(customer){
   activeModal.componentInstance.anyVariable = customer.name;
   activeModal.componentInstance.model = 'customers';
   activeModal.componentInstance.endpointType = 'put';
-  activeModal.componentInstance.apiName = 'changeCostumerStatus';
+  activeModal.componentInstance.apiName = 'changeCustomerStatus';
   activeModal.componentInstance.headerTitle = 'Status Change';
   activeModal.componentInstance.bodyContent = 'Changing Status of';
   activeModal.componentInstance.passEntry.subscribe((receivedEntry) => {
@@ -135,17 +136,70 @@ rerender(): void {
 }
 
 
-updateCustomer(customer){
-  console.log(`this to update the customer with id ${customer.id}`);
+updateCustomer(id){
+  const activeModal = this.ngbModal.open(CustomerModalComponent, { size: 'sm', container: 'nb-layout', windowClass: 'min_height', backdrop: 'static' });
+  activeModal.componentInstance.buttonStatus = "success";
+  activeModal.componentInstance.buttonTxt = "update";
+  activeModal.componentInstance.action = "update";
+  activeModal.componentInstance.updateUser = true;
+  activeModal.componentInstance.customerData = {
+    endpoint : 'put',
+    apiName :  'findById',
+    apiName2 : 'updateCustomer',
+    endpoint2 : 'put',
+    id : id,
+  };
+  activeModal.componentInstance.passEntry.subscribe((receivedEntry) => {
+    receivedEntry.success ?
+    [this.auth.makeToast('success',`Updating ${receivedEntry.data?.name}`,receivedEntry.message),
+    this.rerender()] : [this.auth.makeToast('danger',`Updating ${receivedEntry.data?.name || 'failed'}`,receivedEntry.message),
+    this.rerender()]
+ });
 
 }
 
 deleteCustomer(customer){
-  console.log(`this to delete the customer with id ${customer.id}`);
+  const activeModal = this.ngbModal.open(CommonComponent, { size: 'sm', container: 'nb-layout', windowClass: 'min_height', backdrop: 'static' });
+  activeModal.componentInstance.username = customer.name;
+  activeModal.componentInstance.id = customer.id;
+  activeModal.componentInstance.frontEnddata = customer;
+  activeModal.componentInstance.model = 'customers';
+  activeModal.componentInstance.endpointType = 'put';
+  activeModal.componentInstance.apiName = 'deleteCustomer';
+  activeModal.componentInstance.headerTitle = 'Deleting';
+  activeModal.componentInstance.bodyContent = 'Deleting';
+  activeModal.componentInstance.passEntry.subscribe((receivedEntry) => {
+    receivedEntry.success ?
+    [this.auth.makeToast('success',`Deleting ${receivedEntry.data?.name || customer.name}`,receivedEntry.message),
+    this.rerender()] : [this.auth.makeToast('danger',`Deleting ${receivedEntry.data?.name || 'failed'}`,receivedEntry.message),
+    this.rerender()]
+  });
 
 }
 addCustomer(){
-  console.log(`this to add  new customer`);
+  const activeModal = this.ngbModal.open(CustomerModalComponent, { size: 'sm', container: 'nb-layout', windowClass: 'min_height', backdrop: 'static' });
+  activeModal.componentInstance.customerData = {
+
+    endpoint : 'post',
+    apiName : 'addCustomer',
+
+
+  };
+  activeModal.componentInstance.model = 'customers';
+  activeModal.componentInstance.endpointType = 'post';
+  activeModal.componentInstance.endpoint = 'post';
+  activeModal.componentInstance.apiName = 'addCustomer';
+  activeModal.componentInstance.passEntry.subscribe((receivedEntry) => {
+
+    receivedEntry.success ?
+    [this.auth.makeToast('success',`Adding Customer`,receivedEntry.message),
+    this.rerender()] : [this.auth.makeToast('danger',`Adding Customer ${receivedEntry.data?.username || 'failed'}`,receivedEntry.message),
+    this.rerender()]
+
+    //  receivedEntry &&
+    //  [this.auth.makeToast('success','Adding Customer',`Success adding customer`),
+    //  this.rerender()];
+  });
 
 }
 

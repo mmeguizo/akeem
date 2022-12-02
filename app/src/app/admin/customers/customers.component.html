@@ -25,6 +25,7 @@
                   <th>Email</th>
                   <th>Company</th>
                   <th>Address</th>
+                  <th>Balance</th>
                   <th>Status</th>
                   <th>Options</th>
                 </tr>
@@ -36,6 +37,7 @@
                   <td>{{ customer.email }}</td>
                   <td>{{ customer.company }}</td>
                   <td>{{ customer.address }}</td>
+                  <td>₱{{ customer.open_balance }}</td>
                   <!-- <td>{{ customer.status }}</td> -->
                   <td scope="col">
                     <span class="pointer" (click)="changeStatus(customer)"
@@ -44,7 +46,7 @@
                   <td scope="col" id="options">
                     <span>
                       <nb-action  nbPopover="Update User" nbPopoverTrigger="hint"
-                      nbPopoverPlacement="bottom" (click)="updateCustomer(customer)"><nb-icon  id="updateUser" icon="edit-2" ></nb-icon></nb-action>
+                      nbPopoverPlacement="bottom" (click)="updateCustomer(customer.id)"><nb-icon  id="updateUser" icon="edit-2" ></nb-icon></nb-action>
                     </span>
                     &nbsp;
                     &nbsp;
