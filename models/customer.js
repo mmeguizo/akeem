@@ -11,7 +11,15 @@ const customerSchema = new Schema({
     address: { type: String, required: true },
     company: { type: String, required: true },
     phone: { type: Number, required: true },
-    attachment: { type: String },
+    attachment:[ 
+
+        {
+          id :  { type: String, required: true },
+          source :  { type: String, required: true },
+          date_added: { type:Date, required:true, default : new Date() },
+        }
+    
+      ],
     open_balance: { type: Number, required: true },
     notes: { type: String, },
     status: { type: String, default: 'active' },

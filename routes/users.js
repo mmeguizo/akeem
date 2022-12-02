@@ -221,6 +221,52 @@ module.exports = (router) => {
         }
     });
 
+    router.put('/updateProfile', async (req, res) =>   {
+
+        let data = req.body;
+        let userData = {};
+
+        if(data.changePassword){
+            let checkPassword = await bcrypt.compare(data.old_password, docs.password); 
+
+            if( !checkPassword){
+                res.json({ success: false, message: 'Old Password Incorrect: ' + !checkPassword })
+            }else{
+                
+                hash.encryptPassword(data.new_password).then(hash => {
+                    userData.role = data.role;
+                    userData.username = data.username;
+                    userData.email = data.email;
+                    userData.password = hash;
+                    userData.profile_pic = data.profile_pic;
+                    changedPassword = true;
+                    User.findOneAndUpdate({ id: data.id }, userData, { upsert: true }, (err, response) => {
+                        if (err) return res.json({ success: false, message: err.message });
+                        if (response) {
+                            res.json({ success: true, message: "User Information has been updated!", data: response });
+                        } else {
+                            res.json({ success: true, message: "No User has been modified!", data: response });
+                        }
+                    });
+                }).catch(err => { console.log(err); })
+
+            }
+        }else{
+            userData.role = data.role;
+            userData.username = data.username;
+            userData.email = data.email;
+            userData.profile_pic = data.profile_pic;
+            User.findOneAndUpdate({ id: data.id }, userData, { upsert: true }, (err, response) => {
+                if (err) return res.json({ success: false, message: err.message });
+                if (response) {
+                     res.json({ success: true, message: "User Information has been updated!", data: response  });
+                } else {
+                    res.json({ success: true, message: "No User has been modified!", data: response });
+                }
+            });
+        }
+    });
+
 
     router.get('/profile', (req, res) => {
         User.findOne({ id: req.decoded.userID }).select('username email').exec((err, user) => {

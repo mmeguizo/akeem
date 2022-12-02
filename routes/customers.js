@@ -28,6 +28,10 @@ module.exports = (router) => {
 
 
     router.post('/addCustomer', (req, res) => {
+
+        console.log(req.body);
+
+
         if (!req.body.email) {
             res.json({ success: false, message: 'You must provide an email' })
         } else {
@@ -41,7 +45,7 @@ module.exports = (router) => {
                     email: req.body.email.toLowerCase(),
                     name: req.body.name.toLowerCase(),
                     address: req.body.address.toLowerCase(),
-                    attachment: req.body.attachment.toLowerCase(),
+                    attachment: req.body.attachment,
                     notes: req.body.notes.toLowerCase(),
                     company: req.body.company.toLowerCase(),
                     phone: req.body.phone,
@@ -145,9 +149,12 @@ module.exports = (router) => {
     });
 
 
-    router.get('/customer', (req, res) => {
+    router.put('/findById', (req, res) => {
         // Customer.findOne({ id: req.decoded.customerId }).select('name email').exec((err, customer) => {
-        Customer.findOne({ id: req.body.id }).select('name email').exec((err, customer) => {
+        Customer.findOne({ id: req.body.id }).select().exec((err, customer) => {
+                
+            console.log(customer);
+
             if (err) {
                 res.json({ success: false, message: err.message })
             } else {

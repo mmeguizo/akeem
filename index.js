@@ -15,6 +15,7 @@ const http = require('http').Server(app);
 const authentication = require('./routes/authentication')(router);
 const customer = require('./routes/customers')(router);
 const users = require('./routes/users')(router);
+const file = require('./routes/fileupload')(router);
 
 mongoose.Promise = global.Promise;
 
@@ -30,24 +31,35 @@ mongoose.connect(config.uri, config.options, (err) => {
 app.use(cors())
 
 //body-parser built in express middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb',  extended: false}));
+
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+
+
+/*
+this.app.use(express.json({ limit: '2mb' }));
+this.app.use(express.urlencoded({ limit: '2mb', extended: false }));
+
+*/
 
 //for deployment on hosting and build
 app.use(express.static(__dirname + '/app/dist/'));
 app.use('/images', express.static(path.join(__dirname, './images')));
-// app.use('/upload', express.static(path.join(__dirname, './upload')));
-
+//app.use('/uploads', express.static(path.join(__dirname, '../uploads/images')));
 
 //api routes
 //app.use('/customer', customer);
 app.use('/authentication', authentication);
 app.use('/customers', customer);
 app.use('/users', users);
+app.use('/fileupload', file);
 
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/app/dist/index.html'),)
+   // res.sendFile('Adik SALA!!!')
 });
 
 
