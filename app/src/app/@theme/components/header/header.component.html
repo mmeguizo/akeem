@@ -13,7 +13,7 @@
   <nb-actions size="small">
     <nb-action class="user-action" *nbIsGranted="['view', 'user']" matRipple>
       <nb-user [nbContextMenu]="userMenu" nbSpinnerStatus="success" [name]="auth?.getTokenUsername() | titlecase"
-        [onlyPicture]="userPictureOnly" [picture]="this.auth.domain + '/images/no-photo.png'">
+        [onlyPicture]="userPictureOnly" [picture]="this.auth.domain + '/images/'+profile_pic">
       </nb-user>
     </nb-action>
   </nb-actions>

@@ -268,15 +268,59 @@ module.exports = (router) => {
     });
 
 
-    router.get('/profile', (req, res) => {
-        User.findOne({ id: req.decoded.userID }).select('username email').exec((err, user) => {
+    // router.get('/profile/:id', async (req, res) => {
+
+    //     let id  = req.params.id
+
+    //     User.findOne({ id: id },  (err, user) => {
+    //       if (err) {
+    //         res.json({ success: false, message: err.message })
+    //       } else {
+    //         if (!user) {
+    //           res.json({ success: false, message: 'User not found' })
+    //         } else {
+    //           res.json({ success: true, user: user })
+    //         }
+    //       }
+    //     })
+    //   });
+
+
+    router.get('/profile/:id', (req, res) => {
+
+        User.findOne({ id: req.params.id }).select('username email profile_pic').exec((err, user) => {
+
+            console.log(user);
+
           if (err) {
             res.json({ success: false, message: err.message })
           } else {
             if (!user) {
               res.json({ success: false, message: 'User not found' })
             } else {
-              res.json({ success: true, data: user })
+              res.json({ success: true, user: user })
+            }
+          }
+        });
+      });
+
+
+    router.get('/UserProfilePic/:id', (req, res) => {
+
+        console.log('UserProfilePic');
+        console.log(req.params);
+
+        User.findOne({ profile_pic : req.params.id }).select('profile_pic').exec((err, user) => {
+
+            console.log(user);
+
+          if (err) {
+            res.json({ success: false, message: err.message })
+          } else {
+            if (!user) {
+              res.json({ success: false, message: 'UserPic not found' })
+            } else {
+              res.json({ success: true, picture: user })
             }
           }
         });

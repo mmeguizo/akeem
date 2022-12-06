@@ -171,11 +171,12 @@ export class AuthService {
 
 
   // Function to store user's data in client local storage
-  storeUserData(token, user, tokenUsername) {
+  storeUserData(token, user) {
     localStorage.setItem('token', token); // Set token in local storage
-    localStorage.setItem('tokenUsername', user.username); // Set token in local storage
     localStorage.setItem('user', JSON.stringify(user)); // Set user in local storage as string
-    localStorage.setItem('user', JSON.stringify(user)); // Set user in local storage as string
+    localStorage.setItem('name', JSON.stringify(user.username)); // Set user in local storage as string
+    localStorage.setItem('profile_pic', JSON.stringify(user.profile_pic)); // Set user in local storage as string
+    localStorage.setItem('userID', JSON.stringify(user.id)); // Set user in local storage as string
     // localStorage.setItem('fulluserloggedData', JSON.stringify(data)); // Set user in local storage as string
     this.authToken = token; // Assign token to be used elsewhere
     this.user = user; // Set user to be used elsewhere
@@ -185,7 +186,13 @@ export class AuthService {
 
 
   getTokenUsername() {
-    return localStorage.getItem('tokenUsername');
+    return localStorage.getItem('name');
+  }
+  getTokenUserID() {
+    return localStorage.getItem('userID');
+  }
+  getUserProfilePic() {
+    return localStorage.getItem('profile_pic');
   }
 
 

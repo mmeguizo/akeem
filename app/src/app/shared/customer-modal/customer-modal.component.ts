@@ -104,7 +104,39 @@ export class CustomerModalComponent implements OnInit {
    });
   }
 
+  elEventListenerActive: boolean;
+  openFile(ev, id){
+    let file,
+      el = document.getElementById(id);
+      el.click();
+    let handler = (fc) => {
+      try{
+        let fileList: any;
+        let fd = new FormData();
+            if(fc.target['files'][0]['name'] !== undefined){
+              fileList = fc.target;
+              let file: File = fileList.files[0];
+                fd.append('files', file, file.name);
 
+
+            }else{
+              // this.Product.image = '';
+              ev.target.innerHTML = 'Browse';
+              this.elEventListenerActive = false;
+              el.removeEventListener('change', handler);
+            }
+          }catch(e){
+            // this.Product.image = '';
+            ev.target.innerHTML = 'Browse';
+            this.elEventListenerActive = false;
+            el.removeEventListener('change', handler);
+          }
+        }
+    if( !this.elEventListenerActive ){
+      el.addEventListener('change', handler);
+      this.elEventListenerActive = true;
+    }
+  }
 
 
 

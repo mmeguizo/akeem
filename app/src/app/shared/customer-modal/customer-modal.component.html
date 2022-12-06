@@ -2,7 +2,7 @@
   <nb-card>
 <nb-card-header> {{ action | titlecase }} Customer {{ updateCustomer ? updateCustomer : '' }} </nb-card-header>
 <nb-card-body>
-  <form [formGroup]="form" (submit)="executeAction(form)">
+  <form [formGroup]="form"  enctype="multipart/form-data" (submit)="executeAction(form)">
   <div class="row">
     <div class="col-sm-12">
       <div class="form-group">
@@ -58,7 +58,7 @@
     <div class="col-sm-12">
       <div class="form-group">
         <label for="inputFirstName" class="label">Open Balance</label>
-        <input type="text" nbInput fullWidth id="open_balance" [status]="form?.get('open_balance').touched && form.controls['open_balance'].errors?.required ? 'danger' : '' "  placeholder="Open Balance" formControlName="open_balance">
+        <input type="text" name="open_balance" nbInput fullWidth id="open_balance" [status]="form?.get('open_balance').touched && form.controls['open_balance'].errors?.required ? 'danger' : '' "  placeholder="Open Balance" formControlName="open_balance" (click)="openFile($event, 'open_balance')">
       </div>
     </div>
   </div>

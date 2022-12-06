@@ -85,9 +85,9 @@ export class LoginComponent implements OnInit {
       } else {
         this.authService.makeToast('success', 'Success', data.message);
         // Function to store user's token in client local storage
-        this.authService.storeUserData(data.token, data.user, data.userToken);
+        this.authService.storeUserData(data.token, data.user);
         if (this.authService.CurrentlyloggedIn()) {
-            this.authService.loggingIn(data.role)
+            this.authService.loggingIn(data.user.role)
         } else {
           this.authService.logout()
           this.router.navigate(['login']); // Navigate to dashboard view

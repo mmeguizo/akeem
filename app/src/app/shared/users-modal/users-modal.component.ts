@@ -77,9 +77,6 @@ export class UsersModalComponent implements OnInit {
         password:     ['', [Validators.required]],
         confirm:     ['', [Validators.required]],
       })
-
-
-
       // data.success ? [this.passEntry.emit(data) , this.activeModal.close()] : this.passEntry.emit(data)
    });
   }

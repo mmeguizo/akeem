@@ -26,7 +26,8 @@ export class FileService {
    createAuthenticationHeaders() {
     this.loadToken();
     this.options = new HttpHeaders({
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/json',
+      'Accept': 'image/jpeg',
       'authorization': this.authToken
     })
   }
@@ -43,40 +44,19 @@ export class FileService {
   console.log('addFile')
   console.log(data)
 
-  return this.http.post(this.cs.domain + '/fileupload/addFile', JSON.stringify(data) ,{ headers: this.options });
+  return this.http.post(this.cs.domain + '/fileupload/addFile', data ,{ headers: this.options, responseType: 'json' });
   }
 
 
-
-
-
-/*
-getRoutes(apiName) {
+ addAvatar(data) {
   this.createAuthenticationHeaders()
-  return this.http.get(this.cs.domain + `/users/${apiName}`,{ headers: this.options });
+
+  console.log('addAvatar')
+  console.log(data)
+
+  return this.http.post(this.cs.domain + '/fileupload/addAvatar', data ,{ headers: this.options, responseType: 'json' });
+  // return this.http.post(this.cs.domain + '/fileupload/addAvatar', JSON.stringify(data) ,{ headers: this.options });
   }
 
- postRoutes(apiName,data) {
-  this.createAuthenticationHeaders()
-  return this.http.post(this.cs.domain + `/users/${apiName}`,  data ,{ headers: this.options });
-  }
- putRoutes(apiName,data) {
-  this.createAuthenticationHeaders()
-  return this.http.put(this.cs.domain + `/users/${apiName}`, data,{ headers: this.options });
-  }
-
-  addUser(data) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.post(this.domain + '/users/addUser', data, { headers: this.options });
-  }
-  changeStatus(data) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.put(this.domain + '/users/changeStatus', data, { headers: this.options });
-  }
-  updateUser(data) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.put(this.domain + '/users/updateUser', data, { headers: this.options });
-  }
-*/
 
 }

@@ -7,13 +7,13 @@
     <div class="col-sm-12">
       <div class="form-group">
         <label for="inputFirstName" class="label">Username</label>
-        <input type="text" nbInput fullWidth id="inputFirstName" [status]="form?.get('username').touched && form.controls['username'].errors?.required ? 'danger' : '' "  placeholder="Username" formControlName="username">
+        <input type="text" nbInput fullWidth id="username" [status]="form?.get('username').touched && form.controls['username'].errors?.required ? 'danger' : '' "  placeholder="Username" formControlName="username">
       </div>
     </div>
     <div class="col-sm-12">
       <div class="form-group">
         <label for="inputLastName" class="label">Email</label>
-        <input type="email" nbInput fullWidth id="inputLastName" [status]="form?.get('email').touched && form.controls['email'].errors?.required ? 'danger' : '' "  placeholder="Email" formControlName="email">
+        <input type="email" nbInput fullWidth id="email" [status]="form?.get('email').touched && form.controls['email'].errors?.required ? 'danger' : '' "  placeholder="Email" formControlName="email">
       </div>
     </div>
   </div>
@@ -21,27 +21,27 @@
       <div class="col-sm-12"  >
         <div class="form-group" >
           <label for="inputEmail" class="label">Password</label>
-          <input type="{{showpassword ? 'text' : 'password'}}"  nbInput fullWidth id="inputEmail" [status]="form?.get('password').touched && form.controls['password'].errors?.required ? 'danger' : '' " placeholder="Password" formControlName="password">
+          <input type="{{showpassword ? 'text' : 'password'}}"  nbInput fullWidth id="password" [status]="form?.get('password').touched && form.controls['password'].errors?.required ? 'danger' : '' " placeholder="Password" formControlName="password">
           <nb-icon class="password-icon" [icon]="eyeIcon" (click)="showPassword()" pack="eva"></nb-icon>
         </div>
       </div>
       <div class="col-sm-12" >
         <div class="form-group">
           <label for="inputWebsite" class="label">Confirm Password</label>
-          <input type="{{showpassword ? 'text' : 'password'}}" nbInput fullWidth id="inputWebsite" [status]="form?.get('confirm').touched && form.controls['confirm'].errors?.required ? 'danger' : '' " placeholder="Confirm Password" formControlName="confirm">
+          <input type="{{showpassword ? 'text' : 'password'}}" nbInput fullWidth id="confirm" [status]="form?.get('confirm').touched && form.controls['confirm'].errors?.required ? 'danger' : '' " placeholder="Confirm Password" formControlName="confirm">
             <nb-icon class="password-icon" [icon]="eyeIcon" (click)="showPassword()" pack="eva"></nb-icon>
         </div>
       </div>
     <div class="col-sm-12">
       <div class="form-group">
           <div class="avatar-container">
-          <div class="display-photo" *ngIf="avatar"
-            >
+          <!-- <div class="display-photo" *ngIf="profile_pic">
+            <img   [src]="this.auth.domain+'/profile_pic/'+profile_pic ">
+          </div> -->
+          <div class="display-photo" *ngIf="profile_pic"
+            [style.background-image]="'url('+this.auth.domain+'/images/'+profile_pic+')'">
           </div>
-          <div class="display-photo" *ngIf="avatar"
-            [style.background-image]="'url('+this.auth.domain+'/images/'+avatar+')'">
-          </div>
-          <div class="display-photo" *ngIf="!avatar"
+          <div class="display-photo" *ngIf="!profile_pic"
             [style.background-image]="'url('+this.auth.domain+'/images/no-photo.png'+')'">
           </div>
           <input type="file" name="file" class="d-none" id="file">

@@ -9,7 +9,7 @@ const { Schema } = mongoose;
 const fileUpload = new Schema({
   id:                 { type:String,  required:true },
   source:             { type:String, maxlength:50, required:true },
-  // for:                { type:String, maxlength:50, required:true },
+  for:                { type:String, maxlength:50, required:true },
   date_added:         { type:Date, required:true, required:true, default : new Date() },
   status:             { type:Boolean, default: true },
   // added_by:           { type:Number, maxlength:7, required:true },

@@ -30,24 +30,28 @@ mongoose.connect(config.uri, config.options, (err) => {
 
 app.use(cors())
 
+
+//CORS middleware
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+}
+
+
 //body-parser built in express middleware
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb',  extended: false}));
 
 // app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
-
-
-/*
-this.app.use(express.json({ limit: '2mb' }));
-this.app.use(express.urlencoded({ limit: '2mb', extended: false }));
-
-*/
+app.use(allowCrossDomain);
 
 //for deployment on hosting and build
 app.use(express.static(__dirname + '/app/dist/'));
 app.use('/images', express.static(path.join(__dirname, './images')));
-//app.use('/uploads', express.static(path.join(__dirname, '../uploads/images')));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads/images')));
 
 //api routes
 //app.use('/customer', customer);
@@ -55,6 +59,7 @@ app.use('/authentication', authentication);
 app.use('/customers', customer);
 app.use('/users', users);
 app.use('/fileupload', file);
+app.use('/profile_pic', express.static(path.join(__dirname, '../uploads/images')));
 
 
 app.get('*', (req, res) => {

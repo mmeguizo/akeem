@@ -132,7 +132,7 @@ module.exports = (router) => {
 
                if(await comparePassword(req.body.password, user.password)){
                 const token = jwt.sign({ userID: user._id }, config.secret, { expiresIn: '24h' });
-                res.json({ success: true, message: 'Password is Correct', token: token, user: { username: user.username }, userToken: user.username, role: user.role })
+                res.json({ success: true, message: 'Password is Correct', token: token, user: user, role: user.role, profile_pic : user.profile_pic,})
                }else{
                 res.json({ success: false, message: 'Password is incorrect' });
                }

@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
   name: string;
+  profile_pic: string;
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -47,7 +48,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.onItemSelection(event.item.title);
       }
     });
+
+
     this.name = this.auth.getTokenUsername();
+    this.profile_pic = JSON.parse(this.auth.getUserProfilePic());
+    console.log(this.auth.domain + `/` + this.profile_pic)
+
+
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(

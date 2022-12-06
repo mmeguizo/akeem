@@ -1,6 +1,6 @@
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter,OnDestroy } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../@core/services/auth.service';
@@ -18,6 +18,7 @@ import { setTimeout } from 'timers';
 })
 export class UpdateProfileComponent implements OnInit {
 
+  @Output() passEntry: EventEmitter<string> = new EventEmitter<string>();
 
   private getSubscription = new Subject<void>();
 
@@ -29,8 +30,9 @@ export class UpdateProfileComponent implements OnInit {
   public dataID: any;
   public showpassword = false;
   public eyeIcon = "eye-off-outline";
-  public avatar: any;
+  public profile_pic: any;
   public role: any;
+  public profile_pic_image: any;
 
 
   private userData :any;
@@ -42,6 +44,7 @@ export class UpdateProfileComponent implements OnInit {
 
   loadingMediumGroup = false;
 
+
   constructor(
     public activeModal: NgbActiveModal,
     public formBuilder: FormBuilder,
@@ -49,6 +52,7 @@ export class UpdateProfileComponent implements OnInit {
     public user: UserService,
     public file: FileService
   ) {
+    this.profile_pic = JSON.parse( this.auth.getUserProfilePic() );
     this.createForm();
   }
 
@@ -63,14 +67,38 @@ export class UpdateProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.id = JSON.parse(this.auth.getTokenUserID() );
+    // this.profile_pic_image = JSON.parse( this.auth.getUserProfilePic() );
+   // this.profile_pic = JSON.parse( this.auth.getUserProfilePic() );
+    // this.getProfilePic();
+   // console.log(this.profile_pic);
+   // console.log(this.auth.domain+'/images/'+this.profile_pic);
+
     this.getUser();
 
   }
 
   getUser(){
+    this.user.getRoute('get', 'profile',this.id).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
+     // this.profile_pic = data.user.profile_pic
+     // console.log(this.auth.domain + "/" + this.profile_pic);
 
-
+      this.form = this.formBuilder.group({
+              username:         [data.user.username, [Validators.required]],
+              email:     [data.user.email, [Validators.required]],
+              password:     ["", [Validators.required]],
+              confirm:     ["", [Validators.required]],
+              role:     [data.user.role, [Validators.required]],
+      })
+   });
   }
+
+  // getProfilePic(){
+  //   this.user.getUserProfilePic(this.profile_pic_image).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
+  //     this.profile_pic = data.picture.profile_pic
+  //  });
+  // }
 
   updateUser(data){
 
@@ -93,73 +121,39 @@ export class UpdateProfileComponent implements OnInit {
       el = document.getElementById(id);
       el.click();
     let handler = (fc) => {
-          try{
-            let fileList: any;
-            let fd = new FormData();
-                if(fc.target['files'][0]['name'] !== undefined){
-                  fileList = fc.target;
-                  let file: File = fileList.files[0];
-                   fd.append('profile_picture', file, file.name);
-
-                    this.loadingMediumGroup = true;
-                    this.file.addFile(fd).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
-                    this.loadingMediumGroup = false;
-                    console.log(data);
-                   });
-
-
-                  /*
-var formData = new FormData();
-formData.append('key1', 'value1');
-formData.append('key2', 'value2');
-// Display the key/value pairs
-for (var pair of formData.entries()) {
-    console.log(pair[0]+ ', ' + pair[1]);
-}
-
-                  */
-
-
-
-
-                  //   this.file.addFile(fd).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
-                  //   this.loadingMediumGroup = false;
-                  //   console.log(data);
-                  //  });
-
-                  /*
-                      this.sgs.request('post', 'xfile/avatars', fd, response => {
-                        if(response.success){
-                          this.elEventListenerActive = false;
-                          this.avatar = response.data.name;
-                          el.removeEventListener('change', handler);
-                        }else{
-                          // this.Product.image = '';
-                          el.removeEventListener('change', handler);
-                        }
-                      });
-                  */
-
-                }else{
-                  // this.Product.image = '';
-                  ev.target.innerHTML = 'Browse';
+      try{
+        let fileList: any;
+        let fd = new FormData();
+            if(fc.target['files'][0]['name'] !== undefined){
+              fileList = fc.target;
+              let file: File = fileList.files[0];
+                fd.append('avatar', file, file.name);
+                this.file.addAvatar(fd).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
+                  console.log('addAvatarxxxxx')
+                  console.log(data)
                   this.elEventListenerActive = false;
+                  this.profile_pic = data.data.source;
                   el.removeEventListener('change', handler);
-                }
-              }catch(e){
-                // this.Product.image = '';
-                ev.target.innerHTML = 'Browse';
-                this.elEventListenerActive = false;
-                el.removeEventListener('change', handler);
-              }
+               });
+            }else{
+              // this.Product.image = '';
+              ev.target.innerHTML = 'Browse';
+              this.elEventListenerActive = false;
+              el.removeEventListener('change', handler);
+            }
+          }catch(e){
+            // this.Product.image = '';
+            ev.target.innerHTML = 'Browse';
+            this.elEventListenerActive = false;
+            el.removeEventListener('change', handler);
+          }
         }
-
-
     if( !this.elEventListenerActive ){
       el.addEventListener('change', handler);
       this.elEventListenerActive = true;
     }
   }
+
 
   closeModal() {
     this.activeModal.close();
