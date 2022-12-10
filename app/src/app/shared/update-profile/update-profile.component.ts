@@ -52,7 +52,7 @@ export class UpdateProfileComponent implements OnInit {
     public user: UserService,
     public file: FileService
   ) {
-    this.profile_pic = JSON.parse( this.auth.getUserProfilePic() );
+    this.profile_pic = this.auth.getUserProfilePic();
     this.createForm();
   }
 
@@ -68,13 +68,7 @@ export class UpdateProfileComponent implements OnInit {
 
   ngOnInit() {
 
-    this.id = JSON.parse(this.auth.getTokenUserID() );
-    // this.profile_pic_image = JSON.parse( this.auth.getUserProfilePic() );
-   // this.profile_pic = JSON.parse( this.auth.getUserProfilePic() );
-    // this.getProfilePic();
-   // console.log(this.profile_pic);
-   // console.log(this.auth.domain+'/images/'+this.profile_pic);
-
+    this.id = this.auth.getTokenUserID();
     this.getUser();
 
   }
@@ -101,6 +95,9 @@ export class UpdateProfileComponent implements OnInit {
   // }
 
   updateUser(data){
+
+    console.log(data);
+
 
   }
 
@@ -160,6 +157,9 @@ export class UpdateProfileComponent implements OnInit {
   }
 
   executeAction(form){
+
+    console.log(form);
+
 
   }
 

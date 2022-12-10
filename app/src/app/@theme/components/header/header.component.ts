@@ -51,8 +51,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 
     this.name = this.auth.getTokenUsername();
-    this.profile_pic = JSON.parse(this.auth.getUserProfilePic());
-    console.log(this.auth.domain + `/` + this.profile_pic)
+    this.profile_pic = this.auth.getUserProfilePic();
 
 
     const { xl } = this.breakpointService.getBreakpointsMap();

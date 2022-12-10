@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../@core/services/auth.service';
 import { ConnectionService } from '../@core/services/connection.service';
+import jwt_decode from "jwt-decode";
+import { UserToken } from '../@core/data/user-token';
 
 @Component({
   selector: 'app-login',
@@ -75,25 +77,25 @@ export class LoginComponent implements OnInit {
     }
 
     // Function to send login data to API
-    this.authService.login(user).subscribe((data: any) => {
+    this.authService.login(user).subscribe((token: any) => {
 
-      // Check if response was a success or error
-      if (!data.success) {
-        this.authService.makeToast('danger', 'Failed Logging in', data.message);
+
+      let decoded = jwt_decode<UserToken>(token.token);
+
+      //Check if response was a success or error
+      if (!token.success) {
+        this.authService.makeToast('danger', 'Failed Logging in', token.message);
         this.processing = false; // Enable submit button
         this.enableForm(); // Enable form for editting
       } else {
-        this.authService.makeToast('success', 'Success', data.message);
-        // Function to store user's token in client local storage
-        this.authService.storeUserData(data.token, data.user);
+        this.authService.makeToast('success', 'Success', token.message);
+        this.authService.storeUserData(token.token,decoded);
         if (this.authService.CurrentlyloggedIn()) {
-            this.authService.loggingIn(data.user.role)
+            this.authService.loggingIn(decoded.role)
         } else {
           this.authService.logout()
           this.router.navigate(['login']); // Navigate to dashboard view
         }
-        // After 2 seconds, redirect to dashboard page
-
       }
     });
 

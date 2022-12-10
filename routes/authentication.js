@@ -120,8 +120,7 @@ module.exports = (router) => {
         res.json({ success: false, message: 'No password was provided' })
       } else {
 
-        User.findOne({ username: req.body.username.toLowerCase() }, async (err, user) => {
-
+        User.findOne({ username: req.body.username.toLowerCase() } , async (err, user) => {
           if (err) {
             res.json({ success: false, message: err.message })
 
@@ -131,8 +130,14 @@ module.exports = (router) => {
             } else {
 
                if(await comparePassword(req.body.password, user.password)){
-                const token = jwt.sign({ userID: user._id }, config.secret, { expiresIn: '24h' });
-                res.json({ success: true, message: 'Password is Correct', token: token, user: user, role: user.role, profile_pic : user.profile_pic,})
+                //remove _id andpassword from the entries
+              let newUser = user.toObject();
+                delete newUser.password;
+                delete newUser._id;
+                delete newUser.__v
+
+                const token = jwt.sign( newUser, config.secret, { expiresIn: '24h' });
+                res.json({ success: true, message: 'Password is Correct', token: token})
                }else{
                 res.json({ success: false, message: 'Password is incorrect' });
                }
@@ -146,6 +151,12 @@ module.exports = (router) => {
     }
   });
 
+/*
+o = {a: 5, b: 6, c: 7}
+Object.fromEntries(Object.entries(o).filter(e => e[0] != 'b'))
+Object { a: 5, c: 7 }
+
+*/
 
   // any route that needs authorization or token should be under it if not above this middleware 
   router.use((req, res, next) => {

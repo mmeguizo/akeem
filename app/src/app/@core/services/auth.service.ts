@@ -6,6 +6,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ConnectionService } from './connection.service';
+import jwt_decode from "jwt-decode";
+// import { UserToken } from '../@core/data/user-token';
+import { UserToken } from '../data/user-token';
 
 import {
   NbComponentStatus,
@@ -28,9 +31,9 @@ export class AuthService {
   authToken;
   user;
   public options;
-  fulluserloggedData: any[];
+  fulluserloggedData: {};
   public socketserver: any = { status: true, message: "online" };
-
+  private decoded: UserToken;
 
   config: NbToastrConfig;
 
@@ -62,6 +65,7 @@ export class AuthService {
     NbGlobalLogicalPosition.BOTTOM_END,
     NbGlobalLogicalPosition.BOTTOM_START,
   ];
+
 
   constructor(
 
@@ -158,7 +162,7 @@ export class AuthService {
   }
 
   CurrentlyloggedIn() {
-    const token = localStorage.getItem('token');
+    const token = this.authToken;
     return !this.jwtHelper.isTokenExpired(token)
 
   }
@@ -171,28 +175,26 @@ export class AuthService {
 
 
   // Function to store user's data in client local storage
-  storeUserData(token, user) {
+  storeUserData(token,user) {
     localStorage.setItem('token', token); // Set token in local storage
-    localStorage.setItem('user', JSON.stringify(user)); // Set user in local storage as string
-    localStorage.setItem('name', JSON.stringify(user.username)); // Set user in local storage as string
-    localStorage.setItem('profile_pic', JSON.stringify(user.profile_pic)); // Set user in local storage as string
-    localStorage.setItem('userID', JSON.stringify(user.id)); // Set user in local storage as string
-    // localStorage.setItem('fulluserloggedData', JSON.stringify(data)); // Set user in local storage as string
     this.authToken = token; // Assign token to be used elsewhere
-    this.user = user; // Set user to be used elsewhere
-
-
+    this.fulluserloggedData = user; // Set user to be used elsewhere
   }
 
 
   getTokenUsername() {
-    return localStorage.getItem('name');
+    return jwt_decode<UserToken>(localStorage.getItem('token')).username;
   }
   getTokenUserID() {
-    return localStorage.getItem('userID');
+
+    return jwt_decode<UserToken>(localStorage.getItem('token')).id;
   }
   getUserProfilePic() {
-    return localStorage.getItem('profile_pic');
+    return jwt_decode<UserToken>(localStorage.getItem('token')).profile_pic;
+  }
+
+  getUserRole() {
+    return jwt_decode<UserToken>(localStorage.getItem('token')).role;
   }
 
 
@@ -244,8 +246,6 @@ export class AuthService {
       `${titleContent}`,
       config);
   }
-
-
 
 }
 
