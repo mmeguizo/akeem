@@ -2,7 +2,7 @@
   <nb-card>
 <nb-card-header> {{ action | titlecase }} Customer {{ updateCustomer ? updateCustomer : '' }} </nb-card-header>
 <nb-card-body>
-  <form [formGroup]="form"  enctype="multipart/form-data" (submit)="executeAction(form)">
+  <form [formGroup]="form"  enctype="multipart/form-data" >
   <div class="row">
     <div class="col-sm-12">
       <div class="form-group">
@@ -49,8 +49,30 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="form-group">
-        <label for="inputFirstName" class="label">Attachment</label>
-        <input type="file" multiple nbInput fullWidth id="attachment" [status]="form?.get('attachment').touched && form.controls['attachment'].errors?.required ? 'danger' : '' "  placeholder="Attachment" formControlName="attachment">
+        <!-- <label for="inputFirstName" class="label">Attachment</label>
+        <input type="file" multiple nbInput fullWidth id="file" name="file" [status]="form?.get('attachment').touched && form.controls['attachment'].errors?.required ? 'danger' : '' "  placeholder="Attachment" formControlName="attachment" (change)="openFile($event, 'file')"> -->
+
+        <!-- <input type="file" name="file" class="d-none" multiple id="file"  (change)="openFile($event, 'file')"> -->
+
+          <!-- <button class="btn btn-primary browse-btn"   nbSpinnerStatus="primary" nbSpinnerSize="tiny" nbSpinnerMessage="" (click)="openFile($event, 'file')">Choose Files</button> -->
+
+
+
+          <div class="avatar-container">
+            <!-- <div class="display-photo" *ngIf="profile_pic">
+              <img   [src]="this.auth.domain+'/profile_pic/'+profile_pic ">
+            </div>
+            <div class="display-photo" *ngIf=""
+              [style.background-image]="'url('+this.auth.domain+'/images/'+profile_pic+')'">
+            </div>
+            <div class="display-photo" *ngIf="!profile_pic"
+              [style.background-image]="'url('+this.auth.domain+'/images/no-photo.png'+')'">
+            </div> -->
+            <input type="file" name="file" class="d-none" multiple id="file">
+            <button class="btn btn-primary browse-btn"  nbSpinnerStatus="primary" nbSpinnerSize="tiny" nbSpinnerMessage="" (click)="openFile($event, 'file')"> Choose Files</button>
+          </div>
+
+
       </div>
     </div>
   </div>
@@ -58,14 +80,13 @@
     <div class="col-sm-12">
       <div class="form-group">
         <label for="inputFirstName" class="label">Open Balance</label>
-        <input type="text" name="open_balance" nbInput fullWidth id="open_balance" [status]="form?.get('open_balance').touched && form.controls['open_balance'].errors?.required ? 'danger' : '' "  placeholder="Open Balance" formControlName="open_balance" (click)="openFile($event, 'open_balance')">
+        <input type="text" name="open_balance" nbInput fullWidth id="open_balance" [status]="form?.get('open_balance').touched && form.controls['open_balance'].errors?.required ? 'danger' : '' "  placeholder="Open Balance" formControlName="open_balance" >
       </div>
     </div>
   </div>
-
   <div class="row">
     <div class="col-sm-12 text-center">
-      <button type="submit" nbButton [status]="buttonStatus" outline  > {{ buttonTxt | titlecase }}  </button> &nbsp;
+      <button type="submit" nbButton [status]="buttonStatus" outline (submit)="executeAction(form)" > {{ buttonTxt | titlecase }}  </button> &nbsp;
       <button type="button" nbButton status="danger" (click)="closeModal()" outline>Cancel</button>
     </div>
   </div>

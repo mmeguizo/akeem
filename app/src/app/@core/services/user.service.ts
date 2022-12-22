@@ -68,39 +68,4 @@ export class UserService {
 
 
 
-
-/*
-
- headers: { 'Content-Type': 'application/octet-stream'},
-      responseType: 'blob'
-
-
-getRoutes(apiName) {
-  this.createAuthenticationHeaders()
-  return this.http.get(this.cs.domain + `/users/${apiName}`,{ headers: this.options });
-  }
-
- postRoutes(apiName,data) {
-  this.createAuthenticationHeaders()
-  return this.http.post(this.cs.domain + `/users/${apiName}`,  data ,{ headers: this.options });
-  }
- putRoutes(apiName,data) {
-  this.createAuthenticationHeaders()
-  return this.http.put(this.cs.domain + `/users/${apiName}`, data,{ headers: this.options });
-  }
-
-  addUser(data) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.post(this.domain + '/users/addUser', data, { headers: this.options });
-  }
-  changeStatus(data) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.put(this.domain + '/users/changeStatus', data, { headers: this.options });
-  }
-  updateUser(data) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.put(this.domain + '/users/updateUser', data, { headers: this.options });
-  }
-*/
-
 }

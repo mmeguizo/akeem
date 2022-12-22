@@ -8,6 +8,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CustomerService } from '../../@core/services/customer.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { FileService } from '../../@core/services/file.service';
+import { log } from 'console';
 
 
 
@@ -30,12 +32,16 @@ export class CustomerModalComponent implements OnInit {
   public id : String;
   public updateCustomer : Boolean;
   selected : String;
+  files: any;
+  myFiles: any;
+  myNewFiles =  [];
 
 
   constructor(
 
     public auth: AuthService,
     public user: UserService,
+    public fileService: FileService,
     public customer: CustomerService,
     public activeModal: NgbActiveModal,
     public formBuilder: FormBuilder,
@@ -46,9 +52,6 @@ export class CustomerModalComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
-    console.log(this.customerData.id)
-
     this.buttonTxt === 'update' ?  this.getCustomer(this.customerData.id ) : '';
   }
 
@@ -91,9 +94,6 @@ export class CustomerModalComponent implements OnInit {
         open_balance:     [data.data.open_balance, [Validators.required]],
       })
 
-
-
-      // data.success ? [this.passEntry.emit(data) , this.activeModal.close()] : this.passEntry.emit(data)
    });
   }
 
@@ -113,20 +113,47 @@ export class CustomerModalComponent implements OnInit {
       try{
         let fileList: any;
         let fd = new FormData();
-            if(fc.target['files'][0]['name'] !== undefined){
-              fileList = fc.target;
-              let file: File = fileList.files[0];
-                fd.append('files', file, file.name);
 
+      console.log(fc.target.files);
 
-            }else{
-              // this.Product.image = '';
-              ev.target.innerHTML = 'Browse';
-              this.elEventListenerActive = false;
-              el.removeEventListener('change', handler);
-            }
+      for  (var index =  0; index <  fc.target.files.length; index++)  {
+          this.myNewFiles.push(fc.target.files[index])
+      }
+      console.log({newFilesLength :this.myNewFiles.length});
+
+      for (let i = 0; i < this.myNewFiles.length; i++) {
+        console.log({"this.myNewFiles[i].name": this.myNewFiles[i].name});
+      fd.append('files[]', this.myNewFiles[i], this.myNewFiles[i].name);
+      }
+
+      this.fileService.addFile(fd).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
+        console.log(data);
+        this.elEventListenerActive = false;
+        el.removeEventListener('change', handler);
+     });
+
+            // if(fc.target['files'][0]['name'] !== undefined){
+            //   fileList = fc.target;
+            //   let file: File = fileList.files;
+            //   console.log(file)
+            //   console.log(fileList.files.length)
+
+            //     for (let i = 0; i <fileList.files.length; i++) {
+            //       console.log(fileList.file[i])
+            //       console.log(fileList.file.name[i])
+            //       fd.append('files', file[i], file.name[i]);
+            //     }
+            //     console.log(fd.getAll('files'));
+            // }else{
+            //   // this.Product.image = '';
+            //   ev.target.innerHTML = 'Browse';
+            //   this.elEventListenerActive = false;
+            //   el.removeEventListener('change', handler);
+            // }
+
           }catch(e){
             // this.Product.image = '';
+            console.log(e);
             ev.target.innerHTML = 'Browse';
             this.elEventListenerActive = false;
             el.removeEventListener('change', handler);

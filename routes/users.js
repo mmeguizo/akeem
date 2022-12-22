@@ -223,10 +223,18 @@ module.exports = (router) => {
 
     router.put('/updateProfile', async (req, res) =>   {
 
+
+
         let data = req.body;
         let userData = {};
+        console.log('updateProfile');
+        console.log(data);
 
-        if(data.changePassword){
+        if(data.confirm){
+
+        console.log('if');
+
+
             let checkPassword = await bcrypt.compare(data.old_password, docs.password); 
 
             if( !checkPassword){
@@ -252,11 +260,15 @@ module.exports = (router) => {
 
             }
         }else{
-            userData.role = data.role;
-            userData.username = data.username;
-            userData.email = data.email;
-            userData.profile_pic = data.profile_pic;
-            User.findOneAndUpdate({ id: data.id }, userData, { upsert: true }, (err, response) => {
+
+            const { username,email,profile_pic,id } = req.body
+
+            User.findOneAndUpdate({ id:id }, {username,email,profile_pic}, { upsert: false }, (err, response) => {
+
+                console.log('else');
+                console.log(response);
+                console.log(err);
+
                 if (err) return res.json({ success: false, message: err.message });
                 if (response) {
                      res.json({ success: true, message: "User Information has been updated!", data: response  });
@@ -267,23 +279,6 @@ module.exports = (router) => {
         }
     });
 
-
-    // router.get('/profile/:id', async (req, res) => {
-
-    //     let id  = req.params.id
-
-    //     User.findOne({ id: id },  (err, user) => {
-    //       if (err) {
-    //         res.json({ success: false, message: err.message })
-    //       } else {
-    //         if (!user) {
-    //           res.json({ success: false, message: 'User not found' })
-    //         } else {
-    //           res.json({ success: true, user: user })
-    //         }
-    //       }
-    //     })
-    //   });
 
 
     router.get('/profile/:id', (req, res) => {

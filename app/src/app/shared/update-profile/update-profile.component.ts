@@ -75,8 +75,7 @@ export class UpdateProfileComponent implements OnInit {
 
   getUser(){
     this.user.getRoute('get', 'profile',this.id).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
-     // this.profile_pic = data.user.profile_pic
-     // console.log(this.auth.domain + "/" + this.profile_pic);
+
 
       this.form = this.formBuilder.group({
               username:         [data.user.username, [Validators.required]],
@@ -88,18 +87,6 @@ export class UpdateProfileComponent implements OnInit {
    });
   }
 
-  // getProfilePic(){
-  //   this.user.getUserProfilePic(this.profile_pic_image).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
-  //     this.profile_pic = data.picture.profile_pic
-  //  });
-  // }
-
-  updateUser(data){
-
-    console.log(data);
-
-
-  }
 
   showPassword(){
     if(this.showpassword == true){
@@ -118,7 +105,7 @@ export class UpdateProfileComponent implements OnInit {
       el = document.getElementById(id);
       el.click();
     let handler = (fc) => {
-      try{
+    try{
         let fileList: any;
         let fd = new FormData();
             if(fc.target['files'][0]['name'] !== undefined){
@@ -126,8 +113,6 @@ export class UpdateProfileComponent implements OnInit {
               let file: File = fileList.files[0];
                 fd.append('avatar', file, file.name);
                 this.file.addAvatar(fd).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
-                  console.log('addAvatarxxxxx')
-                  console.log(data)
                   this.elEventListenerActive = false;
                   this.profile_pic = data.data.source;
                   el.removeEventListener('change', handler);
@@ -157,10 +142,26 @@ export class UpdateProfileComponent implements OnInit {
   }
 
   executeAction(form){
+    form.value.id = this.id;
+    form.value.profile_pic = this.profile_pic;
+    let data = form.value;
+    this.user.getRoute('put','updateProfile',data).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
+     if(data.success ){
+      this.auth.makeToast('success',`Updating ${form.value.username}`,data.message);
+      this.closeModal()
+      this.auth.logout();
+     }else{
+      this.auth.makeToast('danger',`Updating ${form.value.username}`,data.message)
+     }
 
-    console.log(form);
-
-
+   });
   }
+
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.getSubscription.unsubscribe();
+  }
+
 
 }

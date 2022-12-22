@@ -14,7 +14,6 @@ const customerSchema = new Schema({
     attachment:[ 
 
         {
-          id :  { type: String, required: true },
           source :  { type: String, required: true },
           date_added: { type:Date, required:true, default : new Date() },
         }

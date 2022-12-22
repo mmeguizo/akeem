@@ -29,6 +29,7 @@ module.exports = (router) => {
 
     router.post('/addCustomer', (req, res) => {
 
+        console.log('addCustomer');
         console.log(req.body);
 
 

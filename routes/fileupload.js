@@ -13,48 +13,64 @@ const { fail } = require('assert');
 module.exports = (router) => {
     
 
-        router.post('/addFile', (req, res) => {
+        router.post('/addFile', async (req, res) => {
+
+            console.log('addfile kicks in');
+            console.log(req.body);
             
-            let useFor = data.body.useFor;
-            let username = data.body.auth.username;
+            let useFor = 'files';
+            let username = 'tester';
             let formidable = require('formidable');
             let fs = require('fs');
             let path = require('path');
             let md5 = require('md5');
+            
+            var counter = 0;
+            var newFileNameData = []
+            var returnedData;
 
             var form = new formidable.IncomingForm();
-             form.uploadDir = `${__dirname}/../uploads/images/`;
+             form.uploadDir = `${__dirname}/../images/files`;
+             form.multiples = true;
              form.on('file', async (field, file) => {
                  
-                 let newFileName = [
+                let newFileName = [
                     username,
                      Math.random(),
                      Math.random(),
                      Math.random(),
                 ];
+            
+             counter++;
 
-                newFileName = `${md5(newFileName.join(''))}.${file.name.split('.').pop()}`;
+            newFileName = `${md5(newFileName.join(''))}.${( (file.originalFilename )).split('.').pop()}`;
+            newFileNameData.push(newFileName);
+           
+                        if (fs.existsSync(file.filepath)) {
+                                fs.rename(file.filepath, path.join(form.uploadDir, newFileName), (err) => {
+                                    if (err) {
+                                        return res.json({ success:false, message:err.name + " " + err.message }) 
+                                    }else{
 
-                    if (fs.existsSync(file.path)) {
-                        fs.rename(file.path, path.join(form.uploadDir, newFileName), (err) => {
-                            if (err) {
-                                return res.json({ success:false, message:err.name + " " + err.message }) 
-                            }else{
-
+                                        
                                 let uploadData = new File( {
                                     id: uuidv4(),
                                     source: newFileName,
-                                    for : 'customer-files'
+                                    for : 'files'
                                 });
 
-                                console.log(newFileName);
-
-                              
+                                uploadData.save( async (err, data) => {
+                                   // await returnedData.push(data || []);
+                                   console.log(err)
+                                   console.log(data)
+                                } )
                             }
                         });
-                    }else{
-                        return res.json({ success:false, message: "Something went wrong please re-upload your image." }) 
-                    }
+                        }else{
+                            console.log('err')
+                        }
+
+                        
              });
 
               form.on('error', function(err) {
@@ -63,12 +79,44 @@ module.exports = (router) => {
               form.on('end', function() {
                 // console.log('hey');
               });
-              form.parse(data);
+              form.parse(req);
+              console.log( await newFileNameData);
+
+            //   let flag;
+            //   let dataFile =[];
+            //   function saveFile(newFileName){
+
+            //     console.log('saveFile');
+            //     console.log(newFileName);
+
+            //     let uploadData = new File( {
+            //         id: uuidv4(),
+            //         source: newFileName,
+            //         for : 'files'
+            //     });
+            //     uploadData.save( (err, data) => {
+            //        if(err){
+            //         flag = false;
+            //        }else{
+            //         flag = true
+            //         dataFile.push(data)
+            //        }
+            //     } );
+            //   }
+            //   if(flag){
+            //     res.json({ success: false, message: 'Error, could not save avatar : ' })
+            //   }else{
+            //     res.json({ success: true, message: 'Avatar uploaded successfully ', data:dataFile });
+
+            //   }
 
         });
 
 
         router.post('/addAvatar', (req, res) => {
+
+            console.log('addAvatar kicks in');
+            console.log(req.body);
             
             let useFor = req.body.useFor;
             let username = 'tester';

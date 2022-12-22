@@ -19,17 +19,12 @@ const hash = crypto.createHmac('sha256', secret)
  
                    // Encoding to be used
                    .digest('hex');
- 
 
-
-
-
-// const hash = crypto.createHmac(process.env.ENCRYPTION_ALGO, process.env.ENCRYPTION_KEY).update('Akeem').digest(process.env.ENCRYPTION_ENCODING);
 
 module.exports = {
 
-    uri: process.env.DB_URL,
-    // uri: process.env.DB_LOCAL,
+    // uri: process.env.DB_URL,
+    uri: process.env.DB_LOCAL,
     secret: hash,
     options: {
         useUnifiedTopology: true,
