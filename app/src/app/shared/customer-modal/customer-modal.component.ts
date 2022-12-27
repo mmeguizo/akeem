@@ -35,7 +35,7 @@ export class CustomerModalComponent implements OnInit {
   files: any;
   myFiles: any;
   myNewFiles =  [];
-
+  theFileLength : Number = 0;
 
   constructor(
 
@@ -90,7 +90,7 @@ export class CustomerModalComponent implements OnInit {
         company:     [data.data.company, [Validators.required]],
         phone:     [data.data.phone, [Validators.required]],
         notes:     [data.data.notes, [Validators.required]],
-        attachment:     [data.data.attachment, [Validators.required]],
+        attachment:     ['', [Validators.required]],
         open_balance:     [data.data.open_balance, [Validators.required]],
       })
 
@@ -98,10 +98,14 @@ export class CustomerModalComponent implements OnInit {
   }
 
   executeAction(form){
+
+
+
     form.value.id = this.customerData?.id || 0;
     this.customer.getRoute(this.customerData?.endpoint2 ?? this.customerData.endpoint, this.customerData?.apiName2 ?? this.customerData.apiName, form.value).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
       data.success ? [this.passEntry.emit(data) , this.activeModal.close()] : this.passEntry.emit(data)
    });
+
   }
 
   elEventListenerActive: boolean;
@@ -119,38 +123,15 @@ export class CustomerModalComponent implements OnInit {
       for  (var index =  0; index <  fc.target.files.length; index++)  {
           this.myNewFiles.push(fc.target.files[index])
       }
-      console.log({newFilesLength :this.myNewFiles.length});
-
       for (let i = 0; i < this.myNewFiles.length; i++) {
-        console.log({"this.myNewFiles[i].name": this.myNewFiles[i].name});
       fd.append('files[]', this.myNewFiles[i], this.myNewFiles[i].name);
       }
 
       this.fileService.addFile(fd).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
-        console.log(data);
+        this.theFileLength = this.myNewFiles.length;
         this.elEventListenerActive = false;
         el.removeEventListener('change', handler);
      });
-
-            // if(fc.target['files'][0]['name'] !== undefined){
-            //   fileList = fc.target;
-            //   let file: File = fileList.files;
-            //   console.log(file)
-            //   console.log(fileList.files.length)
-
-            //     for (let i = 0; i <fileList.files.length; i++) {
-            //       console.log(fileList.file[i])
-            //       console.log(fileList.file.name[i])
-            //       fd.append('files', file[i], file.name[i]);
-            //     }
-            //     console.log(fd.getAll('files'));
-            // }else{
-            //   // this.Product.image = '';
-            //   ev.target.innerHTML = 'Browse';
-            //   this.elEventListenerActive = false;
-            //   el.removeEventListener('change', handler);
-            // }
-
           }catch(e){
             // this.Product.image = '';
             console.log(e);

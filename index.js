@@ -41,8 +41,11 @@ var allowCrossDomain = function(req, res, next) {
 
 
 //body-parser built in express middleware
-app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({limit: '50mb',  extended: false}));
+app.use(express.json({limit: '20mb'}));
+app.use(express.urlencoded({limit: '20mb',  extended: false}));
+
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended:false}));
 
 // app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
@@ -51,6 +54,7 @@ app.use(allowCrossDomain);
 //for deployment on hosting and build
 app.use(express.static(__dirname + '/app/dist/'));
 app.use('/images', express.static(path.join(__dirname, './images')));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads/files')));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads/images')));
 
 //api routes

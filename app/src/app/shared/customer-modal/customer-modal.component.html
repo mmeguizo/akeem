@@ -68,8 +68,9 @@
             <div class="display-photo" *ngIf="!profile_pic"
               [style.background-image]="'url('+this.auth.domain+'/images/no-photo.png'+')'">
             </div> -->
-            <input type="file" name="file" class="d-none" multiple id="file">
+            <input type="file" name="file" class="d-none" multiple="multiple" id="file">
             <button class="btn btn-primary browse-btn"  nbSpinnerStatus="primary" nbSpinnerSize="tiny" nbSpinnerMessage="" (click)="openFile($event, 'file')"> Choose Files</button>
+            <span> Files <strong> {{ theFileLength }} </strong></span>
           </div>
 
 
