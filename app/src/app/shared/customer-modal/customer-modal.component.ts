@@ -64,7 +64,7 @@ export class CustomerModalComponent implements OnInit {
       company:     ['', [Validators.required]],
       phone:     ['', [Validators.required]],
       notes:     ['', [Validators.required]],
-      attachment:     ['', [Validators.required]],
+      // attachment:     ['', [Validators.required]],
       open_balance:     ['', [Validators.required]],
     })
   }
@@ -98,7 +98,15 @@ export class CustomerModalComponent implements OnInit {
   }
 
   executeAction(form){
+console.log('execute form');
 
+    console.log(form.value)
+
+    console.log(this.customerData.endpoint);
+    console.log(this.customerData.endpoint2);
+    console.log(this.customerData.apiName);
+    console.log(this.customerData.apiName2);
+    console.log(this.customerData);
 
 
     form.value.id = this.customerData?.id || 0;
@@ -128,7 +136,7 @@ export class CustomerModalComponent implements OnInit {
       }
 
       this.fileService.addFile(fd).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
-        this.theFileLength = this.myNewFiles.length;
+        this.theFileLength = this.myNewFiles.length || fc.target.length;
         this.elEventListenerActive = false;
         el.removeEventListener('change', handler);
      });

@@ -52,6 +52,7 @@ import {
 } from '@nebular/theme';
 
 import { CommonComponent } from './common/common.component';
+// import { FilesComponent } from './files/files.component';
 // import { CustomerModalComponent } from './customer-modal/customer-modal.component';
 
 const materialModules = [
@@ -134,6 +135,7 @@ const MODULES = [
     ChatMessagePipe,
     FileNameOnly,
     CommonComponent,
+    // FilesComponent,
     // CustomerModalComponent,
     //UpdateProfileComponent,
   ],

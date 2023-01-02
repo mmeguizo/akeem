@@ -68,7 +68,13 @@ export class CommonComponent implements OnInit,OnDestroy {
       }else{
 
       }
-    }else{
+    }else if(this.model && this.model === 'fileupload'){
+      this.user.getRoute(this.endpointType,this.apiName,this.frontEnddata).pipe(takeUntil(this.getSubscription)).subscribe((data: any) => {
+        this.passEntry.emit(data);
+        this.activeModal.close();
+     });
+
+  }else{
       this.logout();
     }
   }

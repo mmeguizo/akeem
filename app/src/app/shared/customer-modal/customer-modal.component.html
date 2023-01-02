@@ -1,6 +1,6 @@
 <div class="col-md-12">
   <nb-card>
-<nb-card-header> {{ action | titlecase }} Customer {{ updateCustomer ? updateCustomer : '' }} </nb-card-header>
+<nb-card-header> {{ action | titlecase }} Customer11 {{ updateCustomer ? updateCustomer : '' }} </nb-card-header>
 <nb-card-body>
   <form [formGroup]="form"  enctype="multipart/form-data" >
   <div class="row">
@@ -48,17 +48,14 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <div class="form-group">
+      <div class="form-group"> -->
         <!-- <label for="inputFirstName" class="label">Attachment</label>
         <input type="file" multiple nbInput fullWidth id="file" name="file" [status]="form?.get('attachment').touched && form.controls['attachment'].errors?.required ? 'danger' : '' "  placeholder="Attachment" formControlName="attachment" (change)="openFile($event, 'file')"> -->
 
         <!-- <input type="file" name="file" class="d-none" multiple id="file"  (change)="openFile($event, 'file')"> -->
 
           <!-- <button class="btn btn-primary browse-btn"   nbSpinnerStatus="primary" nbSpinnerSize="tiny" nbSpinnerMessage="" (click)="openFile($event, 'file')">Choose Files</button> -->
-
-
-
-          <div class="avatar-container">
+          <!-- <div class="avatar-container"> -->
             <!-- <div class="display-photo" *ngIf="profile_pic">
               <img   [src]="this.auth.domain+'/profile_pic/'+profile_pic ">
             </div>
@@ -68,13 +65,10 @@
             <div class="display-photo" *ngIf="!profile_pic"
               [style.background-image]="'url('+this.auth.domain+'/images/no-photo.png'+')'">
             </div> -->
-            <input type="file" name="file" class="d-none" multiple="multiple" id="file">
+          <input type="file" name="file" class="d-none" multiple="multiple" id="file">
             <button class="btn btn-primary browse-btn"  nbSpinnerStatus="primary" nbSpinnerSize="tiny" nbSpinnerMessage="" (click)="openFile($event, 'file')"> Choose Files</button>
             <span> Files <strong> {{ theFileLength }} </strong></span>
-          </div>
-
-
-      </div>
+     </div>
     </div>
   </div>
   <div class="row">
@@ -87,7 +81,7 @@
   </div>
   <div class="row">
     <div class="col-sm-12 text-center">
-      <button type="submit" nbButton [status]="buttonStatus" outline (submit)="executeAction(form)" > {{ buttonTxt | titlecase }}  </button> &nbsp;
+      <button type="submit" nbButton [status]="buttonStatus" outline (click)="executeAction(form)" > {{ buttonTxt | titlecase }}  </button> &nbsp;
       <button type="button" nbButton status="danger" (click)="closeModal()" outline>Cancel</button>
     </div>
   </div>
