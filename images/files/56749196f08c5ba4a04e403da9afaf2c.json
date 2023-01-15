@@ -1,0 +1,2900 @@
+{
+	"info": {
+		"_postman_id": "c6cad2b6-76a1-445b-b7df-d5d0a6baf039",
+		"name": "THESIS1.1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9200883"
+	},
+	"item": [
+		{
+			"name": "GLOBAL USER",
+			"item": [
+				{
+					"name": "addUserApi",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"email\": \"gagers@gagers.com\",\r\n    \"username\": \"gagers\",\r\n    \"password\": \"Password123!\",\r\n    \"confirm\": \"Password123!\",\r\n    \"role\": \"admin\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/addUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"addUser"
+							]
+						},
+						"description": "add User"
+					},
+					"response": []
+				},
+				{
+					"name": "getUserApi",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/getAllUser",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"getAllUser"
+							]
+						},
+						"description": "view user"
+					},
+					"response": []
+				},
+				{
+					"name": "updateUserApi",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n  {\r\n    \"_id\" : \"634bf056206f612702bc784f\",\r\n    \"id\" : \"bd44159d-263c-474d-8691-032d023c239d\",\r\n    \"email\" : \"test@test.com\",\r\n    \"username\" : \"test\",\r\n    \"role\" : \"admin\",\r\n    \"status\" : \"active\",\r\n    \"deleted\" : false,\r\n    \"changePassword\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/updateUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"updateUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUserApi",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"id\" : \"bd44159d-263c-474d-8691-032d023c239d\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users/deleteUser",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"deleteUser"
+							]
+						},
+						"description": "delete user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Volunteer",
+			"item": [
+				{
+					"name": "addVolunteerApi",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"id\" : \"fada68af-2574-4c03-819a-648b738a10ba\",\r\n    \"email\" : \"tester@tester.com\",\r\n    \"username\" : \"tester\",\r\n    \"role\" : \"volunteer\",\r\n    \"status\" : \"active\",\r\n    \"deleted\" : false,\r\n    \"password\" : \"Password123!\",\r\n    \"confirm\" : \"Password123!\"\r\n \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/volunteers/addVolunteer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"volunteers",
+								"addVolunteer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllScheduleByID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"volunteer_id\": \"a345ce02-be9d-41f5-802a-492ede5a1e7c\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/volunteers/getAllScheduleByID",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"volunteers",
+								"getAllScheduleByID"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateVolunteerApi",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n   \r\n    \"id\" : \"536fee26-fe86-4208-87cc-bb3e31e1c3cb\",\r\n    \"firstname\" : \"tester\",\r\n    \"lastname\" : \"tester\",\r\n    \"address\" : \"tester st.\",\r\n    \"email\" : \"tester@tester.com\",\r\n    \"username\" : \"tester\",\r\n    \"role\" : \"volunteer\",\r\n    \"status\" : \"active\",\r\n    \"deleted\" : false,\r\n    \"changePassword\": true,\r\n    \"old_password\" : \"Password123!\",\r\n    \"confirm_password\" : \"Password123!!\",\r\n    \"new_password\" : \"Password123!!\"\r\n\r\n\r\n   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/volunteers/updateVolunteer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"volunteers",
+								"updateVolunteer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteVolunteerApi",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n   \"id\" : \"536fee26-fe86-4208-87cc-bb3e31e1c3cb\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/volunteers/deleteVolunteer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"volunteers",
+								"deleteVolunteer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SocialWorker",
+			"item": [
+				{
+					"name": "addSocialWorkerApi",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\r\n    \"email\" : \"tester@tester.com\",\r\n    \"username\" : \"tester\",\r\n    \"role\" : \"socialworker\",\r\n    \"status\" : \"active\",\r\n    \"deleted\" : false,\r\n    \"password\" : \"Password123!\",\r\n    \"confirm\" : \"Password123!\"\r\n \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/socialworker/addSocialWorker",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"socialworker",
+								"addSocialWorker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllSocialWorkerApi",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/socialworker/getAllSocialWorker",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"socialworker",
+								"getAllSocialWorker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateSocialWorkerApi",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \r\n    \"id\" : \"85063480-5d59-4f64-84e4-afd2898e1599\",\r\n    \"firstname\" : \"tester\",\r\n    \"lastname\" : \"tester\",\r\n    \"address\" : \"tester st. zone 1\",\r\n    \"email\" : \"tester@tester.com\",\r\n    \"username\" : \"tester\",\r\n    \"role\" : \"socialworker\",\r\n    \"status\" : \"active\",\r\n    \"deleted\" : false,\r\n    \"changePassword\" : true,\r\n    \"new_password\" : \"Password123!!\",\r\n    \"old_password\" : \"Password123!\",\r\n    \"confirm_password\" : \"Password123!!\"\r\n    \r\n   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/socialworker/updateSocialWorker",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"socialworker",
+								"updateSocialWorker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSocialWorkerApi",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n     \"id\" : \"b802ac26-8ac2-4396-846e-124bb34f996e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/socialworker/deleteSocialWorker",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"socialworker",
+								"deleteSocialWorker"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Foster",
+			"item": [
+				{
+					"name": "global controls",
+					"item": [
+						{
+							"name": "addFosterApi",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n \r\n\r\n    \"email\": \"tester@tester.com\",\r\n    \"username\": \"tester\",\r\n    \"password\": \"Password123!\",\r\n    \"confirm\": \"Password123!\",\r\n    \"role\": \"foster\"\r\n\r\n\r\n   \r\n   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/fosters/addFoster",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"fosters",
+										"addFoster"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllFosterApi",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/fosters/getAllFoster",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"fosters",
+										"getAllFoster"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateFosterApi",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"5eb09051-3607-4b8b-847d-9a29dfd128e6\",\r\n    \"firstname\" : \"tester\",\r\n    \"lastname\" : \"tester\",\r\n    \"address\" : \"tester st\",\r\n    \"email\" : \"tester@tester.com\",\r\n    \"username\" : \"tester\",\r\n    \"role\" : \"foster\",\r\n    \"status\" : \"active\",\r\n    \"deleted\" : false,\r\n    \"changePassword\" : false\r\n \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/fosters/updateFoster",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"fosters",
+										"updateFoster"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteFosterApi",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"id\" : \"5eb09051-3607-4b8b-847d-9a29dfd128e6\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/fosters/deleteFoster",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"fosters",
+										"deleteFoster"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "updateStatusInquiry Api",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzdhMjE3NTM1ODUzYTUxMGJhYTRkMmMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiI2MTE3ZTgxZi04NjE0LTRmY2YtOGZhZS0xY2MwYzY3NjYzYjkiLCJmdWxsbmFtZSI6Impvc2ggZ3dhcG8iLCJpYXQiOjE2NzA1MDM1NzcsImV4cCI6MTY3MDU4OTk3N30.PK28nn-yhey4AgYQBQsZHRQeuMnPRWAs-D6yiCbWAoA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n   \"id\": \"6b68a5c1-1b55-40da-9603-c9002a28db58\",\r\n   \"status\" : true,\r\n   \"deleted\" : true\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/inquiry/updateStatusInquiry",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"inquiry",
+								"updateStatusInquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateReadStatusInquiryApi",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzdhMjE3NTM1ODUzYTUxMGJhYTRkMmMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiI2MTE3ZTgxZi04NjE0LTRmY2YtOGZhZS0xY2MwYzY3NjYzYjkiLCJmdWxsbmFtZSI6Impvc2ggZ3dhcG8iLCJpYXQiOjE2NzA1MDM1NzcsImV4cCI6MTY3MDU4OTk3N30.PK28nn-yhey4AgYQBQsZHRQeuMnPRWAs-D6yiCbWAoA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n   \"id\": \"6b68a5c1-1b55-40da-9603-c9002a28db58\",\r\n   \"read\" : false\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/inquiry/updateReadStatusInquiry",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"inquiry",
+								"updateReadStatusInquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteInquiryApi Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzdhMjE3NTM1ODUzYTUxMGJhYTRkMmMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiI2MTE3ZTgxZi04NjE0LTRmY2YtOGZhZS0xY2MwYzY3NjYzYjkiLCJmdWxsbmFtZSI6Impvc2ggZ3dhcG8iLCJpYXQiOjE2NzA1MDM1NzcsImV4cCI6MTY3MDU4OTk3N30.PK28nn-yhey4AgYQBQsZHRQeuMnPRWAs-D6yiCbWAoA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n   \"id\": \"24bb1cc4-d323-4c3b-a299-2b5a43baee94\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/inquiry/deleteInquiry",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"inquiry",
+								"deleteInquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addInquiryApi Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzdhMjE3NTM1ODUzYTUxMGJhYTRkMmMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiI2MTE3ZTgxZi04NjE0LTRmY2YtOGZhZS0xY2MwYzY3NjYzYjkiLCJmdWxsbmFtZSI6Impvc2ggZ3dhcG8iLCJpYXQiOjE2NzA1MDM1NzcsImV4cCI6MTY3MDU4OTk3N30.PK28nn-yhey4AgYQBQsZHRQeuMnPRWAs-D6yiCbWAoA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"name\" : \"gagedfdrs\",\r\n    \"message\" : \"tttt\",\r\n    \"phone\" : \"8989898\",\r\n    \"email\" : \"tester@teste.com\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/inquiry/addinquiry",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"inquiry",
+								"addinquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllInquiry Api",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzdhMjE3NTM1ODUzYTUxMGJhYTRkMmMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiI2MTE3ZTgxZi04NjE0LTRmY2YtOGZhZS0xY2MwYzY3NjYzYjkiLCJmdWxsbmFtZSI6Impvc2ggZ3dhcG8iLCJpYXQiOjE2NzA3NjQ3MjYsImV4cCI6MTY3MDg1MTEyNn0.XnEEUe36aNJtL5CadqyF6dbWaKfQNFKDe1EgXZmg4Io",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/inquiry/getAllInquiry",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"inquiry",
+								"getAllInquiry"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "authentication",
+			"item": [
+				{
+					"name": "authenticationWebtokenCreation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n     \"username\": \"tester\",\r\n    \"password\": \"Password123!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/authentication/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"authentication",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Volunteer Api",
+					"item": [
+						{
+							"name": "addVolunteerApi",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n    \"id\" : \"fada68af-2574-4c03-819a-648b738a10ba\",\r\n    \"email\" : \"tester@tester.com\",\r\n    \"username\" : \"tester\",\r\n    \"role\" : \"volunteer\",\r\n    \"status\" : \"active\",\r\n    \"deleted\" : false,\r\n    \"password\" : \"Password123!\",\r\n    \"confirm\" : \"Password123!\"\r\n \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/volunteers/addVolunteer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"volunteers",
+										"addVolunteer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllVolunteerApi",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/users/getAllVolunteer",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"getAllVolunteer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateVolunteerApi",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n   \r\n    \"id\" : \"536fee26-fe86-4208-87cc-bb3e31e1c3cb\",\r\n    \"firstname\" : \"tester\",\r\n    \"lastname\" : \"tester\",\r\n    \"address\" : \"tester st.\",\r\n    \"email\" : \"tester@tester.com\",\r\n    \"username\" : \"tester\",\r\n    \"role\" : \"volunteer\",\r\n    \"status\" : \"active\",\r\n    \"deleted\" : false,\r\n    \"changePassword\": true,\r\n    \"old_password\" : \"Password123!\",\r\n    \"confirm_password\" : \"Password123!!\",\r\n    \"new_password\" : \"Password123!!\"\r\n\r\n\r\n   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/volunteers/updateVolunteer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"volunteers",
+										"updateVolunteer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteVolunteerApi",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n   \"id\" : \"536fee26-fe86-4208-87cc-bb3e31e1c3cb\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/volunteers/deleteVolunteer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"volunteers",
+										"deleteVolunteer"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SocialWorker Api",
+					"item": [
+						{
+							"name": "Add Schedule",
+							"item": [
+								{
+									"name": "addSchedule Api",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n     \r\n    \"volunteer_id\" :  \"ec68bda2-61d2-4b17-9eb3-66026468b38c\",\r\n    \"schedule_date\" : \"2022-12-24T05:35:28Z\",\r\n    \"schedule\" :  \"8am - 5pm\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/schedule/addSchedule",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"schedule",
+												"addSchedule"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateSchedule Api",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \r\n    \"id\": \"c907168c-2b85-43f6-9b40-4a1a2d7f94e2\",\r\n    \"volunteer_id\": \"ec68bda2-61d2-4b17-9eb3-66026468b38c\",\r\n    \"schedule_date\": \"2022-12-24T05:35:28Z\",\r\n    \"schedule\": \"1pm - 5pm\"\r\n    \r\n   \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:3000/schedule/updateSchedule",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"schedule",
+												"updateSchedule"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "deleteSchedule Api",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \r\n    \"id\" : \"c907168c-2b85-43f6-9b40-4a1a2d7f94e2\",\r\n    \"status\" : true\r\n    \r\n   \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:3000/schedule//deleteSchedule",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"schedule",
+												"",
+												"deleteSchedule"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getAllSchedule Api",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:3000/schedule/getAllSchedule",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"schedule",
+												"getAllSchedule"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getTotalSchedule Api",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:3000/schedule/getTotalSchedule",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"schedule",
+												"getTotalSchedule"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "addSocialWorkerApi",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\r\n    \"email\" : \"tester@tester.com\",\r\n    \"username\" : \"tester\",\r\n    \"role\" : \"socialworker\",\r\n    \"status\" : \"active\",\r\n    \"deleted\" : false,\r\n    \"password\" : \"Password123!\",\r\n    \"confirm\" : \"Password123!\"\r\n \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/socialworker/addSocialWorker",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"socialworker",
+										"addSocialWorker"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllSocialWorkerApi",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/socialworker/getAllSocialWorker",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"socialworker",
+										"getAllSocialWorker"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateSocialWorkerApi",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \r\n    \"id\" : \"85063480-5d59-4f64-84e4-afd2898e1599\",\r\n    \"firstname\" : \"tester\",\r\n    \"lastname\" : \"tester\",\r\n    \"address\" : \"tester st. zone 1\",\r\n    \"email\" : \"tester@tester.com\",\r\n    \"username\" : \"tester\",\r\n    \"role\" : \"socialworker\",\r\n    \"status\" : \"active\",\r\n    \"deleted\" : false,\r\n    \"changePassword\" : true,\r\n    \"new_password\" : \"Password123!!\",\r\n    \"old_password\" : \"Password123!\",\r\n    \"confirm_password\" : \"Password123!!\"\r\n    \r\n   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/socialworker/updateSocialWorker",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"socialworker",
+										"updateSocialWorker"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteSocialWorkerApi",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n     \"id\" : \"b802ac26-8ac2-4396-846e-124bb34f996e\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/socialworker/deleteSocialWorker",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"socialworker",
+										"deleteSocialWorker"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GLOBAL USER Api",
+					"item": [
+						{
+							"name": "addUserApi",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n    \"email\": \"tester@tester.com\",\r\n    \"username\": \"tester\",\r\n    \"password\": \"Password123!\",\r\n    \"confirm\": \"Password123!\",\r\n    \"role\": \"admin\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users/addUser",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"addUser"
+									]
+								},
+								"description": "add User"
+							},
+							"response": []
+						},
+						{
+							"name": "getUserApi",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/users/getAllUser",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"getAllUser"
+									]
+								},
+								"description": "view user"
+							},
+							"response": []
+						},
+						{
+							"name": "updateUserApi",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n  {\r\n    \"_id\" : \"634bf056206f612702bc784f\",\r\n    \"id\" : \"bd44159d-263c-474d-8691-032d023c239d\",\r\n    \"email\" : \"test@test.com\",\r\n    \"username\" : \"test\",\r\n    \"role\" : \"admin\",\r\n    \"status\" : \"active\",\r\n    \"deleted\" : false,\r\n    \"changePassword\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users/updateUser",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"updateUser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteUserApi",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n    \"id\" : \"bd44159d-263c-474d-8691-032d023c239d\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/users/deleteUser",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"deleteUser"
+									]
+								},
+								"description": "delete user"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Foster Api",
+					"item": [
+						{
+							"name": "addFosterApi",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n \r\n\r\n    \"email\": \"tester@tester.com\",\r\n    \"username\": \"tester\",\r\n    \"password\": \"Password123!\",\r\n    \"confirm\": \"Password123!\",\r\n    \"role\": \"foster\"\r\n\r\n\r\n   \r\n   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/fosters/addFoster",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"fosters",
+										"addFoster"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllFosterApi",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/fosters/getAllFoster",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"fosters",
+										"getAllFoster"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateFosterApi",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"5eb09051-3607-4b8b-847d-9a29dfd128e6\",\r\n    \"firstname\" : \"tester\",\r\n    \"lastname\" : \"tester\",\r\n    \"address\" : \"tester st\",\r\n    \"email\" : \"tester@tester.com\",\r\n    \"username\" : \"tester\",\r\n    \"role\" : \"foster\",\r\n    \"status\" : \"active\",\r\n    \"deleted\" : false,\r\n    \"changePassword\" : false\r\n \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/fosters/updateFoster",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"fosters",
+										"updateFoster"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteFosterApi",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"id\" : \"5eb09051-3607-4b8b-847d-9a29dfd128e6\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/fosters/deleteFoster",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"fosters",
+										"deleteFoster"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Landing Page Api",
+					"item": [
+						{
+							"name": "addLandingPageApi",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzdhMjE3NTM1ODUzYTUxMGJhYTRkMmMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiI2MTE3ZTgxZi04NjE0LTRmY2YtOGZhZS0xY2MwYzY3NjYzYjkiLCJmdWxsbmFtZSI6Impvc2ggZ3dhcG8iLCJpYXQiOjE2NzA1MDM1NzcsImV4cCI6MTY3MDU4OTk3N30.PK28nn-yhey4AgYQBQsZHRQeuMnPRWAs-D6yiCbWAoA",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n \r\n\r\n    \"information\" :  \"balay adoption free for COD\",\r\n    \"services\" :  [\r\n        {\r\n            \"name\" : \"price\"\r\n        },\r\n        {\r\n            \"name\" : \"soap\"\r\n        },\r\n        {\r\n            \"name\" : \"ghost\"\r\n        }\r\n    ],\r\n    \"trusted_agency\" : [\r\n        {\r\n            \"name\": \"tank\"\r\n        },\r\n        {\r\n            \"name\": \"warthog\"\r\n        },\r\n        {\r\n            \"name\": \"uav\"\r\n        }\r\n    ],\r\n    \"contact_number\" : \"0909090909\",\r\n    \"email\" : \"tester@tester.com\",\r\n    \"address\" : \"address indai\"\r\n\r\n\r\n   \r\n   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/landingpage/addlandingpage",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"landingpage",
+										"addlandingpage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getLatestLandingPage Api",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/landingpage/getLatestLandingPage",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"landingpage",
+										"getLatestLandingPage"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Visitation Api",
+					"item": [
+						{
+							"name": "AddVisitation",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjcxMjI0OTEsImV4cCI6MTY2NzIwODg5MX0.Km5I4okk3FcUrQy4a8zeF6AHXkGebcLjXk2QbcFJCxQ",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n           \"user_id\": 2,\r\n            \"orphan_id\": 0,\r\n            \"date\": \"2022-10-30T10:26:49Z\",\r\n            \"role\": \"admin\",\r\n            \"purpose\" : \"'trip2 lang'\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/visitation/addVisitation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"visitation",
+										"addVisitation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllVisitation",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjcxMjI0OTEsImV4cCI6MTY2NzIwODg5MX0.Km5I4okk3FcUrQy4a8zeF6AHXkGebcLjXk2QbcFJCxQ",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/visitation/getAllVisitation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"visitation",
+										"getAllVisitation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllVisitationForLoggedUser Api",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjcxMjI0OTEsImV4cCI6MTY2NzIwODg5MX0.Km5I4okk3FcUrQy4a8zeF6AHXkGebcLjXk2QbcFJCxQ",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n    \"user_id\" : \"098319e2-86f2-4eaa-ae51-73b21c868a08\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/visitation/getAllVisitationForLoggedUser",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"visitation",
+										"getAllVisitationForLoggedUser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteVisitation",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjcxMjI0OTEsImV4cCI6MTY2NzIwODg5MX0.Km5I4okk3FcUrQy4a8zeF6AHXkGebcLjXk2QbcFJCxQ",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"id\" : \"2e359b40-a2c7-4c72-af90-52dae035d39f\"\r\n\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/visitation/deleteVisitation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"visitation",
+										"deleteVisitation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateVisitationWithOrphan Api",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzdhMjE3NTM1ODUzYTUxMGJhYTRkMmMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njk5ODQxOTcsImV4cCI6MTY3MDA3MDU5N30.bo1gVo7hR_L8hqQkZDvrZxTJlMoSEN16UVkg4DLQu6w",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\"id\" : \"eed4b466-fc10-49a0-adf7-81a9ca921066\",\r\n\"orphan_id\" : \"70405c2f-cbd4-47ec-9e88-9b97c9c6f578\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/visitation/updateVisitationWithOrphan",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"visitation",
+										"updateVisitationWithOrphan"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateVisitation",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjcxMjI0OTEsImV4cCI6MTY2NzIwODg5MX0.Km5I4okk3FcUrQy4a8zeF6AHXkGebcLjXk2QbcFJCxQ",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n   \r\n    \"id\" : \"4894683a-a99d-48c5-9d80-f250eb3791cf\",\r\n    \"user_id\" : \"3\",\r\n    \"orphan_id\" : \"5\",\r\n    \"date\": \"2022-10-30T10:26:49.000Z\",\r\n    \"purpose\" : \"'testers\",\r\n    \"status\" : \"pending\",\r\n    \"deleted\" : false,\r\n    \"__v\" : 0\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/visitation/updateVisitation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"visitation",
+										"updateVisitation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateStatusVisitation",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjcxMjI0OTEsImV4cCI6MTY2NzIwODg5MX0.Km5I4okk3FcUrQy4a8zeF6AHXkGebcLjXk2QbcFJCxQ",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n   \r\n    \"id\" : \"4894683a-a99d-48c5-9d80-f250eb3791cf\",\r\n    \"status\" : \"approved\"\r\n    \r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/visitation/updateStatusVisitation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"visitation",
+										"updateStatusVisitation"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Dashboard Count Total",
+					"item": [
+						{
+							"name": "getAllSocialWorkerApi",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjgyNTg0MDUsImV4cCI6MTY2ODM0NDgwNX0.8jPjwOJNkNJ12VQJ7lNimfJrEHfESmskT1BPdueUQAw",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:3000/socialworker/getTotalSocialWorker",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"socialworker",
+										"getTotalSocialWorker"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getTotalFoster Api",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjgyNTg0MDUsImV4cCI6MTY2ODM0NDgwNX0.8jPjwOJNkNJ12VQJ7lNimfJrEHfESmskT1BPdueUQAw",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:3000/foster/getTotalSocialWorker",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"foster",
+										"getTotalSocialWorker"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getTotalOrphanApi",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjgyNTg0MDUsImV4cCI6MTY2ODM0NDgwNX0.8jPjwOJNkNJ12VQJ7lNimfJrEHfESmskT1BPdueUQAw",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:3000/orphans/getTotalOrphan",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"orphans",
+										"getTotalOrphan"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getTotalVisitation",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjgyNTg0MDUsImV4cCI6MTY2ODM0NDgwNX0.8jPjwOJNkNJ12VQJ7lNimfJrEHfESmskT1BPdueUQAw",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:3000/visitation/getTotalSocialWorker",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"visitation",
+										"getTotalSocialWorker"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getTotalVolunteer Api",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjgyNTg0MDUsImV4cCI6MTY2ODM0NDgwNX0.8jPjwOJNkNJ12VQJ7lNimfJrEHfESmskT1BPdueUQAw",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:3000/volunteer/getTotalVolunteer",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"volunteer",
+										"getTotalVolunteer"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getTotalApprovedVisitation Api",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjgyNTg0MDUsImV4cCI6MTY2ODM0NDgwNX0.8jPjwOJNkNJ12VQJ7lNimfJrEHfESmskT1BPdueUQAw",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:3000/visitation/getTotalVolunteer",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"visitation",
+										"getTotalVolunteer"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getTotalPendingVisitation Api",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjgyNTg0MDUsImV4cCI6MTY2ODM0NDgwNX0.8jPjwOJNkNJ12VQJ7lNimfJrEHfESmskT1BPdueUQAw",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:3000/socialworker/getTotalPendingVisitation",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"socialworker",
+										"getTotalPendingVisitation"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getTotalCancelledVisitation Api",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjgyNTg0MDUsImV4cCI6MTY2ODM0NDgwNX0.8jPjwOJNkNJ12VQJ7lNimfJrEHfESmskT1BPdueUQAw",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "localhost:3000/visitation/getTotalPendingVisitation",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"visitation",
+										"getTotalPendingVisitation"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Orphan Api",
+					"item": [
+						{
+							"name": "addOrphanApi",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjgyNTg0MDUsImV4cCI6MTY2ODM0NDgwNX0.8jPjwOJNkNJ12VQJ7lNimfJrEHfESmskT1BPdueUQAw",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n  \"first_name\" :  \"hahaha\",\r\n    \"lastname\" :  \"hahaha\",\r\n    \"age\" :  2,\r\n    \"height\" :  2,\r\n    \"weight\" :  2,\r\n    \"waist\" :  2,\r\n    \"dob\" :  \"2022-11-12T15:11:55Z\",\r\n    \"place_of_birth\" :  \"banago\",\r\n    \"birth_status\" : \"triplet\",\r\n    \"present_whereabouts\" :  \"banago\",\r\n    \"date_admission\" :  \"2022-11-12T15:11:55Z\",\r\n    \"date_surrendered\" : \"2022-11-12T15:11:55Z\",\r\n    \"category\" :  \"buang\",\r\n    \"moral\" :   \"immoral\",\r\n    \"mointoring\" : [\r\n\r\n        { \r\n          \"education\" : \"high school\"\r\n        },\r\n        { \r\n          \"daily_health\" : \"sick\"\r\n        },\r\n        { \r\n          \"chores\" :  \"sleeping\"\r\n        },\r\n        { \r\n          \"action\" :  \"stupid\"\r\n        },\r\n        { \r\n          \"meal\" :  \"lugaw\"\r\n        }\r\n\r\n    ]\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/orphans/addOrphan",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"orphans",
+										"addOrphan"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllActiveOrphanApi",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzdhMjE3NTM1ODUzYTUxMGJhYTRkMmMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NzA0MTkxODEsImV4cCI6MTY3MDUwNTU4MX0.-uQSPXFJU6bv2I1mGu5ogjevpF2T9-kmiPwRj5UOpb8",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/orphans/getAllActiveOrphanApi",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"orphans",
+										"getAllActiveOrphanApi"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteOrphanApi",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjgyNTg0MDUsImV4cCI6MTY2ODM0NDgwNX0.8jPjwOJNkNJ12VQJ7lNimfJrEHfESmskT1BPdueUQAw",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"id\" : \"5eb09051-3607-4b8b-847d-9a29dfd128e6\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/orphans/deleteOrphan",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"orphans",
+										"deleteOrphan"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateOrphanApi",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"5eb09051-3607-4b8b-847d-9a29dfd128e6\",\r\n    \"firstname\" : \"tester\",\r\n    \"lastname\" : \"tester\",\r\n    \"address\" : \"tester st\",\r\n    \"email\" : \"tester@tester.com\",\r\n    \"username\" : \"tester\",\r\n    \"role\" : \"foster\",\r\n    \"status\" : \"active\",\r\n    \"deleted\" : false,\r\n    \"changePassword\" : false\r\n \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/fosters/updateFoster",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"fosters",
+										"updateFoster"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllActiveOrphanApi",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRlZDQ0YjlkNzEzNWU3Y2VkMjAxMGYiLCJpYXQiOjE2NjgyNTg0MDUsImV4cCI6MTY2ODM0NDgwNX0.8jPjwOJNkNJ12VQJ7lNimfJrEHfESmskT1BPdueUQAw",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/orphans/getAllOrphan",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"orphans",
+										"getAllOrphan"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Monitoring",
+					"item": [
+						{
+							"name": "updateMonitoring",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"id\" : \"e68856ec-fb40-407e-b37e-75483d353b25\",\r\n            \"social_worker_id\": \"social_worker_id\",\r\n            \"orphan_id\": \"orphan_id\",\r\n            \"education\": \"highschol\",\r\n            \"daily_health\": \"test\",\r\n            \"chores\": \"xxxxx\",\r\n            \"action\": \"xxxx ah\",\r\n            \"meal\": \"xxxxx lng\",\r\n            \"date\": \"2011-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/monitoring/updateMonitoring",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"monitoring",
+										"updateMonitoring"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteMonitoring",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n           \"id\" : \"bcace9cf-7b39-4840-8c7c-91774ef44342\"\r\n\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/monitoring/deleteMonitoring",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"monitoring",
+										"deleteMonitoring"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddMonitoring",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"orphan_id\": [\r\n        {\r\n            \"name\": \"tester, tester\",\r\n            \"id\": \"869838c6-855c-469a-8390-aff7c6405166\"\r\n        },\r\n        {\r\n            \"name\": \" test, test\",\r\n            \"id\": \"bd086818-1dc5-455b-9ab4-69474794f0aa\"\r\n        }\r\n    ],\r\n    \"meal\": \"none\",\r\n    \"chores\": \"none\",\r\n    \"education\": \"none\",\r\n    \"daily_health\": \"none\",\r\n    \"action\": \"none\",\r\n    \"date\": \"2022-12-20\",\r\n    \"addedby\": \"6117e81f-8614-4fcf-8fae-1cc0c67663b9\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/monitoring/addMonitoring",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"monitoring",
+										"addMonitoring"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getTotalMonitoring",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n            \"social_worker_id\": \"social_worker_id\",\r\n            \"orphan_id\": \"orphan_id\",\r\n            \"education\": \"highschol\",\r\n            \"daily_health\": \"gagers\",\r\n            \"chores\": \"gagers\",\r\n            \"action\": \"gagers ah\",\r\n            \"meal\": \"gagers lng\",\r\n            \"date\": \"2011-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/monitoring/getTotalMonitoring",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"monitoring",
+										"getTotalMonitoring"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllMonitoring",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n            \"social_worker_id\": \"social_worker_id\",\r\n            \"orphan_id\": \"orphan_id\",\r\n            \"education\": \"highschol\",\r\n            \"daily_health\": \"gagers\",\r\n            \"chores\": \"gagers\",\r\n            \"action\": \"gagers ah\",\r\n            \"meal\": \"gagers lng\",\r\n            \"date\": \"2011-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/monitoring/getAllMonitoring",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"monitoring",
+										"getAllMonitoring"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getMonitoringRangeByID",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"orphanID\": \"1ac876c1-7eaf-4d4d-843c-c5150a06642a\",\r\n    \"endDate\": \"2023-01-21T15:59:59.999Z\",\r\n    \"startDate\": \"2023-01-06T16:00:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/monitoring/getMonitoringRangeByID",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"monitoring",
+										"getMonitoringRangeByID"
+									],
+									"query": [
+										{
+											"key": "orphanID",
+											"value": "1ac876c1-7eaf-4d4d-843c-c5150a06642a",
+											"disabled": true
+										},
+										{
+											"key": "startDate",
+											"value": "2023-01-10T00:00:00.000+00:00",
+											"disabled": true
+										},
+										{
+											"key": "endDate",
+											"value": "2023-02-10T00:00:00.000+00:00",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Inquiry Api",
+					"item": [
+						{
+							"name": "readAllinquryMessages Api",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzdhMjE3NTM1ODUzYTUxMGJhYTRkMmMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiI2MTE3ZTgxZi04NjE0LTRmY2YtOGZhZS0xY2MwYzY3NjYzYjkiLCJmdWxsbmFtZSI6Impvc2ggZ3dhcG8iLCJpYXQiOjE2NzA3NjQ3MjYsImV4cCI6MTY3MDg1MTEyNn0.XnEEUe36aNJtL5CadqyF6dbWaKfQNFKDe1EgXZmg4Io",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/inquiry/readAllinquryMessages",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"inquiry",
+										"readAllinquryMessages"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateReadStatusInquiryApi Copy",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzdhMjE3NTM1ODUzYTUxMGJhYTRkMmMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiI2MTE3ZTgxZi04NjE0LTRmY2YtOGZhZS0xY2MwYzY3NjYzYjkiLCJmdWxsbmFtZSI6Impvc2ggZ3dhcG8iLCJpYXQiOjE2NzA1MDM1NzcsImV4cCI6MTY3MDU4OTk3N30.PK28nn-yhey4AgYQBQsZHRQeuMnPRWAs-D6yiCbWAoA",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n   \"id\": \"6b68a5c1-1b55-40da-9603-c9002a28db58\",\r\n   \"read\" : false\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/inquiry/updateReadStatusInquiry",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"inquiry",
+										"updateReadStatusInquiry"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AddHistory Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n            \"social_worker_id\": \"social_worker_id\",\r\n            \"orphan_id\": \"orphan_id\",\r\n            \"education\": \"highschol\",\r\n            \"daily_health\": \"gagers\",\r\n            \"chores\": \"gagers\",\r\n            \"action\": \"gagers ah\",\r\n            \"meal\": \"gagers lng\",\r\n            \"date\": \"2011-10-05T14:48:00.000Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/monitoring/getAllMonitoring",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"monitoring",
+								"getAllMonitoring"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllSchedule",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/schedule/getAllSchedule",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"schedule",
+								"getAllSchedule"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SocialWorker",
+			"item": [
+				{
+					"name": "Monitoring",
+					"item": [
+						{
+							"name": "updateMonitoring",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"id\" : \"e68856ec-fb40-407e-b37e-75483d353b25\",\r\n            \"social_worker_id\": \"social_worker_id\",\r\n            \"orphan_id\": \"orphan_id\",\r\n            \"education\": \"highschol\",\r\n            \"daily_health\": \"test\",\r\n            \"chores\": \"xxxxx\",\r\n            \"action\": \"xxxx ah\",\r\n            \"meal\": \"xxxxx lng\",\r\n            \"date\": \"2011-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/monitoring/updateMonitoring",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"monitoring",
+										"updateMonitoring"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteMonitoring",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"id\" : \"e68856ec-fb40-407e-b37e-75483d353b25\",\r\n            \"social_worker_id\": \"social_worker_id\",\r\n            \"orphan_id\": \"orphan_id\",\r\n            \"education\": \"highschol\",\r\n            \"daily_health\": \"test\",\r\n            \"chores\": \"xxxxx\",\r\n            \"action\": \"xxxx ah\",\r\n            \"meal\": \"xxxxx lng\",\r\n            \"date\": \"2011-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/monitoring/updateMonitoring",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"monitoring",
+										"updateMonitoring"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddHistory Copy 2",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n            \"social_worker_id\": \"social_worker_id\",\r\n            \"orphan_id\": \"orphan_id\",\r\n            \"education\": \"highschol\",\r\n            \"daily_health\": \"gagers\",\r\n            \"chores\": \"gagers\",\r\n            \"action\": \"gagers ah\",\r\n            \"meal\": \"gagers lng\",\r\n            \"date\": \"2011-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/monitoring/addMonitoring",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"monitoring",
+										"addMonitoring"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddHistory Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n            \"social_worker_id\": \"social_worker_id\",\r\n            \"orphan_id\": \"orphan_id\",\r\n            \"education\": \"highschol\",\r\n            \"daily_health\": \"gagers\",\r\n            \"chores\": \"gagers\",\r\n            \"action\": \"gagers ah\",\r\n            \"meal\": \"gagers lng\",\r\n            \"date\": \"2011-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/monitoring/getAllMonitoring",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"monitoring",
+										"getAllMonitoring"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getTotalMonitoring",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n            \"social_worker_id\": \"social_worker_id\",\r\n            \"orphan_id\": \"orphan_id\",\r\n            \"education\": \"highschol\",\r\n            \"daily_health\": \"gagers\",\r\n            \"chores\": \"gagers\",\r\n            \"action\": \"gagers ah\",\r\n            \"meal\": \"gagers lng\",\r\n            \"date\": \"2011-10-05T14:48:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/monitoring/getTotalMonitoring",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"monitoring",
+										"getTotalMonitoring"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddMonitoring Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"orphan_id\": [\r\n        {\r\n            \"name\": \"tester, tester\",\r\n            \"id\": \"869838c6-855c-469a-8390-aff7c6405166\"\r\n        },\r\n        {\r\n            \"name\": \" test, test\",\r\n            \"id\": \"bd086818-1dc5-455b-9ab4-69474794f0aa\"\r\n        }\r\n    ],\r\n    \"meal\": \"none\",\r\n    \"chores\": \"none\",\r\n    \"education\": \"none\",\r\n    \"daily_health\": \"none\",\r\n    \"action\": \"none\",\r\n    \"date\": \"2022-12-20\",\r\n    \"addedby\": \"6117e81f-8614-4fcf-8fae-1cc0c67663b9\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/monitoring/addMonitoring",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"monitoring",
+										"addMonitoring"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Landing Page Api",
+					"item": [
+						{
+							"name": "addLandingPageApi",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzdhMjE3NTM1ODUzYTUxMGJhYTRkMmMiLCJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiI2MTE3ZTgxZi04NjE0LTRmY2YtOGZhZS0xY2MwYzY3NjYzYjkiLCJmdWxsbmFtZSI6Impvc2ggZ3dhcG8iLCJpYXQiOjE2NzA1MDM1NzcsImV4cCI6MTY3MDU4OTk3N30.PK28nn-yhey4AgYQBQsZHRQeuMnPRWAs-D6yiCbWAoA",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n \r\n\r\n    \"information\" :  \"balay adoption free for COD\",\r\n    \"services\" :  [\r\n        {\r\n            \"name\" : \"price\"\r\n        },\r\n        {\r\n            \"name\" : \"soap\"\r\n        },\r\n        {\r\n            \"name\" : \"ghost\"\r\n        }\r\n    ],\r\n    \"trusted_agency\" : [\r\n        {\r\n            \"name\": \"tank\"\r\n        },\r\n        {\r\n            \"name\": \"warthog\"\r\n        },\r\n        {\r\n            \"name\": \"uav\"\r\n        }\r\n    ],\r\n    \"contact_number\" : \"0909090909\",\r\n    \"email\" : \"tester@tester.com\",\r\n    \"address\" : \"address indai\"\r\n\r\n\r\n   \r\n   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/landingpage/addlandingpage",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"landingpage",
+										"addlandingpage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getLatestLandingPage Api",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/landingpage/getLatestLandingPage",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"landingpage",
+										"getLatestLandingPage"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Add Schedule",
+					"item": [
+						{
+							"name": "addSchedule Api",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n     \r\n    \"volunteer_id\" :  \"ec68bda2-61d2-4b17-9eb3-66026468b38c\",\r\n    \"schedule_date\" : \"2022-12-24T05:35:28Z\",\r\n    \"schedule\" :  \"8am - 5pm\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/schedule/addSchedule",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"schedule",
+										"addSchedule"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateSchedule Api",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \r\n    \"id\": \"c907168c-2b85-43f6-9b40-4a1a2d7f94e2\",\r\n    \"volunteer_id\": \"ec68bda2-61d2-4b17-9eb3-66026468b38c\",\r\n    \"schedule_date\": \"2022-12-24T05:35:28Z\",\r\n    \"schedule\": \"1pm - 5pm\"\r\n    \r\n   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/schedule/updateSchedule",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"schedule",
+										"updateSchedule"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllSchedule Api",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/schedule/getAllSchedule",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"schedule",
+										"getAllSchedule"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getTotalSchedule Api",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/schedule/getTotalSchedule",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"schedule",
+										"getTotalSchedule"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "History",
+			"item": [
+				{
+					"name": "getAllHistory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTotalHistory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddHistory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n        \"date\": \"2011-10-05T14:48:00.000Z\",\r\n        \"action\": \"gagers\",\r\n        \"createdBy\": \"marksID\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/history/addHistory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"history",
+								"addHistory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateHistory",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\" : \"72183be8-f47c-447d-b2e7-a0f298524427\",\r\n        \"date\": \"2011-10-05T14:48:00.000Z\",\r\n        \"action\": \"gagxxxxers\",\r\n        \"createdBy\": \"marksID\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/history/updateHistory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"history",
+								"updateHistory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateHistory",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzRiZDAyN2ZiMzgyYWE5MzdjNzFjNDgiLCJpYXQiOjE2Njg1MTc4NjEsImV4cCI6MTY2ODYwNDI2MX0.x3tvLS-QCiHbnE_LebedWhrCdDqfuKWyljVja6kzD_k",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\" : \"72183be8-f47c-447d-b2e7-a0f298524427\"\r\n    \r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/history/deleteHistory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"history",
+								"deleteHistory"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

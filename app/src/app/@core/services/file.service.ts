@@ -38,25 +38,41 @@ export class FileService {
   }
 
 
- addFile(data) {
+ addFile(form, id = null) {
   this.createAuthenticationHeaders()
 
-  console.log('addFile')
-  console.log(data)
+  console.log(form)
 
-  return this.http.post(this.cs.domain + '/fileupload/addFile', data ,{ headers: this.options, responseType: 'json' });
+  return this.http.post(this.cs.domain + `/fileupload/addFile/${id}`,form ,{ headers: this.options, responseType: 'json' });
   }
 
 
  addAvatar(data) {
   this.createAuthenticationHeaders()
-
-  console.log('addAvatar')
-  console.log(data)
-
   return this.http.post(this.cs.domain + '/fileupload/addAvatar', data ,{ headers: this.options, responseType: 'json' });
-  // return this.http.post(this.cs.domain + '/fileupload/addAvatar', JSON.stringify(data) ,{ headers: this.options });
   }
 
+  deleteFile(data) {
+  this.createAuthenticationHeaders()
+  return this.http.post(this.cs.domain + '/fileupload/deleteFile', data ,{ headers: this.options, responseType: 'json' });
+  }
+
+
+  getAllFiles(id){
+    this.createAuthenticationHeaders()
+    return this.http.get(this.cs.domain + `/fileupload/getAllFiles/${id}`,{ headers: this.options, responseType: 'json' });
+  }
+
+
+  getRoute(endpoint,apiName,data){
+    this.createAuthenticationHeaders()
+    if(endpoint == 'put'){
+      return this.http.put(this.cs.domain + `/fileupload/${apiName}`, data,{ headers: this.options });
+    }else if(endpoint == 'post'){
+      return this.http.post(this.cs.domain + `/fileupload/${apiName}`,  data ,{ headers: this.options });
+    }else{
+      return this.http.get(this.cs.domain + `/fileupload/${apiName}`,{ headers: this.options });
+    }
+  }
 
 }

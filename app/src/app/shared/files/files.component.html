@@ -33,7 +33,24 @@
 
                   <th scope="row">{{ i + 1 }}</th>
                   <td class="w-25">
-                    <img [src]="this.auth.domain + '/images/files/'+file.source" class="img-fluid img-thumbnail" alt="Sheep">
+                    <span *ngIf="file.filetype === 'image/png' ">
+                     <a [href]="this.auth.domain + '/images/files/'+file.source" target="_blank"><i class="fas fa-image"></i></a> <strong> : IMAGE</strong>
+                    </span>
+                    <span *ngIf="file.filetype === 'application/msword' ">
+                      <a [href]="this.auth.domain + '/images/files/'+file.source" target="_blank"><i class="fas fa-file-word"></i></a> <strong> : DOCS</strong>
+                    </span>
+                    <span  *ngIf="file.filetype === 'application/json' ">
+                      <a [href]="this.auth.domain + '/images/files/'+file.source" target="_blank"><i class="fas fa-solid fa-file"></i></a> <strong> : JSON</strong>
+                    </span>
+                    <span *ngIf="file.filetype === 'application/pdf' ">
+                      <a [href]="this.auth.domain + '/images/files/'+file.source" target="_blank"><i class="fas fa-file-pdf"></i></a> <strong> : PDF</strong>
+                    </span>
+                    <span *ngIf="file.filetype === 'video/webm' ">
+                      <a [href]="this.auth.domain + '/images/files/'+file.source" target="_blank"><i class="fas fa-solid fa-video"></i></a> <strong> : PDF</strong>
+                    </span>
+                    <span *ngIf="file.filetype !== 'video/webm' && file.filetype !==  'application/pdf' && file.filetype !==  'application/json' && file.filetype !==  'application/msword'  && file.filetype !==  'image/png'">
+                      <a [href]="this.auth.domain + '/images/files/'+file.source" target="_blank"><i class="fas fa-question"></i></a> <strong> : UNKNOWN</strong>
+                    </span>
                   </td>
                   <td scope="col" id="options">
                     <span>

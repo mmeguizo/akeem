@@ -25,8 +25,6 @@ import {
 })
 export class AuthService {
 
-  //public domain = "http://localhost:3000";
-  //public domain = "cryptic-anchorage-20422.herokuapp.com:3000";
   public domain
   authToken;
   user;
