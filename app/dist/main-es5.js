@@ -5310,7 +5310,9 @@
         _classCallCheck(this, _ConnectionService);
 
         //localhost development
-        this.domain = "http://localhost:3000";
+        //  public domain: String = "http://localhost:3000";
+        // if deployed online
+        this.domain = "";
       });
 
       _ConnectionService.ɵfac = function ConnectionService_Factory(t) {
