@@ -43,6 +43,8 @@ export class FilesComponent implements OnInit {
   me;
   id : String;
 
+
+
   @ViewChild(NbPopoverDirective, { static: false }) popover: NbPopoverDirective;
   @ViewChild("search", {static: false}) nameField: ElementRef;
 
@@ -77,7 +79,7 @@ export class FilesComponent implements OnInit {
       console.log('getAllFiles')
       console.table(data)
 
-        this.data = data.data;
+      this.data = data.data;
        this.loading = false;
        this.dtTrigger.next();
      });

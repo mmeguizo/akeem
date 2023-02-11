@@ -51,7 +51,7 @@ module.exports = (router) => {
             user_id : req.params.user_id, 
             source: newFileName,
             for : 'files',
-            filetype : file.mimetype
+            filetype : file.mimetype.substring(0, file.mimetype.indexOf('/'))
             });
             uploadData.save(  (err, data) => {
                 console.log(err);
@@ -92,85 +92,11 @@ if (err) {
 }
 return  await res.json({ success: true, message: 'Files uploaded successfully ', data:returnMe });
     })
-            // var form = new formidable.IncomingForm();
-            // form.multiples = true;
-            // form.uploadDir = path.join(__dirname, '..', 'images')
-            // // form.uploadDir = `${__dirname}/../images/files`;
-            // form.parse(req);
-            
-            // form.on('fileBegin', function (name, file){
-            //     file.path = path.join(__dirname, '..', 'images')
-            //     console.log( file);
-
-            //     fs.rename(file.path, path.join(form.uploadDir,  file.newFileName), (err) => {
-            //         console.log(err);
-            //     });
-
-            // });
-            
-        
-            // form.on('file', function (name, file){
-            //     console.log('Uploaded ' + file.newFileName);
-            // });
-        
-            // return res.status(200).json({result: 'Upload Success'});
-
-            
-            // let useFor = 'files';
-            // let username = 'tester';
-            // let formidable = require('formidable');
-            // let fs = require('fs');
-            // let path = require('path');
-            // let md5 = require('md5');
-            // var form = new formidable.IncomingForm();
-            //  form.uploadDir = `${__dirname}/../images/files`;
-            //  form.multiples = true;
-            // await form.on('file', async (field, file) => {
-              
-
-            //   //  file.path = path.join(__dirname, '..', 'images/files')
-            //     console.log(file);
-
-            //     if ( await fs.existsSync(file.filepath)) {
-            //                     await fs.rename(file.filepath, path.join(form.uploadDir, file.originalFilename), async (err) => {
-            //                         if (err) {
-            //                             console.log(err);
-            //                         // return res.json({ success:false, message:err.name + " " + err.message }) 
-            //                         }else{
-            //                                 let  uploadData =  new  File( {
-            //                                     id: uuidv4(),
-            //                                     source: file.newFileName,
-            //                                     for : 'files'
-            //                                 });
-            //                                 await uploadData.save(  (err, data) => {
-            //                                     if(err){
-            //                                     // res.json({ success: false, message: 'Error, could not save files : ' + err })
-            //                                         }
-            //                                 } )
-            //                             }
-            //             });
-            //     }else{
-            //       console.log('err');
-            //     }
-            //  }) ;
-            //   form.on('error', function(err) {
-            //     console.log('An error has occured: \n' + err);
-            //   });
-            //   form.on('end', function() {
-            //     // console.log('hey');
-            //   });
-            //   form.parse(req, async (err, fields, files) => {
-            //     if (err) {
-            //       next(err);
-            //       return;
-            //     }
-            //     return  await res.json({ success: true, message: 'Files uploaded successfully ', data:{ fields, files} });
-            //   });
-
+           
         });
 
 
-        router.post('/addAvatar', (req, res) => {
+        router.post('/addAvatar', async (req, res) => {
           
             
             let useFor = req.body.useFor;
@@ -201,16 +127,15 @@ return  await res.json({ success: true, message: 'Files uploaded successfully ',
                                 return res.json({ success:false, message:err.name + " " + err.message }) 
                             }else{
 
-                                let uploadData = new File( {
+                                let uploadData = await new File( {
                                     id: uuidv4(),
                                     source: newFileName,
                                     user_id : req.decoded.id,
                                     for : 'avatar',
-                                    
-
+                                    filetype : file.mimetype.substring(0, file.mimetype.indexOf('/'))
                                 });
 
-                                uploadData.save( (err, data) => {
+                             await   uploadData.save( (err, data) => {
 
                                     if(err){
                                     res.json({ success: false, message: 'Error, could not save avatar : ' + err })
