@@ -15,6 +15,8 @@ import { AuthService } from '../../@core/services/auth.service';
 import { DataTableDirective } from 'angular-datatables';
 import { log } from 'console';
 import { CustomerModalComponent } from '../../shared/customer-modal/customer-modal.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FilesComponent } from '../../shared/files/files.component';
 
 
 
@@ -52,6 +54,8 @@ export class CustomersComponent implements OnInit {
     public customer : CustomerService,
     public ngbModal: NgbModal,
     public auth : AuthService,
+    public route : Router,
+    public router : ActivatedRoute,
 
   ) {
 
@@ -200,6 +204,14 @@ addCustomer(){
     //  [this.auth.makeToast('success','Adding Customer',`Success adding customer`),
     //  this.rerender()];
   });
+
+}
+
+
+viewAttachment(id){
+
+  const activeModal = this.ngbModal.open(FilesComponent, { size: 'xl', container: 'nb-layout', windowClass: 'min_height' });
+  activeModal.componentInstance.id = id;
 
 }
 

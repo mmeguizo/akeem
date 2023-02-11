@@ -9,6 +9,6 @@ export class ConnectionService {
    public domain: String = "http://localhost:3000";
 
   // if deployed online
-  // public domain: String = "";
+  //  public domain: String = "";
 }
 

@@ -35,33 +35,9 @@ import { CustomersComponent } from './customers/customers.component';
 import { UsersModalComponent } from '../shared/users-modal/users-modal.component';
 import { UpdateProfileComponent } from '../shared/update-profile/update-profile.component';
 import { CustomerModalComponent } from '../shared/customer-modal/customer-modal.component';
+import { FilesComponent } from '../shared/files/files.component';
+import { UploadsComponent } from '../shared/uploads/uploads.component';
 
-// import { ThemeModule } from '../@theme/theme.module';
-// import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-// import { DashboardComponent } from './dashboard/dashboard.component';
-// import { ImageCropperModule } from 'ngx-image-cropper';
-// import { NgApexchartsModule } from "ng-apexcharts";
-
-
-// import { CreateWarehouseComponent } from './warehouse/modals/create-warehouse/create-warehouse.component';
-// import { ViewStorageComponent } from './warehouse/modals/view-storage/view-storage.component';
-// import { CreateStorageComponent } from './warehouse/modals/create-storage/create-storage.component';
-// import { AllWarehousesComponent } from './warehouse/all-warehouses/all-warehouses.component';
-// import { ViewStoragesComponent } from './warehouse/view-storages/view-storages.component';
-// import { ViewInventoryComponent } from './dashboard/view-inventory/view-inventory.component';
-// import { AllProductsComponent } from './warehouse/all-products/all-products.component';
-// import { ReportsComponent } from './reports/reports.component';
-// import { UpdateWarehouseComponent } from './warehouse/modals/update-warehouse/update-warehouse.component';
-// import { DialogComponent } from './components/dialog/dialog.component';
-// import { UpdateStorageComponent } from './warehouse/modals/update-storage/update-storage.component';
-// import { ProductComponent } from './product/product.component';
-// import { AddProductComponent } from './product/modals/add-product/add-product.component';
-// import { AllUsersComponent } from './user/all-users/all-users.component';
-// import { AddUserComponent } from './user/modals/add-user/add-user.component';
-// import { EditUserComponent } from './user/modals/edit-user/edit-user.component';
-// import { AddUserModalComponent } from './modals/add-user/add-user.component';
-// import {  UpdateUserModalComponent } from './modals/update-user/update-user.component';
-// import { UserComponent } from './user/user.component';
 
 
 const NB_MODULES = [
@@ -110,40 +86,17 @@ const NB_MODULES = [
     UpdateProfileComponent,
     UsersModalComponent,
     CustomerModalComponent,
-    // CreateWarehouseComponent,
-    // ViewStorageComponent,
-    // CreateStorageComponent,
-    // AllWarehousesComponent,
-    // ViewStoragesComponent,
-    // ViewInventoryComponent,
-    // AllProductsComponent,
-    // ReportsComponent,
-    // UpdateWarehouseComponent,
-    // DialogComponent,
-    // UpdateStorageComponent,
-    // ProductComponent,
-    // AddProductComponent,
-    // AllUsersComponent,
-    // UserComponent,
-    // AddUserComponent,
-    // EditUserComponent,
-    // UpdateUserModalComponent,
-    // AddUserModalComponent
+    FilesComponent,
+    UploadsComponent,
+
   ],
   entryComponents: [
     UpdateProfileComponent,
     UsersModalComponent,
     CustomerModalComponent,
-    // CreateWarehouseComponent,
-    // CreateStorageComponent,
-    // UpdateWarehouseComponent,
-    // DialogComponent,
-    // UpdateStorageComponent,
-    // AddProductComponent,
-    // AddUserComponent,
-    // EditUserComponent,
-    // UpdateUserModalComponent,
-    // AddUserModalComponent
+    FilesComponent,
+    UploadsComponent,
+
   ],
   exports: [
   ],
@@ -151,6 +104,8 @@ const NB_MODULES = [
     UsersModalComponent,
     UpdateProfileComponent,
     CustomerModalComponent,
+    FilesComponent,
+    UploadsComponent,
 
   ]
 })

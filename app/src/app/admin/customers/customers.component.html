@@ -27,6 +27,7 @@
                   <th>Address</th>
                   <th>Balance</th>
                   <th>Status</th>
+                  <th>Files</th>
                   <th>Options</th>
                 </tr>
               </thead>
@@ -42,6 +43,10 @@
                   <td scope="col">
                     <span class="pointer" (click)="changeStatus(customer)"
                       [ngClass]="{'active': customer.status == 'active',  'inactive': customer.status == 'inactive' }">{{ customer.status | titlecase}}</span>
+                  </td>
+                  <td scope="col">
+                    <span (click)="viewAttachment(customer.id)"
+                      class="active text-center pointer">📁</span>
                   </td>
                   <td scope="col" id="options">
                     <span>

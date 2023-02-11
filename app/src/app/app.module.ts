@@ -14,8 +14,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { JwtModule } from "@auth0/angular-jwt";
 
 
-
-
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -62,14 +60,15 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        // allowedDomains: ['localhost:3000'],
-        // disallowedRoutes: ["http://localhost:3000/authentication/login"],
+
       },
     }),
     AdminModule,
     NbDialogModule.forRoot(),
     NgbModule,
     SharedModule,
+    // NgxDocViewerModule
+
 
   ],
   bootstrap: [AppComponent],

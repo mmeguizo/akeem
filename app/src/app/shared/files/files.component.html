@@ -11,7 +11,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <nb-actions size="medium" style="float: right; font-size: 10px;">
-          <nb-action color="success" nbPopover="Add new customer" nbPopoverTrigger="hint"
+          <nb-action color="success" nbPopover="Add new files" nbPopoverTrigger="hint"
             nbPopoverPlacement="bottom" (click)="addFiles()">
             <nb-icon id="addUser" icon="file-text-outline"></nb-icon></nb-action>
         </nb-actions>
@@ -33,12 +33,14 @@
 
                   <th scope="row">{{ i + 1 }}</th>
                   <td class="w-25">
-                    <img [src]="this.auth.domain + '/images/files/'+file.source" class="img-fluid img-thumbnail" alt="Sheep">
+                    <span>
+                     <a [href]="this.auth.domain + '/images/files/'+file.source" target="_blank"><i class="fas fa-file display-4"></i></a> <strong> &nbsp; : {{ file.filetype | uppercase }}</strong>
+                    </span>
                   </td>
                   <td scope="col" id="options">
                     <span>
                       <nb-action   nbPopover="Delete User" nbPopoverTrigger="hint"
-                      nbPopoverPlacement="bottom" (click)="deleteCustomer({id : file.id, source : file.source })"><nb-icon id="deleteUser" class="active" icon="trash-2-outline"></nb-icon></nb-action>
+                      nbPopoverPlacement="bottom" (click)="deleteCustomer({id : file.id, source : file.source })"><nb-icon id="deleteUser" class="active iconDelete" icon="trash-2-outline"></nb-icon></nb-action>
                     </span>
                   </td>
                 </tr>
@@ -51,52 +53,3 @@
     </nb-card>
   </div>
 </div>
-
-
-<!--
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-		<table class="table table-image">
-		  <thead>
-		    <tr>
-		      <th scope="col">Day</th>
-		      <th scope="col">Image</th>
-		      <th scope="col">Article Name</th>
-		      <th scope="col">Author</th>
-		      <th scope="col">Words</th>
-		      <th scope="col">Shares</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <th scope="row">1</th>
-		      <td class="w-25">
-			      <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg" class="img-fluid img-thumbnail" alt="Sheep">
-		      </td>
-		      <td>Bootstrap 4 CDN and Starter Template</td>
-		      <td>Cristina</td>
-		      <td>913</td>
-		      <td>2.846</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">2</th>
-		      <td class="w-25">
-			      <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-5.jpg" class="img-fluid img-thumbnail" alt="Sheep">
-		      </td>
-		      <td>Bootstrap Grid 4 Tutorial and Examples</td>
-		      <td>Cristina</td>
-		      <td>1.434</td>
-		      <td>3.417</td>
-		    </tr>
-		  </tbody>
-		</table>
-    </div>
-  </div>
-</div>
-
-
-
- -->

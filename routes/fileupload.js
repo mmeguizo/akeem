@@ -13,8 +13,19 @@ const { fail } = require('assert');
 module.exports = (router) => {
     
 
-        router.post('/addFile', async (req, res) => {
-                // create an incoming form object
+        router.post('/addFile/:user_id', async (req, res) => {
+
+
+
+
+            let useFor = 'files';
+            let formidable = require('formidable');
+            let fs = require('fs');
+            let path = require('path');
+            let md5 = require('md5');
+
+
+
   var form = new formidable.IncomingForm();
 
   form.maxFileSize = 2500 * 1024 * 1024;
@@ -23,11 +34,24 @@ module.exports = (router) => {
   form.uploadDir = path.join(__dirname, '..', 'images/files')
 
   form.on('file', function(field, file) {
-     fs.rename(file.filepath, path.join(form.uploadDir, file.newFilename), () => {
+                        
+             let newFileName = [
+                useFor,
+                 Math.random(),
+                 Math.random(),
+                 Math.random(),
+            ];
+
+         newFileName = `${md5(newFileName.join(''))}.${( (file.originalFilename )).split('.').pop()}`;
+
+
+     fs.rename(file.filepath, path.join(form.uploadDir, newFileName), () => {
          let  uploadData =  new  File( {
             id: uuidv4(),
-            source: file.newFilename,
-            for : 'files'
+            user_id : req.params.user_id, 
+            source: newFileName,
+            for : 'files',
+            filetype : file.mimetype.substring(0, file.mimetype.indexOf('/'))
             });
             uploadData.save(  (err, data) => {
                 console.log(err);
@@ -68,88 +92,12 @@ if (err) {
 }
 return  await res.json({ success: true, message: 'Files uploaded successfully ', data:returnMe });
     })
-            // var form = new formidable.IncomingForm();
-            // form.multiples = true;
-            // form.uploadDir = path.join(__dirname, '..', 'images')
-            // // form.uploadDir = `${__dirname}/../images/files`;
-            // form.parse(req);
-            
-            // form.on('fileBegin', function (name, file){
-            //     file.path = path.join(__dirname, '..', 'images')
-            //     console.log( file);
-
-            //     fs.rename(file.path, path.join(form.uploadDir,  file.newFileName), (err) => {
-            //         console.log(err);
-            //     });
-
-            // });
-            
-        
-            // form.on('file', function (name, file){
-            //     console.log('Uploaded ' + file.newFileName);
-            // });
-        
-            // return res.status(200).json({result: 'Upload Success'});
-
-            
-            // let useFor = 'files';
-            // let username = 'tester';
-            // let formidable = require('formidable');
-            // let fs = require('fs');
-            // let path = require('path');
-            // let md5 = require('md5');
-            // var form = new formidable.IncomingForm();
-            //  form.uploadDir = `${__dirname}/../images/files`;
-            //  form.multiples = true;
-            // await form.on('file', async (field, file) => {
-              
-
-            //   //  file.path = path.join(__dirname, '..', 'images/files')
-            //     console.log(file);
-
-            //     if ( await fs.existsSync(file.filepath)) {
-            //                     await fs.rename(file.filepath, path.join(form.uploadDir, file.originalFilename), async (err) => {
-            //                         if (err) {
-            //                             console.log(err);
-            //                         // return res.json({ success:false, message:err.name + " " + err.message }) 
-            //                         }else{
-            //                                 let  uploadData =  new  File( {
-            //                                     id: uuidv4(),
-            //                                     source: file.newFileName,
-            //                                     for : 'files'
-            //                                 });
-            //                                 await uploadData.save(  (err, data) => {
-            //                                     if(err){
-            //                                     // res.json({ success: false, message: 'Error, could not save files : ' + err })
-            //                                         }
-            //                                 } )
-            //                             }
-            //             });
-            //     }else{
-            //       console.log('err');
-            //     }
-            //  }) ;
-            //   form.on('error', function(err) {
-            //     console.log('An error has occured: \n' + err);
-            //   });
-            //   form.on('end', function() {
-            //     // console.log('hey');
-            //   });
-            //   form.parse(req, async (err, fields, files) => {
-            //     if (err) {
-            //       next(err);
-            //       return;
-            //     }
-            //     return  await res.json({ success: true, message: 'Files uploaded successfully ', data:{ fields, files} });
-            //   });
-
+           
         });
 
 
-        router.post('/addAvatar', (req, res) => {
-
-            console.log('addAvatar kicks in');
-            console.log(req.body);
+        router.post('/addAvatar', async (req, res) => {
+          
             
             let useFor = req.body.useFor;
             let username = 'tester';
@@ -162,6 +110,8 @@ return  await res.json({ success: true, message: 'Files uploaded successfully ',
              form.uploadDir = `${__dirname}/../images/`;
              form.on('file', async (field, file) => {
                  
+              
+
                  let newFileName = [
                     username,
                      Math.random(),
@@ -177,13 +127,15 @@ return  await res.json({ success: true, message: 'Files uploaded successfully ',
                                 return res.json({ success:false, message:err.name + " " + err.message }) 
                             }else{
 
-                                let uploadData = new File( {
+                                let uploadData = await new File( {
                                     id: uuidv4(),
                                     source: newFileName,
-                                    for : 'avatar'
+                                    user_id : req.decoded.id,
+                                    for : 'avatar',
+                                    filetype : file.mimetype.substring(0, file.mimetype.indexOf('/'))
                                 });
 
-                                uploadData.save( (err, data) => {
+                             await   uploadData.save( (err, data) => {
 
                                     if(err){
                                     res.json({ success: false, message: 'Error, could not save avatar : ' + err })
@@ -212,13 +164,43 @@ return  await res.json({ success: true, message: 'Files uploaded successfully ',
 
   
      
-        router.post('deleteFile', (data, res) => {
+        router.put('/deleteFile', (req, res) => {
 
-            File.deleteOne({ id:data.id }, (err) => {
+            console.log(req.body);
+
+            let file = req.body.link.source;
+            let id = req.body.link.id;
+
+            let fs = require('fs');
+            fs.unlink(`${path.join(__dirname, '..', 'images/files')}/${file}`, (err) => {
+                if(err){
+                    return res.json({success: false, message: 'The server cant find the file.'})
+
+                }else{
+                    File.deleteOne( { id : id}, (err, results) => {
+
+                        if(err){
+                            return res.json({ success:false, message: err.message });
+                        }else{
+                            return res.json({success: true, message: 'The file has been remove.'})
+                        }
+                    } )
+                }
+             });
+        });
+
+
+     
+        router.get('/getAllFiles/:user_id', (req, res) => {
+          
+            let query = req.params
+
+            File.find(query, (err, files) => {
+
                 if (err){
                     return res.json({ success:false, message: err.message });
                 }else{
-                    return res.json({ success:true, message: "File successfully deleted." });
+                    return res.json({ success:true, message: "Files", data : files });
                 }
             });
         });
