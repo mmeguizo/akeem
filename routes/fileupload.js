@@ -96,7 +96,7 @@ return  await res.json({ success: true, message: 'Files uploaded successfully ',
         });
 
 
-        router.post('/addAvatar', async (req, res) => {
+        router.post('/addAvatar',  (req, res) => {
           
             
             let useFor = req.body.useFor;
@@ -127,7 +127,7 @@ return  await res.json({ success: true, message: 'Files uploaded successfully ',
                                 return res.json({ success:false, message:err.name + " " + err.message }) 
                             }else{
 
-                                let uploadData = await new File( {
+                                let uploadData =  new File( {
                                     id: uuidv4(),
                                     source: newFileName,
                                     user_id : req.decoded.id,
@@ -135,7 +135,7 @@ return  await res.json({ success: true, message: 'Files uploaded successfully ',
                                     filetype : file.mimetype.substring(0, file.mimetype.indexOf('/'))
                                 });
 
-                             await   uploadData.save( (err, data) => {
+                                uploadData.save( (err, data) => {
 
                                     if(err){
                                     res.json({ success: false, message: 'Error, could not save avatar : ' + err })
