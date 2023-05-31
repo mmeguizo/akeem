@@ -121,6 +121,9 @@ module.exports = (router) => {
       } else {
 
         User.findOne({ username: req.body.username.toLowerCase() } , async (err, user) => {
+           
+          console.log({ login : [ req.body.username.toLowerCase() ] }, user)
+          
           if (err) {
             res.json({ success: false, message: err.message })
 
