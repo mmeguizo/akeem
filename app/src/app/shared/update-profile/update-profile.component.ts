@@ -60,9 +60,9 @@ export class UpdateProfileComponent implements OnInit {
     this.form = this.formBuilder.group({
       username:         ['', [Validators.required]],
       email:     ['', [Validators.required]],
-      password:     ['', [Validators.required]],
+      current_password:     ['', [Validators.required]],
       role:     ['', [Validators.required]],
-      confirm:     ['', [Validators.required]],
+      new_password:     ['', [Validators.required]],
     })
   }
 
