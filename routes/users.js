@@ -221,63 +221,87 @@ module.exports = (router) => {
         }
     });
 
-    router.put('/updateProfile', async (req, res) =>   {
+   router.put("/updateProfile", async (req, res) => {
+    let data = req.body;
+    let userData = {};
+    console.log(data);
 
+    const user = await User.findOne({ id: req.body.id });
 
-
-        let data = req.body;
-        let userData = {};
-        console.log('updateProfile');
-        console.log(data);
-
-        if(data.confirm){
-
-        console.log('if');
-
-
-            let checkPassword = await bcrypt.compare(data.old_password, docs.password); 
-
-            if( !checkPassword){
-                res.json({ success: false, message: 'Old Password Incorrect: ' + !checkPassword })
-            }else{
-                
-                hash.encryptPassword(data.new_password).then(hash => {
-                    userData.role = data.role;
-                    userData.username = data.username;
-                    userData.email = data.email;
-                    userData.password = hash;
-                    userData.profile_pic = data.profile_pic;
-                    changedPassword = true;
-                    User.findOneAndUpdate({ id: data.id }, userData, { upsert: true }, (err, response) => {
-                        if (err) return res.json({ success: false, message: err.message });
-                        if (response) {
-                            res.json({ success: true, message: "User Information has been updated!", data: response });
-                        } else {
-                            res.json({ success: true, message: "No User has been modified!", data: response });
-                        }
-                    });
-                }).catch(err => { console.log(err); })
-
-            }
-        }else{
-
-            const { username,email,profile_pic,id } = req.body
-
-            User.findOneAndUpdate({ id:id }, {username,email,profile_pic}, { upsert: false }, (err, response) => {
-
-                console.log('else');
-                console.log(response);
-                console.log(err);
-
-                if (err) return res.json({ success: false, message: err.message });
+    if (data.new_password) {
+      let checkPassword = await bcrypt.compare(data.current_password, user.password);
+      console.log({ checkPassword: checkPassword });
+      if (!checkPassword) {
+        res.json({
+          success: false,
+          message: "Incorrect Old Password : " + data.current_password + " for " + data.username,
+        });
+      } else {
+        hash
+          .encryptPassword(data.new_password)
+          .then((hash) => {
+            userData.role = data.role;
+            userData.username = data.username;
+            userData.email = data.email;
+            userData.password = hash;
+            userData.profile_pic = data.profile_pic;
+            User.findOneAndUpdate(
+              { id: data.id },
+              userData,
+              { upsert: true },
+              (err, response) => {
+                if (err)
+                  return res.json({ success: false, message: err.message });
                 if (response) {
-                     res.json({ success: true, message: "User Information has been updated!", data: response  });
+                  res.json({
+                    success: true,
+                    message: "User Information has been updated!",
+                    data: response,
+                  });
                 } else {
-                    res.json({ success: true, message: "No User has been modified!", data: response });
+                  res.json({
+                    success: true,
+                    message: "No User has been modified!",
+                    data: response,
+                  });
                 }
+              }
+            );
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    } else {
+      const { username, email, profile_pic, id } = req.body;
+
+      User.findOneAndUpdate(
+        { id: id },
+        { username, email, profile_pic },
+        { upsert: false },
+        (err, response) => {
+          console.log("else");
+          console.log(response);
+          console.log(err);
+
+          if (err) return res.json({ success: false, message: err.message });
+          if (response) {
+            res.json({
+              success: true,
+              message: "User Information has been updated!",
+              data: response,
             });
+          } else {
+            res.json({
+              success: true,
+              message: "No User has been modified!",
+              data: response,
+            });
+          }
         }
-    });
+      );
+    }
+  });
 
 
 
