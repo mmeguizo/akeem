@@ -20,14 +20,14 @@
   <div class="row">
       <div class="col-sm-12"  >
         <div class="form-group" >
-          <label for="inputEmail" class="label">Password</label>
+          <label for="inputEmail" class="label">Current Password</label>
           <input type="{{showpassword ? 'text' : 'password'}}"  nbInput fullWidth id="password" [status]="form?.get('password').touched && form.controls['password'].errors?.required ? 'danger' : '' " placeholder="Password" formControlName="password">
           <nb-icon class="password-icon" [icon]="eyeIcon" (click)="showPassword()" pack="eva"></nb-icon>
         </div>
       </div>
       <div class="col-sm-12" >
         <div class="form-group">
-          <label for="inputWebsite" class="label">Confirm Password</label>
+          <label for="inputWebsite" class="label">New Password</label>
           <input type="{{showpassword ? 'text' : 'password'}}" nbInput fullWidth id="confirm" [status]="form?.get('confirm').touched && form.controls['confirm'].errors?.required ? 'danger' : '' " placeholder="Confirm Password" formControlName="confirm">
             <nb-icon class="password-icon" [icon]="eyeIcon" (click)="showPassword()" pack="eva"></nb-icon>
         </div>
